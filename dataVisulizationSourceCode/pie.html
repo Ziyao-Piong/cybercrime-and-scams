@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scams Data Insights</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .piechart-container {
+            width: 100%;
+            margin-top: 50px; /* Added spacing between dropdown and pie chart */
+            text-align: center;
+        }
+
+        #pieChart {
+            margin: 20px auto; /* Added margin around the pie chart */
+            display: block;
+        }
+
+        .legend {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-anchor: start;
+            fill: #000;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightgray;
+            border: 1px solid #000;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="piechart-container">
+        <select id="scamTypeSelect">
+            <option value="Text message">Text message</option>
+            <option value="Phone call">Phone call</option>
+            <option value="Internet">Internet</option>
+            <option value="Social media/Online forums">Social media/Online forums</option>
+        </select>
+        <svg id="pieChart" width="400" height="400"></svg>
+        <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <script>
+        const pieWidth = 400;
+        const pieHeight = 400;
+        const radius = Math.min(pieWidth, pieHeight) / 2;
+
+        const svgPie = d3.select("#pieChart")
+            .attr("width", pieWidth)
+            .attr("height", pieHeight)
+            .append("g")
+            .attr("transform", `translate(${pieWidth / 2},${pieHeight / 2})`);
+
+        const color = d3.scaleOrdinal()
+            .domain(["Female", "Male"])
+            .range(["#ff9999", "#66b3ff"]);
+
+        const pie = d3.pie()
+            .value(d => d.value);
+
+        const arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+
+        const tooltip = d3.select("#tooltip");
+
+        function updatePieChart(data) {
+            const pieData = pie(Object.entries(data).map(([key, value]) => ({ key, value: +value })));
+
+            const arcs = svgPie.selectAll("path").data(pieData);
+            const formatThousands = d3.format(",");
+            const formatPercentage = d3.format(".1%");
+
+            arcs.enter()
+                .append("path")
+                .merge(arcs)
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.key))
+                .on("mouseover", (event, d) => {
+                    tooltip.style("opacity", 1)
+                        .html(`${d.data.key}: ${formatThousands(d.data.value)}`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 5) + "px");
+                })
+                .on("mousemove", (event) => {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 5) + "px");
+                })
+                .on("mouseout", () => {
+                    tooltip.style("opacity", 0);
+                });
+
+            arcs.exit().remove();
+        }
+
+        function fetchAndRenderPieChart(scamType) {
+            d3.json("http://127.0.0.1:8000/aggregate-by-gender").then(apiGenderData => {
+                const dataEntry = apiGenderData.find(d => d.ScamType === scamType);
+                if (dataEntry) {
+                    const data = {
+                        "Female": dataEntry.Female,
+                        "Male": dataEntry.Male,
+                    };
+                    updatePieChart(data);
+                } else {
+                    console.log("No data found for selected scam type:", scamType);
+                }
+            }).catch(error => {
+                console.error("Error fetching gender data from API:", error);
+            });
+        }
+
+        // Initial rendering of the pie chart
+        const initialScamType = d3.select("#scamTypeSelect").property("value");
+        fetchAndRenderPieChart(initialScamType);
+
+        // Update the pie chart when the user selects a different scam type
+        d3.select("#scamTypeSelect").on("change", function() {
+            const selectedScamType = d3.select(this).property("value");
+            fetchAndRenderPieChart(selectedScamType);
+        });
+
+        // Legend
+        const legend = svgPie.selectAll(".legend")
+            .data(color.domain())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", (d, i) => `translate(-30, ${-pieHeight / 2 + i * 20})`);
+
+        legend.append("rect")
+            .attr("x", pieWidth / 1-190)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", color);
+
+        legend.append("text")
+            .attr("x", pieWidth / 1-200)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(d => d);
+    </script>
+</body>
+</html>

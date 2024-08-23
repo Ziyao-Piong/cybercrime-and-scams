@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scams in Australia</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .map-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: left;
+            width: auto;
+            height: auto;
+            padding: 10px;
+            font: 12px sans-serif;
+            background: lightgrey;
+            border: 1px solid black;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <svg id="map" width="600" height="650"></svg>
+    </div>
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        const svg = d3.select("#map");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+
+        const projection = d3.geoMercator()
+            .scale(800)
+            .center([135.7751, -28]) // Slightly adjusted center for better fit
+            .translate([width / 2, height / 2]);
+
+        const path = d3.geoPath().projection(projection);
+
+        const tooltip = d3.select("#tooltip");
+
+        // Load GeoJSON data (map) and reports data (counts by state)
+        Promise.all([
+            d3.json("http://127.0.0.1:8000/map"),  // GeoJSON data
+            d3.json("http://127.0.0.1:8000/aggregate-reports-by-state")  // Report data
+        ]).then(([geoData, reportData]) => {
+            // Convert report data into a dictionary for fast lookup
+            const reportDict = {};
+            reportData.forEach(d => {
+                reportDict[d.Address_State] = +d.ReportCount;
+            });
+
+            // Define color scale
+            const maxReports = d3.max(reportData, d => d.ReportCount);
+            const colorScale = d3.scaleSequential(d3.interpolateBlues)
+                .domain([0, maxReports]);
+
+            // Draw map
+            svg.append("g")
+                .selectAll("path")
+                .data(geoData.features)
+                .enter().append("path")
+                .attr("d", path)
+                .attr("fill", d => {
+                    const stateName = d.properties.STATE_NAME;
+                    const value = reportDict[stateName];
+                    return value ? colorScale(value) : "#ccc";  // Default color if no data
+                })
+                .attr("stroke", "#333")
+                .on("mouseover", function(event, d) {
+                    const stateName = d.properties.STATE_NAME;
+                    const value = reportDict[stateName];
+                    tooltip.style("opacity", 1)
+                        .html(`<strong>${stateName}</strong><br>Reports: ${value || "No data"}`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 5) + "px");
+                })
+                .on("mousemove", function(event) {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 5) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.style("opacity", 0);
+                });
+        });
+    </script>
+</body>
+</html>
