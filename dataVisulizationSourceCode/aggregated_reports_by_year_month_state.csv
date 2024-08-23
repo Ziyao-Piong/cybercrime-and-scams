@@ -1,0 +1,503 @@
+Year,Month,State,ReportCount
+2020,01,Australian Capital Territory,9
+2020,01,New South Wales,28
+2020,01,Northern Territory,3
+2020,01,Outside of Australia,3
+2020,01,Queensland,26
+2020,01,South Australia,13
+2020,01,Tasmania,8
+2020,01,Victoria,27
+2020,01,Western Australia,19
+2020,02,Australian Capital Territory,11
+2020,02,New South Wales,24
+2020,02,Northern Territory,3
+2020,02,Outside of Australia,5
+2020,02,Queensland,25
+2020,02,South Australia,18
+2020,02,Tasmania,14
+2020,02,Victoria,25
+2020,02,Western Australia,20
+2020,03,Australian Capital Territory,9
+2020,03,New South Wales,22
+2020,03,Northern Territory,3
+2020,03,Outside of Australia,3
+2020,03,Queensland,26
+2020,03,South Australia,16
+2020,03,Tasmania,5
+2020,03,Unspecified,1
+2020,03,Victoria,24
+2020,03,Western Australia,19
+2020,04,Australian Capital Territory,11
+2020,04,New South Wales,27
+2020,04,Northern Territory,4
+2020,04,Outside of Australia,4
+2020,04,Queensland,24
+2020,04,South Australia,16
+2020,04,Tasmania,9
+2020,04,Victoria,25
+2020,04,Western Australia,20
+2020,05,Australian Capital Territory,11
+2020,05,New South Wales,26
+2020,05,Northern Territory,5
+2020,05,Outside of Australia,4
+2020,05,Queensland,21
+2020,05,South Australia,18
+2020,05,Tasmania,11
+2020,05,Victoria,27
+2020,05,Western Australia,17
+2020,06,Australian Capital Territory,12
+2020,06,New South Wales,30
+2020,06,Northern Territory,8
+2020,06,Outside of Australia,1
+2020,06,Queensland,26
+2020,06,South Australia,16
+2020,06,Tasmania,11
+2020,06,Victoria,25
+2020,06,Western Australia,17
+2020,07,Australian Capital Territory,10
+2020,07,New South Wales,31
+2020,07,Northern Territory,3
+2020,07,Outside of Australia,11
+2020,07,Queensland,34
+2020,07,South Australia,18
+2020,07,Tasmania,12
+2020,07,Unspecified,2
+2020,07,Victoria,30
+2020,07,Western Australia,18
+2020,08,Australian Capital Territory,9
+2020,08,New South Wales,34
+2020,08,Northern Territory,4
+2020,08,Outside of Australia,6
+2020,08,Queensland,28
+2020,08,South Australia,19
+2020,08,Tasmania,12
+2020,08,Unspecified,1
+2020,08,Victoria,26
+2020,08,Western Australia,19
+2020,09,Australian Capital Territory,10
+2020,09,New South Wales,30
+2020,09,Northern Territory,7
+2020,09,Outside of Australia,1
+2020,09,Queensland,33
+2020,09,South Australia,24
+2020,09,Tasmania,12
+2020,09,Unspecified,1
+2020,09,Victoria,32
+2020,09,Western Australia,21
+2020,10,Australian Capital Territory,12
+2020,10,New South Wales,28
+2020,10,Northern Territory,5
+2020,10,Outside of Australia,1
+2020,10,Queensland,24
+2020,10,South Australia,25
+2020,10,Tasmania,12
+2020,10,Unspecified,1
+2020,10,Victoria,30
+2020,10,Western Australia,15
+2020,11,Australian Capital Territory,9
+2020,11,New South Wales,37
+2020,11,Northern Territory,3
+2020,11,Outside of Australia,7
+2020,11,Queensland,26
+2020,11,South Australia,19
+2020,11,Tasmania,14
+2020,11,Unspecified,1
+2020,11,Victoria,27
+2020,11,Western Australia,19
+2020,12,Australian Capital Territory,10
+2020,12,New South Wales,27
+2020,12,Northern Territory,7
+2020,12,Outside of Australia,4
+2020,12,Queensland,27
+2020,12,South Australia,23
+2020,12,Tasmania,11
+2020,12,Victoria,26
+2020,12,Western Australia,20
+2021,01,Australian Capital Territory,11
+2021,01,New South Wales,36
+2021,01,Northern Territory,5
+2021,01,Outside of Australia,5
+2021,01,Queensland,32
+2021,01,South Australia,20
+2021,01,Tasmania,9
+2021,01,Unspecified,1
+2021,01,Victoria,23
+2021,01,Western Australia,21
+2021,02,Australian Capital Territory,11
+2021,02,New South Wales,30
+2021,02,Northern Territory,5
+2021,02,Outside of Australia,3
+2021,02,Queensland,27
+2021,02,South Australia,19
+2021,02,Tasmania,13
+2021,02,Unspecified,1
+2021,02,Victoria,30
+2021,02,Western Australia,23
+2021,03,Australian Capital Territory,13
+2021,03,New South Wales,31
+2021,03,Northern Territory,7
+2021,03,Outside of Australia,4
+2021,03,Queensland,27
+2021,03,South Australia,19
+2021,03,Tasmania,10
+2021,03,Victoria,29
+2021,03,Western Australia,22
+2021,04,Australian Capital Territory,12
+2021,04,New South Wales,26
+2021,04,Northern Territory,9
+2021,04,Outside of Australia,3
+2021,04,Queensland,27
+2021,04,South Australia,19
+2021,04,Tasmania,15
+2021,04,Victoria,26
+2021,04,Western Australia,24
+2021,05,Australian Capital Territory,10
+2021,05,New South Wales,34
+2021,05,Northern Territory,7
+2021,05,Outside of Australia,4
+2021,05,Queensland,31
+2021,05,South Australia,16
+2021,05,Tasmania,13
+2021,05,Victoria,30
+2021,05,Western Australia,23
+2021,06,Australian Capital Territory,11
+2021,06,New South Wales,34
+2021,06,Northern Territory,7
+2021,06,Outside of Australia,5
+2021,06,Queensland,30
+2021,06,South Australia,19
+2021,06,Tasmania,16
+2021,06,Victoria,35
+2021,06,Western Australia,22
+2021,07,Australian Capital Territory,13
+2021,07,New South Wales,40
+2021,07,Northern Territory,9
+2021,07,Outside of Australia,4
+2021,07,Queensland,29
+2021,07,South Australia,25
+2021,07,Tasmania,14
+2021,07,Victoria,31
+2021,07,Western Australia,24
+2021,08,Australian Capital Territory,14
+2021,08,New South Wales,35
+2021,08,Northern Territory,9
+2021,08,Outside of Australia,4
+2021,08,Queensland,32
+2021,08,South Australia,23
+2021,08,Tasmania,16
+2021,08,Victoria,28
+2021,08,Western Australia,24
+2021,09,Australian Capital Territory,17
+2021,09,New South Wales,35
+2021,09,Northern Territory,7
+2021,09,Outside of Australia,3
+2021,09,Queensland,26
+2021,09,South Australia,19
+2021,09,Tasmania,14
+2021,09,Victoria,33
+2021,09,Western Australia,24
+2021,10,Australian Capital Territory,10
+2021,10,New South Wales,38
+2021,10,Northern Territory,6
+2021,10,Outside of Australia,2
+2021,10,Queensland,28
+2021,10,South Australia,19
+2021,10,Tasmania,14
+2021,10,Victoria,27
+2021,10,Western Australia,21
+2021,11,Australian Capital Territory,12
+2021,11,New South Wales,40
+2021,11,Northern Territory,2
+2021,11,Outside of Australia,6
+2021,11,Queensland,33
+2021,11,South Australia,21
+2021,11,Tasmania,11
+2021,11,Victoria,29
+2021,11,Western Australia,23
+2021,12,Australian Capital Territory,13
+2021,12,New South Wales,30
+2021,12,Northern Territory,3
+2021,12,Outside of Australia,3
+2021,12,Queensland,27
+2021,12,South Australia,20
+2021,12,Tasmania,13
+2021,12,Victoria,26
+2021,12,Western Australia,19
+2022,01,Australian Capital Territory,11
+2022,01,New South Wales,33
+2022,01,Northern Territory,7
+2022,01,Outside of Australia,6
+2022,01,Queensland,28
+2022,01,South Australia,21
+2022,01,Tasmania,12
+2022,01,Victoria,25
+2022,01,Western Australia,21
+2022,02,Australian Capital Territory,12
+2022,02,New South Wales,37
+2022,02,Northern Territory,6
+2022,02,Outside of Australia,5
+2022,02,Queensland,27
+2022,02,South Australia,20
+2022,02,Tasmania,15
+2022,02,Victoria,27
+2022,02,Western Australia,19
+2022,03,Australian Capital Territory,13
+2022,03,New South Wales,33
+2022,03,Northern Territory,4
+2022,03,Outside of Australia,5
+2022,03,Queensland,34
+2022,03,South Australia,20
+2022,03,Tasmania,15
+2022,03,Victoria,32
+2022,03,Western Australia,24
+2022,04,Australian Capital Territory,16
+2022,04,New South Wales,35
+2022,04,Northern Territory,8
+2022,04,Outside of Australia,9
+2022,04,Queensland,28
+2022,04,South Australia,18
+2022,04,Tasmania,16
+2022,04,Unspecified,1
+2022,04,Victoria,29
+2022,04,Western Australia,25
+2022,05,Australian Capital Territory,14
+2022,05,New South Wales,32
+2022,05,Northern Territory,6
+2022,05,Outside of Australia,8
+2022,05,Queensland,24
+2022,05,South Australia,24
+2022,05,Tasmania,15
+2022,05,Victoria,32
+2022,05,Western Australia,22
+2022,06,Australian Capital Territory,15
+2022,06,New South Wales,33
+2022,06,Northern Territory,4
+2022,06,Outside of Australia,3
+2022,06,Queensland,33
+2022,06,South Australia,23
+2022,06,Tasmania,15
+2022,06,Unspecified,1
+2022,06,Victoria,32
+2022,06,Western Australia,29
+2022,07,Australian Capital Territory,18
+2022,07,New South Wales,39
+2022,07,Northern Territory,9
+2022,07,Outside of Australia,3
+2022,07,Queensland,30
+2022,07,South Australia,27
+2022,07,Tasmania,15
+2022,07,Victoria,35
+2022,07,Western Australia,30
+2022,08,Australian Capital Territory,19
+2022,08,New South Wales,38
+2022,08,Northern Territory,7
+2022,08,Outside of Australia,5
+2022,08,Queensland,33
+2022,08,South Australia,23
+2022,08,Tasmania,19
+2022,08,Unspecified,2
+2022,08,Victoria,39
+2022,08,Western Australia,27
+2022,09,Australian Capital Territory,20
+2022,09,New South Wales,41
+2022,09,Northern Territory,10
+2022,09,Outside of Australia,6
+2022,09,Queensland,41
+2022,09,South Australia,22
+2022,09,Tasmania,15
+2022,09,Victoria,31
+2022,09,Western Australia,24
+2022,10,Australian Capital Territory,16
+2022,10,New South Wales,42
+2022,10,Northern Territory,7
+2022,10,Outside of Australia,6
+2022,10,Queensland,37
+2022,10,South Australia,21
+2022,10,Tasmania,16
+2022,10,Unspecified,1
+2022,10,Victoria,32
+2022,10,Western Australia,30
+2022,11,Australian Capital Territory,16
+2022,11,New South Wales,36
+2022,11,Northern Territory,9
+2022,11,Outside of Australia,6
+2022,11,Queensland,43
+2022,11,South Australia,23
+2022,11,Tasmania,17
+2022,11,Victoria,37
+2022,11,Western Australia,26
+2022,12,Australian Capital Territory,14
+2022,12,New South Wales,39
+2022,12,Northern Territory,9
+2022,12,Outside of Australia,4
+2022,12,Queensland,33
+2022,12,South Australia,23
+2022,12,Tasmania,18
+2022,12,Victoria,39
+2022,12,Western Australia,27
+2023,01,Australian Capital Territory,14
+2023,01,New South Wales,35
+2023,01,Northern Territory,9
+2023,01,Outside of Australia,7
+2023,01,Queensland,30
+2023,01,South Australia,23
+2023,01,Tasmania,10
+2023,01,Unspecified,1
+2023,01,Victoria,37
+2023,01,Western Australia,26
+2023,02,Australian Capital Territory,17
+2023,02,New South Wales,38
+2023,02,Northern Territory,8
+2023,02,Outside of Australia,7
+2023,02,Queensland,37
+2023,02,South Australia,20
+2023,02,Tasmania,19
+2023,02,Unspecified,1
+2023,02,Victoria,32
+2023,02,Western Australia,30
+2023,03,Australian Capital Territory,16
+2023,03,New South Wales,45
+2023,03,Northern Territory,12
+2023,03,Outside of Australia,7
+2023,03,Queensland,38
+2023,03,South Australia,22
+2023,03,Tasmania,17
+2023,03,Unspecified,1
+2023,03,Victoria,34
+2023,03,Western Australia,29
+2023,04,Australian Capital Territory,20
+2023,04,New South Wales,40
+2023,04,Northern Territory,8
+2023,04,Outside of Australia,9
+2023,04,Queensland,28
+2023,04,South Australia,25
+2023,04,Tasmania,21
+2023,04,Victoria,32
+2023,04,Western Australia,26
+2023,05,Australian Capital Territory,16
+2023,05,New South Wales,38
+2023,05,Northern Territory,11
+2023,05,Outside of Australia,8
+2023,05,Queensland,33
+2023,05,South Australia,24
+2023,05,Tasmania,16
+2023,05,Victoria,39
+2023,05,Western Australia,24
+2023,06,Australian Capital Territory,12
+2023,06,New South Wales,37
+2023,06,Northern Territory,11
+2023,06,Outside of Australia,6
+2023,06,Queensland,32
+2023,06,South Australia,28
+2023,06,Tasmania,18
+2023,06,Victoria,35
+2023,06,Western Australia,32
+2023,07,Australian Capital Territory,20
+2023,07,New South Wales,39
+2023,07,Northern Territory,10
+2023,07,Outside of Australia,6
+2023,07,Queensland,34
+2023,07,South Australia,23
+2023,07,Tasmania,17
+2023,07,Victoria,36
+2023,07,Western Australia,34
+2023,08,Australian Capital Territory,15
+2023,08,New South Wales,44
+2023,08,Northern Territory,8
+2023,08,Outside of Australia,6
+2023,08,Queensland,34
+2023,08,South Australia,22
+2023,08,Tasmania,17
+2023,08,Victoria,36
+2023,08,Western Australia,30
+2023,09,Australian Capital Territory,20
+2023,09,New South Wales,35
+2023,09,Northern Territory,9
+2023,09,Outside of Australia,6
+2023,09,Queensland,34
+2023,09,South Australia,22
+2023,09,Tasmania,16
+2023,09,Victoria,35
+2023,09,Western Australia,28
+2023,10,Australian Capital Territory,15
+2023,10,New South Wales,39
+2023,10,Northern Territory,12
+2023,10,Outside of Australia,6
+2023,10,Queensland,28
+2023,10,South Australia,23
+2023,10,Tasmania,16
+2023,10,Unspecified,1
+2023,10,Victoria,33
+2023,10,Western Australia,23
+2023,11,Australian Capital Territory,16
+2023,11,New South Wales,31
+2023,11,Northern Territory,8
+2023,11,Outside of Australia,4
+2023,11,Queensland,32
+2023,11,South Australia,25
+2023,11,Tasmania,18
+2023,11,Victoria,34
+2023,11,Western Australia,24
+2023,12,Australian Capital Territory,14
+2023,12,New South Wales,36
+2023,12,Northern Territory,6
+2023,12,Outside of Australia,8
+2023,12,Queensland,30
+2023,12,South Australia,27
+2023,12,Tasmania,15
+2023,12,Victoria,32
+2023,12,Western Australia,23
+2024,01,Australian Capital Territory,14
+2024,01,New South Wales,37
+2024,01,Northern Territory,8
+2024,01,Outside of Australia,7
+2024,01,Queensland,34
+2024,01,South Australia,22
+2024,01,Tasmania,15
+2024,01,Victoria,34
+2024,01,Western Australia,25
+2024,02,Australian Capital Territory,11
+2024,02,New South Wales,29
+2024,02,Northern Territory,8
+2024,02,Outside of Australia,4
+2024,02,Queensland,26
+2024,02,South Australia,24
+2024,02,Tasmania,14
+2024,02,Victoria,32
+2024,02,Western Australia,24
+2024,03,Australian Capital Territory,18
+2024,03,New South Wales,32
+2024,03,Northern Territory,8
+2024,03,Outside of Australia,7
+2024,03,Queensland,28
+2024,03,South Australia,24
+2024,03,Tasmania,14
+2024,03,Victoria,32
+2024,03,Western Australia,23
+2024,04,Australian Capital Territory,13
+2024,04,New South Wales,33
+2024,04,Northern Territory,11
+2024,04,Outside of Australia,5
+2024,04,Queensland,31
+2024,04,South Australia,21
+2024,04,Tasmania,15
+2024,04,Victoria,38
+2024,04,Western Australia,21
+2024,05,Australian Capital Territory,11
+2024,05,New South Wales,39
+2024,05,Northern Territory,11
+2024,05,Outside of Australia,1
+2024,05,Queensland,32
+2024,05,South Australia,21
+2024,05,Tasmania,17
+2024,05,Victoria,35
+2024,05,Western Australia,26
+2024,06,Australian Capital Territory,12
+2024,06,New South Wales,28
+2024,06,Northern Territory,9
+2024,06,Outside of Australia,6
+2024,06,Queensland,30
+2024,06,South Australia,20
+2024,06,Tasmania,14
+2024,06,Victoria,32
+2024,06,Western Australia,24
