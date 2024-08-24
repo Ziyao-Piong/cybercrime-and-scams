@@ -14,7 +14,7 @@ body, html {
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url('./assets/stock.jpg') repeat;
+    background: url('/stock.jpg') repeat;
     background-size: cover;
     animation: moveBackground 30s linear infinite;
   }
