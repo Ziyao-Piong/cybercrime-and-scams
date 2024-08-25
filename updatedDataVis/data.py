@@ -15,6 +15,33 @@ def get_connection():
         port=3306
     )
 
+def aggregate_histogram_data(states: list[str], years: list[int]):
+    connection = get_connection()
+
+    if not states:  # If empty, select all states
+        state_query = "SELECT DISTINCT Address_State FROM ScamWatch"
+        states = pd.read_sql(state_query, connection)['Address_State'].tolist()
+
+    if not years:  # If empty, select all years
+        year_query = "SELECT DISTINCT YEAR(StartOfMonth) AS Year FROM ScamWatch"
+        years = pd.read_sql(year_query, connection)['Year'].tolist()
+
+    state_placeholders = ', '.join(['%s'] * len(states))
+    year_placeholders = ', '.join(['%s'] * len(years))
+    
+    query = f"""
+    SELECT Scam_Contact_Mode AS ScamType, 
+           SUM(CASE WHEN Complainant_Gender = 'Female' THEN Number_of_reports ELSE 0 END) AS Female,
+           SUM(CASE WHEN Complainant_Gender = 'Male' THEN Number_of_reports ELSE 0 END) AS Male
+    FROM ScamWatch
+    WHERE Address_State IN ({state_placeholders}) AND YEAR(StartOfMonth) IN ({year_placeholders})
+    GROUP BY Scam_Contact_Mode;
+    """
+    
+    df = pd.read_sql(query, connection, params=(*states, *years))
+    connection.close()
+    return df
+
 # Function to retrieve GeoJSON formatted map data
 def get_geojson_data():
     query = """
@@ -57,7 +84,7 @@ def get_geojson_data():
 # Data aggregation functions
 def aggregate_reports_by_state():
     query = """
-    SELECT Address_State, COUNT(*) as ReportCount
+    SELECT Address_State, SUM(Number_of_reports) as ReportCount
     FROM ScamWatch
     GROUP BY Address_State;
     """
@@ -71,7 +98,7 @@ def split_date_and_aggregate():
     SELECT 
         YEAR(StartOfMonth) as Year, 
         MONTH(StartOfMonth) as Month, 
-        COUNT(*) as ReportCount
+        SUM(Number_of_reports) as ReportCount
     FROM ScamWatch
     GROUP BY Year, Month;
     """
@@ -117,6 +144,30 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all HTTP methods
     allow_headers=["*"],  # Allows all headers
 )
+
+from typing import List, Optional
+from fastapi import FastAPI, Query
+from fastapi.responses import JSONResponse
+
+@app.get("/histogram-data")
+def get_histogram_data(state: Optional[List[str]] = Query(None), year: Optional[List[int]] = Query(None)):
+    # If no states are provided, select all states
+    if not state:
+        state_query = "SELECT DISTINCT Address_State FROM ScamWatch"
+        connection = get_connection()
+        state = pd.read_sql(state_query, connection)['Address_State'].tolist()
+        connection.close()
+
+    # If no years are provided, select all years
+    if not year:
+        year_query = "SELECT DISTINCT YEAR(StartOfMonth) AS Year FROM ScamWatch"
+        connection = get_connection()
+        year = pd.read_sql(year_query, connection)['Year'].tolist()
+        connection.close()
+
+    df = aggregate_histogram_data(state, year)
+    return JSONResponse(df.to_dict(orient="records"))
+
 
 @app.get("/aggregate-reports-by-state")
 def get_aggregate_reports_by_state():

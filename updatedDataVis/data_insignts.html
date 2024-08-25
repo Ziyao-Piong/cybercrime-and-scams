@@ -72,6 +72,37 @@
             pointer-events: none;
             opacity: 0;
         }
+
+        .histogram-container {
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #stateSelect, #yearSelect {
+            margin-bottom: 20px;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #histogram {
+            margin: 0 auto;
+            display: block;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightgray;
+            border: 1px solid #000;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+        }
     </style>
 </head>
 
@@ -99,6 +130,18 @@
         <svg id="pieChart" width="400" height="400"></svg>
         <div id="pieTooltip" class="pie-tooltip"></div>
     </div>
+
+    <div class="histogram-container">
+        <select id="stateSelect" multiple>
+            <!-- Options for states will be populated dynamically -->
+        </select>
+        <select id="yearSelect" multiple>
+            <!-- Options for years will be populated dynamically -->
+        </select>
+        <svg id="histogram" width="500" height="500"></svg>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
 
     <script>
         // Adjusted map implementation
@@ -347,6 +390,184 @@
             .attr("dy", ".35em")
             .style("text-anchor", "end")
             .text(d => d);
+
+        // Bar Chart Implementation
+        const barMargin = {top: 20, right: 20, bottom: 155, left: 40}; // Increased bottom margin for x-axis labels
+
+        // Helper function to get selected values or all if "Select All" is selected
+        function getSelectedValues(selectElement) {
+            const selected = Array.from(selectElement.selectedOptions).map(option => option.value);
+            if (selected.includes('All')) {
+                return Array.from(selectElement.options).map(option => option.value).filter(val => val !== 'All');
+            }
+            return selected;
+        }
+
+        // Load the data from the FastAPI endpoint
+        function updateHistogram(states, years) {
+            const stateQuery = states.map(state => `state=${encodeURIComponent(state)}`).join('&');
+            const yearQuery = years.map(year => `year=${encodeURIComponent(year)}`).join('&');
+            const query = `${stateQuery}&${yearQuery}`;
+
+            d3.json(`http://127.0.0.1:8000/histogram-data?${query}`).then(data => {
+                const genders = ["Female", "Male"]; // Exclude "X" gender
+                let scamTypes = [...new Set(data.map(d => d.ScamType))];
+                scamTypes = scamTypes.sort(); // Sort scam types alphabetically
+                
+                const genderGroups = d3.rollup(
+                    data,
+                    v => ({
+                        Female: d3.sum(v, d => d.Female),
+                        Male: d3.sum(v, d => d.Male),
+                    }),
+                    d => d.ScamType
+                );
+
+                // Ensure non-empty gender groups for all scam types
+                const completeGenderGroups = scamTypes.map(scamType => {
+                    const scamGenderData = genderGroups.get(scamType) || { Female: 0, Male: 0 };
+                    return [scamType, genders.map(gender => ({
+                        gender: gender,
+                        value: scamGenderData[gender] || 0  // Use 0 if there's no data for that gender
+                    }))];
+                });
+
+                // Set up scales
+                const x = d3.scaleBand()
+                    .domain(scamTypes)
+                    .range([0, 400])
+                    .padding(0.1);
+
+                const y = d3.scaleLinear()
+                    .domain([0, d3.max(completeGenderGroups, d => d3.max(d[1], dd => dd.value)) || 1])
+                    .range([400, 0]);
+
+                const color = d3.scaleOrdinal()
+                    .domain(genders)
+                    .range(d3.schemeCategory10);
+
+                const svgHistogram = d3.select("#histogram")
+                    .attr("width", 400 + barMargin.left + barMargin.right)
+                    .attr("height", 400 + barMargin.top + barMargin.bottom);
+
+                // Clear previous histogram
+                svgHistogram.selectAll("*").remove();
+
+                // Draw the bars
+                const barWidth = x.bandwidth() / genders.length;
+
+                const groups = svgHistogram.append("g")
+                    .attr("transform", "translate(50,50)")
+                    .selectAll("g")
+                    .data(completeGenderGroups)
+                    .enter().append("g")
+                    .attr("transform", d => `translate(${x(d[0])},0)`);
+
+                const tooltip = d3.select("#tooltip");
+
+                const formatThousands = d3.format(",");
+
+                groups.selectAll("rect")
+                    .data(d => d[1])
+                    .enter().append("rect")
+                    .attr("x", d => genders.indexOf(d.gender) * barWidth)
+                    .attr("y", d => y(d.value))
+                    .attr("width", barWidth)
+                    .attr("height", d => 400 - y(d.value))
+                    .attr("fill", d => color(d.gender))
+                    .on("mouseover", function(event, d) {
+                        tooltip.transition().duration(200).style("opacity", .9);
+                        tooltip.html(`Gender: ${d.gender}<br/>Reports: ${formatThousands(d.value)}`)
+                            .style("left", (event.pageX + 5) + "px")
+                            .style("top", (event.pageY - 5) + "px");
+                    })
+                    .on("mousemove", function(event) {
+                        tooltip.style("left", (event.pageX + 5) + "px")
+                               .style("top", (event.pageY - 5) + "px");
+                    })
+                    .on("mouseout", function() {
+                        tooltip.transition().duration(500).style("opacity", 0);
+                    });
+
+                // Add the x-axis
+                svgHistogram.append("g")
+                    .attr("transform", "translate(50,450)")
+                    .call(d3.axisBottom(x))
+                    .selectAll("text")  
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .attr("transform", "rotate(-65)");  // Rotate labels for better readability
+
+                // Add the y-axis
+                svgHistogram.append("g")
+                    .attr("transform", "translate(50,50)")
+                    .call(d3.axisLeft(y));
+
+                // Add legend
+                const legend = svgHistogram.selectAll(".legend")
+                    .data(genders)
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr("transform", (d, i) => `translate(${i * 80}, 10)`);
+
+                legend.append("rect")
+                    .attr("x", 50)
+                    .attr("width", 18)
+                    .attr("height", 18)
+                    .style("fill", color);
+
+                legend.append("text")
+                    .attr("x", 75)
+                    .attr("y", 9)
+                    .attr("dy", ".35em")
+                    .style("text-anchor", "start")
+                    .text(d => d);
+            });
+        }
+
+        // Populate state and year dropdowns
+        const stateSelect = d3.select("#stateSelect");
+        const yearSelect = d3.select("#yearSelect");
+
+        // Assuming you have a list of states and ordered years available
+        const states = ["Victoria", "New South Wales", "Queensland", "South Australia", "Western Australia", "Tasmania", "Northern Territory", "Australian Capital Territory"];
+        const orderedYears = [2024, 2023, 2022, 2021, 2020];
+
+        // Add "Select All" options
+        stateSelect.append("option").attr("value", "All").text("Select All");
+        yearSelect.append("option").attr("value", "All").text("Select All");
+
+        states.forEach(state => {
+            stateSelect.append("option")
+                .attr("value", state)
+                .text(state);
+        });
+
+        orderedYears.forEach(year => {
+            yearSelect.append("option")
+                .attr("value", year)
+                .text(year);
+        });
+
+        // Initial histogram rendering
+        const initialStates = getSelectedValues(stateSelect.node());
+        const initialYears = getSelectedValues(yearSelect.node());
+        updateHistogram(initialStates, initialYears);
+
+        // Update histogram on dropdown change
+        stateSelect.on("change", () => {
+            const selectedStates = getSelectedValues(stateSelect.node());
+            const selectedYears = getSelectedValues(yearSelect.node());
+            updateHistogram(selectedStates, selectedYears);
+        });
+
+        yearSelect.on("change", () => {
+            const selectedStates = getSelectedValues(stateSelect.node());
+            const selectedYears = getSelectedValues(yearSelect.node());
+            updateHistogram(selectedStates, selectedYears);
+        });
+
     </script>
 </body>
 </html>
