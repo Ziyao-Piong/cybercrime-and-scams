@@ -1,0 +1,52 @@
+/* src/LandingSection.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Hide scrollbars */
+  }
+  
+  .landing-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: url('/stock.jpg') ;
+    background-size: cover;
+    /* animation: moveBackground 30s linear infinite; */
+  }
+  
+  @keyframes moveBackground {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 100% 100%;
+    }
+  }
+  
+  .content {
+    z-index: 1;
+    text-align: center;
+    color: white;
+  }
+  
+  .cta-button {
+    background-color: #ff4757;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #ff6b81;
+  }
+  
