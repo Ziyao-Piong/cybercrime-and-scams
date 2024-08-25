@@ -1,7 +1,8 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/ui/Navbar/Navbar';
-import Footer from './pages/Home/Footer';
-import LandingPage from './pages/Home/LandingSection';
+import Footer from './components/ui/Footer/Footer';
+// import LandingPage from './pages/Home/LandingSection';
 
 function App() {
   return (

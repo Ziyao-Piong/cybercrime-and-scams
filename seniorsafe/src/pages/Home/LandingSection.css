@@ -1,4 +1,4 @@
-/* src/LandingPage.css */
+/* src/LandingSection.css */
 body, html {
     margin: 0;
     padding: 0;
@@ -14,9 +14,9 @@ body, html {
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url('/stock.jpg') repeat;
+    background: url('/stock.jpg') ;
     background-size: cover;
-    animation: moveBackground 30s linear infinite;
+    /* animation: moveBackground 30s linear infinite; */
   }
   
   @keyframes moveBackground {
