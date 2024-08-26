@@ -6,14 +6,17 @@ function LandingSection() {
   return (
     <div className="landing-section bg-primary text-white text-center d-flex align-items-center">
       <Container>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center introduction">
           <Col md={8}>
             <h1>Welcome to Senior Safe</h1>
             <p className="lead">
-              Your ultimate solution for combating cybercrime and scams. Protect yourself and stay informed with Senior Safe.
+            Scam is an illegal act of obtaining others' property or sensitive information through deceptive means. 
+            Common types of scams include investment, false billing, phishing, and lottery scams. 
+            With the widespread use of the internet and social media, scam tactics have become increasingly sophisticated and far-reaching. 
+            Therefore, staying vigilant and understanding common scam methods are crucial to protecting oneself from losses.
             </p>
             <Button variant="light" size="lg" href="#get-started">
-              Get Started
+              View Insights
             </Button>
           </Col>
         </Row>
