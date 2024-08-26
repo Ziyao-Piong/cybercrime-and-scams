@@ -1,0 +1,102 @@
+.container {
+    width: 900px;
+  }
+  
+  #graphic {
+    padding-top: 60px;
+  }
+  
+  .x_axis path, .x_axis line{
+    display: none;
+  }
+  
+  .x_axis text {
+    font-size: 16px;
+  }
+  
+  .bar_text {
+    font-size: 30px; 
+    text-anchor: middle;
+  }
+  
+  .note {
+    font-size: 10px;
+    font-style: italic;
+    line-height: 12px;
+  }
+  
+  #sections {
+    position: relative;
+    display: inline-block;
+    width: 400px;
+    top: 200px;
+    z-index: 90;
+    padding-bottom: 200px;
+  }
+  
+  .step {
+    margin-bottom: 200px;
+    font-family: "TiemposTextWeb-Regular","Georgia";
+    font-size: 16px;
+    line-height: 23px;
+    color: #767678;
+  }
+  
+  #sections .title {
+    font-family: Arial,Helvetica,"san-serif";
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #262626;
+    line-height: 1.4em;
+  }
+  
+  #extra-space {
+    height: 300px;
+  }
+  
+  #vis {
+    display: inline-block;
+    position: fixed;
+    top: 60px;
+    z-index: 1;
+    margin-left: 0;
+  }
+  
+  .highlight {
+    fill: #008080;
+    font-weight: bold;
+  }
+  
+  .top-center {
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    text-align: Left;
+    width: 40%; /* Adjust width as needed */
+    padding: 20px;
+    background-color: white; /* Optional: add background to make it stand out */
+    z-index: 100; /* Ensure it's on top */
+    font-family: "TiemposTextWeb-Regular", "Georgia", serif; /* Matching the font family */
+    font-size: 16px; /* Matching the font size */
+    line-height: 23px; /* Matching the line height */
+    color: #767678; /* Matching the text color */
+  }
+  
+  .top-center .title {
+    font-family: Arial, Helvetica, "sans-serif"; /* Matching the title font family */
+    font-size: 18px; /* Matching the title font size */
+    font-weight: bold; /* Matching the title font weight */
+    margin-bottom: 10px;
+    color: #262626; /* Matching the title color */
+    line-height: 1.4em;
+  }
+  
+  .container {
+    width: 900px;
+    margin-top: 200px; /* Adjust to ensure the remaining content is below the centered section */
+  }
+  
+  
+  

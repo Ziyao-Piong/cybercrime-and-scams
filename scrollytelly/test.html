@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scam Reports Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .dot {
+            fill: steelblue;
+            stroke: #fff;
+        }
+        .label {
+            font-size: 24px;
+            text-anchor: middle;
+        }
+        .year-label {
+            font-size: 18px;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+
+<div id="vis"></div>
+
+<script>
+async function drawScamReports() {
+    // Your provided data
+    const data = [
+        { "Year": 2020, "NumberOfReports": 10438 },
+        { "Year": 2021, "NumberOfReports": 18659 },
+        { "Year": 2022, "NumberOfReports": 25084 },
+        { "Year": 2023, "NumberOfReports": 43246 },
+        { "Year": 2024, "NumberOfReports": 22574 }
+    ];
+
+    // Set up dimensions
+    const margin = {top: 60, right: 30, bottom: 40, left: 30};
+    const width = 800 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const svg = d3.select("#vis").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Scale to position the dots horizontally
+    const x = d3.scaleBand()
+        .domain(data.map(d => d.Year))
+        .range([0, width])
+        .padding(0.4);
+
+    // Maximum number of dots (each dot represents 100 reports)
+    const maxDots = d3.max(data, d => Math.ceil(d.NumberOfReports / 100));
+    
+    // Scale to position the dots vertically
+    const y = d3.scaleLinear()
+        .domain([0, maxDots])
+        .range([height, 0]);
+
+    // Color scale
+    const color = d3.scaleOrdinal()
+        .domain(data.map(d => d.Year))
+        .range(["#1f78b4", "#a6cee3"]);
+
+    // Draw dots
+    data.forEach(d => {
+        const numDots = Math.ceil(d.NumberOfReports / 100);
+        const dotsData = d3.range(numDots).map(i => ({index: i}));
+
+        svg.selectAll(`.dot-${d.Year}`)
+            .data(dotsData)
+            .enter().append("circle")
+            .attr("class", "dot")
+            .attr("r", 5)
+            .attr("cx", x(d.Year))
+            .attr("cy", (dot, i) => y(i))
+            .style("fill", color(d.Year));
+
+        // Label for number of reports
+        svg.append("text")
+            .attr("class", "label")
+            .attr("x", x(d.Year))
+            .attr("y", y(numDots) - 20)
+            .style("fill", color(d.Year))
+            .text(d.NumberOfReports);
+    });
+
+    // Add X axis
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d => d).tickSize(0));
+
+    // Labels for the years
+    svg.selectAll(".year-label")
+        .data(data)
+        .enter().append("text")
+        .attr("class", "year-label")
+        .attr("x", d => x(d.Year))
+        .attr("y", height + 30)
+        .text(d => d.Year);
+}
+
+// Call the function to draw the visualization
+drawScamReports();
+</script>
+
+</body>
+</html>
