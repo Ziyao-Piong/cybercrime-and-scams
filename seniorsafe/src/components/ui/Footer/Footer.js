@@ -1,20 +1,40 @@
 // src/components/Footer.js
-// import React from 'react';
-import './Footer.css';
+// import './Footer.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
-const Footer = () => {
+function MyFooter() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <p>&copy; {new Date().getFullYear()} Senior Safe. All Rights Reserved.</p>
-        <ul className="footer-links">
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-        </ul>
-      </div>
+    <footer className="bg-light text-dark py-4">
+      <Container>
+        <Row>
+          <Col md={4}>
+            <h5>Senior Safe</h5>
+            <p>Keep the scams away.</p>
+          </Col>
+          <Col md={4}>
+            <h5>Quick Links</h5>
+            <ul className="list-unstyled">
+              <li><a href="#home" className="text-dark">Home</a></li>
+              <li><a href="#about" className="text-dark">Data</a></li>
+              <li><a href="#features" className="text-dark">Features</a></li>
+            </ul>
+          </Col>
+          <Col md={4}>
+            <h5>Contact Us</h5>
+            <p>
+              Email: contact@seniorsafe.com<br />
+              Phone: (123) 456-7890
+            </p>
+          </Col>
+        </Row>
+        <Row className="pt-3">
+          <Col className="text-center">
+            <p>&copy; {new Date().getFullYear()} MyApp. All rights reserved.</p>
+          </Col>
+        </Row>
+      </Container>
     </footer>
   );
-};
+}
 
-export default Footer;
+export default MyFooter;

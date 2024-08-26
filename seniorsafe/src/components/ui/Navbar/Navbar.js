@@ -1,32 +1,25 @@
 // Navbar.js
 import { useState } from 'react';
-import './Navbar.css';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
+// import './Navbar.css';
 
-const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleNavbar = () => {
-        setIsOpen(!isOpen);
-    };
-
+function MyNavbar() {
     return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-                <a href="/">Senior Safe</a>
-            </div>
-            <ul className="navbar-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">Stats</a></li>
-                {/* <li><a href="/services">Services</a></li>
-                <li><a href="/contact">Contact</a></li> */}
-            </ul>
-            <div className="navbar-toggle" onclick={toggleNavbar}>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+      <Navbar bg="light" variant="light" expand="md">
+        <Container>
+          <Navbar.Brand href="#home">Senior Safe</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#data">Interesting Data</Nav.Link>
+              <Nav.Link href="#features">Features</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );
-};
-
-export default Navbar;
+}
+export default MyNavbar;
