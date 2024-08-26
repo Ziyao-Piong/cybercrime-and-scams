@@ -22,23 +22,30 @@ def get_connection():
 def fetch_scam_by_year_data():
     query = """
     SELECT 
-        YEAR(StartOfMonth) AS Year,
-        Address_State AS State,
-        Scam_Contact_Mode AS ScamContactMode,
-        Complainant_Gender AS Gender,
-        Category_Level_3 AS ScamType,
-        SUM(Amount_lost) AS AmountLost,
-        SUM(Number_of_reports) AS NumberOfReports
-    FROM 
-        ScamWatch
-    GROUP BY 
-        YEAR(StartOfMonth),
-        Address_State,
-        Scam_Contact_Mode,
-        Complainant_Gender,
-        Category_Level_3
-    ORDER BY 
-        YEAR(StartOfMonth);
+    YEAR(StartOfMonth) AS Year,
+    Address_State AS State,
+    Scam_Contact_Mode AS ScamContactMode,
+    Complainant_Gender AS Gender,
+    Category_Level_3 AS ScamType,
+    SUM(Amount_lost) AS AmountLost,
+    SUM(Number_of_reports) AS NumberOfReports,
+    CASE 
+        WHEN SUM(Amount_lost) BETWEEN 0 AND 10000 THEN '1 - 10,000'
+        WHEN SUM(Amount_lost) BETWEEN 10001 AND 50000 THEN '10,001 - 50,000'
+        WHEN SUM(Amount_lost) BETWEEN 50001 AND 200000 THEN '50,001 - 200,000'
+        WHEN SUM(Amount_lost) BETWEEN 200001 AND 1000000 THEN '200,001 - 1,000,000'
+        WHEN SUM(Amount_lost) BETWEEN 1000001 AND 7000000 THEN '1,000,001 - 7,000,000'
+    END AS AmountLostRange
+FROM 
+    ScamWatch
+GROUP BY 
+    YEAR(StartOfMonth),
+    Address_State,
+    Scam_Contact_Mode,
+    Complainant_Gender,
+    Category_Level_3
+ORDER BY 
+    YEAR(StartOfMonth);
     """
 
     try:
@@ -73,4 +80,4 @@ def get_scam_by_year():
         raise HTTPException(status_code=500, detail="Data retrieval failed")
 
 # Run the server with:
-# uvicorn scrollytelly.data2:app --reload
+# uvicorn scrollytelly.data:app --reload
