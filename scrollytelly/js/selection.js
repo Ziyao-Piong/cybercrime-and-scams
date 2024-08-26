@@ -1,7 +1,7 @@
 var scrollVis = function () {
     // Define constants
     var width = 1000;
-    var left_right_margin = 30;
+    var left_right_margin = 100;
     var top_bottom_margin = 250;
     var height = 720;
 
@@ -43,6 +43,15 @@ var scrollVis = function () {
     };
 
     var total_scam_count_colour = '#1f78b4';
+    var state_color_scale = d3.scaleOrdinal(d3.schemeCategory10); // Color scale for states
+    var gender_color_scale = d3.scaleOrdinal().domain(["Male", "Female"]).range(["#1f78b4", "#e31a1c"]); // Color scale for Male and Female
+    var lost_amount_color_scale = d3.scaleOrdinal().domain([
+        '0 - 10,000',
+        '10,001 - 50,000',
+        '50,001 - 200,000',
+        '200,001 - 1,000,000',
+        '1,000,001 - 7,000,000'
+    ]).range(d3.schemeCategory10); // Color scale for LostAmountRange
 
     // Define functions for the current scroll setting
     var activateFunctions = [];
@@ -75,6 +84,9 @@ var scrollVis = function () {
         activateFunctions[1] = ["year", "year", 2000]; // Year
         activateFunctions[2] = ["scam_type", "scam_type", 2000]; // Scam Type
         activateFunctions[3] = ["contact_mode", "contact_mode", 2000]; // Contact Mode
+        activateFunctions[4] = ["state", "state", 2000]; // State
+        activateFunctions[5] = ["gender", "gender", 2000]; // Gender (Male and Female only)
+        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000]; // LostAmountRange
     };
 
     chart.update = function (index, progress) {
@@ -116,6 +128,12 @@ var scrollVis = function () {
                     return scam_type_colours[d];
                 } else if (fill_type === "contact_mode") {
                     return contact_mode_colours[d];
+                } else if (fill_type === "state") {
+                    return state_color_scale(d); // Use state color scale
+                } else if (fill_type === "gender") {
+                    return gender_color_scale(d); // Use gender color scale (Male and Female only)
+                } else if (fill_type === "lost_amount_range") {
+                    return lost_amount_color_scale(d); // Use LostAmountRange color scale
                 } else {
                     return total_scam_count_colour;
                 }
@@ -157,6 +175,12 @@ var scrollVis = function () {
                     return scam_type_colours[d[data_class]];
                 } else if (fill_type === "contact_mode") {
                     return contact_mode_colours[d[data_class]];
+                } else if (fill_type === "state") {
+                    return state_color_scale(d[data_class]); // Use state color scale
+                } else if (fill_type === "gender") {
+                    return gender_color_scale(d[data_class]); // Use gender color scale (Male and Female only)
+                } else if (fill_type === "lost_amount_range") {
+                    return lost_amount_color_scale(d[data_class]); // Use LostAmountRange color scale
                 } else {
                     return total_scam_count_colour;
                 }
@@ -168,8 +192,8 @@ var scrollVis = function () {
             .attr("transform", "translate(" + left_right_margin + "," + ((top_bottom_margin * 1.2) + y_scale.range()[0]) + ")")
             .call(d3.axisBottom(x0_scale));
 
-        // Rotate x-axis labels for Section 3
-        if (data_class === "contact_mode") {
+        // Rotate x-axis labels for Section 3, Section 4, and Section 6
+        if (data_class === "contact_mode" || data_class === "state" || data_class === "lost_amount_range") {
             x_axis_selection.selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "-0.8em")
@@ -208,17 +232,80 @@ function convert_data(my_data) {
     var year_data = [];
     var scam_type_data = [];
     var contact_mode_data = [];
+    var state_scam_data = [];
+    var gender_data = [];
+    var lost_amount_range_data = [];
+
+    // Aggregate the number of reports by state
+    var state_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.State
+    ).map(([state, NumberOfReports]) => ({ state, NumberOfReports }));
+
+    // Sort by number of reports in descending order
+    state_aggregated_data.sort((a, b) => b.NumberOfReports - a.NumberOfReports);
+
+    state_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        for (var i = 0; i < numDots; i++) {
+            state_scam_data.push({
+                state: d.state,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
+    // Aggregate the number of reports by gender (only Male and Female)
+    var gender_aggregated_data = d3.rollups(
+        my_data.filter(d => d.Gender === "Male" || d.Gender === "Female"), // Filter to include only Male and Female
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.Gender
+    ).map(([gender, NumberOfReports]) => ({ gender, NumberOfReports }));
+
+    gender_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        for (var i = 0; i < numDots; i++) {
+            gender_data.push({
+                gender: d.gender,
+                row: Math.floor(i / 50),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
+    // Aggregate the number of reports by LostAmountRange
+    var lost_amount_range_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.AmountLostRange
+    ).map(([AmountLostRange, NumberOfReports]) => ({ AmountLostRange, NumberOfReports }));
+
+    lost_amount_range_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        for (var i = 0; i < numDots; i++) {
+            lost_amount_range_data.push({
+                lost_amount_range: d.AmountLostRange,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
 
     // Reducing the number of dots for better rendering performance
-var reduced_scam_count = Math.ceil(120001 / 1200); // Display 120001/1200 dots
-for (var i = 0; i < reduced_scam_count; i++) {
-    total_count_data.push({
-        total_count: "Scam Reports",
-        row: Math.floor(i / dots_per_row),
-        column: i % dots_per_row,
-        NumberOfReports: i === 0 ? "Total Scam Reports: 120001" : 0 // Display custom text above the dots
-    });
-}
+    var reduced_scam_count = Math.ceil(120001 / 100); // Display 120001/1200 dots
+    for (var i = 0; i < reduced_scam_count; i++) {
+        total_count_data.push({
+            total_count: "Scam Reports",
+            row: Math.floor(i / dots_per_row),
+            column: i % 60,
+            NumberOfReports: i === 0 ? "Total Scam Reports: 120001" : 0 // Display custom text above the dots
+        });
+    }
 
     my_data.forEach(function (d) {
         var numDots = Math.ceil(d.NumberOfReports / 20);
@@ -250,7 +337,10 @@ for (var i = 0; i < reduced_scam_count; i++) {
         total_count: total_count_data,
         year: year_data,
         scam_type: scam_type_data,
-        contact_mode: contact_mode_data
+        contact_mode: contact_mode_data,
+        state: state_scam_data, // Add state data
+        gender: gender_data, // Add gender data (Male and Female only)
+        lost_amount_range: lost_amount_range_data // Add lost amount range data
     };
 }
 
