@@ -37,7 +37,7 @@ var scrollVis = function () {
         "Mail": '#e31a1c',
         "Mobile apps": '#ff7f00',
         "Phone call": '#6a3d9a',
-        "Social media/Online forums": '#b15928',
+        "Social media": '#b15928',
         "Text message": '#b2df8a',
         "unspecified": '#cab2d6'
     };
@@ -77,25 +77,36 @@ var scrollVis = function () {
 
     var single_elements = function () {
         svg.append("g").attr("class", "x_axis");
+
+        // Add title placeholders
+        svg.append("text")
+            .attr("class", "chart-title")
+            .attr("x", width / 2)
+            .attr("y", top_bottom_margin - 60)  // Adjusted position for section 0 title
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")  // Set to match x-axis labels size
+            .style("font-family", "sans-serif")  // Set to match x-axis labels font
+            .style("font-weight", "bold")  // Make the title bold
+            .attr("visibility", "hidden");
     };
 
     var set_up_sections = function () {
-        activateFunctions[0] = ["total_count", "total_count", 2000]; // Total Count
-        activateFunctions[1] = ["year", "year", 2000]; // Year
-        activateFunctions[2] = ["scam_type", "scam_type", 2000]; // Scam Type
-        activateFunctions[3] = ["contact_mode", "contact_mode", 2000]; // Contact Mode
-        activateFunctions[4] = ["state", "state", 2000]; // State
-        activateFunctions[5] = ["gender", "gender", 2000]; // Gender (Male and Female only)
-        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000]; // LostAmountRange
+        activateFunctions[0] = ["total_count", "total_count", 2000, "Total Number of Scams"]; // Total Count
+        activateFunctions[1] = ["year", "year", 2000, "Number of Scams by Year"]; // Year
+        activateFunctions[2] = ["scam_type", "scam_type", 2000, "Number of Scams by Scam Type"]; // Scam Type
+        activateFunctions[3] = ["contact_mode", "contact_mode", 2000, "Number of Scams by Contact Mode"]; // Contact Mode
+        activateFunctions[4] = ["state", "state", 2000, "Number of Scams by State"]; // State
+        activateFunctions[5] = ["gender", "gender", 2000, "Number of Scams by Gender"]; // Gender (Male and Female only)
+        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Scams by Lost Amount Range"]; // LostAmountRange
     };
 
     chart.update = function (index, progress) {
         activeIndex = index;
-        draw_dots(activateFunctions[index][0], activateFunctions[index][1], activateFunctions[index][2]);
+        draw_dots(activateFunctions[index][0], activateFunctions[index][1], activateFunctions[index][2], activateFunctions[index][3]);
         lastIndex = activeIndex;
     };
 
-    var draw_dots = function (data_class, fill_type, transition) {
+    var draw_dots = function (data_class, fill_type, transition, chartTitle) {
         var my_data = data_class === "none" ? [] : vis_data[data_class];
 
         x0_scale.domain(Array.from(new Set(my_data.map(d => d[data_class]))));
@@ -141,6 +152,11 @@ var scrollVis = function () {
             .text(function (d) {
                 if (data_class === "total_count") {
                     return "120001"; // Display the full count above the dots
+                } else if (data_class === "gender") {
+                    var totalReports = d3.sum(my_data, m => m.NumberOfReports);
+                    var genderReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
+                    var percentage = ((genderReports / totalReports) * 100).toFixed(1);
+                    return `${percentage}%`; // Display the percentage for gender
                 } else {
                     return my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                 }
@@ -200,6 +216,13 @@ var scrollVis = function () {
                 .attr("dy", "0.15em")
                 .attr("transform", "rotate(-45)");
         }
+
+        // Display the title
+        svg.select(".chart-title")
+            .text(chartTitle)
+            .transition()
+            .delay(transition * 1.2)
+            .attr("visibility", "visible");
     };
 
     return chart;
@@ -258,6 +281,63 @@ function convert_data(my_data) {
         }
     });
 
+    // Aggregate the number of reports by year
+    var year_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.Year
+    ).map(([year, NumberOfReports]) => ({ year, NumberOfReports }));
+
+    year_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Same scaling factor as state
+        for (var i = 0; i < numDots; i++) {
+            year_data.push({
+                year: d.year,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
+    // Aggregate the number of reports by scam type
+    var scam_type_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.ScamType
+    ).map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }));
+
+    scam_type_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Use the same scaling factor
+        for (var i = 0; i < numDots; i++) {
+            scam_type_data.push({
+                scam_type: d.scam_type,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
+    // Aggregate the number of reports by contact mode
+    var contact_mode_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.ScamContactMode
+    ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }));
+
+    contact_mode_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 250); // Use the same scaling factor
+        for (var i = 0; i < numDots; i++) {
+            contact_mode_data.push({
+                contact_mode: d.contact_mode,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
     // Aggregate the number of reports by gender (only Male and Female)
     var gender_aggregated_data = d3.rollups(
         my_data.filter(d => d.Gender === "Male" || d.Gender === "Female"), // Filter to include only Male and Female
@@ -307,32 +387,6 @@ function convert_data(my_data) {
         });
     }
 
-    my_data.forEach(function (d) {
-        var numDots = Math.ceil(d.NumberOfReports / 20);
-        for (var i = 0; i < numDots; i++) {
-            year_data.push({
-                year: d.Year,
-                row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
-                NumberOfReports: i === 0 ? d.NumberOfReports : 0
-            });
-
-            scam_type_data.push({
-                scam_type: d.ScamType,
-                row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
-                NumberOfReports: i === 0 ? d.NumberOfReports : 0
-            });
-
-            contact_mode_data.push({
-                contact_mode: d.ScamContactMode,
-                row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
-                NumberOfReports: i === 0 ? d.NumberOfReports : 0
-            });
-        }
-    });
-
     return {
         total_count: total_count_data,
         year: year_data,
@@ -343,6 +397,7 @@ function convert_data(my_data) {
         lost_amount_range: lost_amount_range_data // Add lost amount range data
     };
 }
+
 
 // Load data and display
 d3.json('http://127.0.0.1:8000/scam-by-year').then(display).catch(function(error) {
