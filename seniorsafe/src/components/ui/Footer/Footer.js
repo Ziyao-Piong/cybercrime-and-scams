@@ -29,7 +29,7 @@ function MyFooter() {
         </Row>
         <Row className="pt-3">
           <Col className="text-center">
-            <p>&copy; {new Date().getFullYear()} MyApp. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Senior Safe. All rights reserved.</p>
           </Col>
         </Row>
       </Container>

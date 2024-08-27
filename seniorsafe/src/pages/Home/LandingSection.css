@@ -1,7 +1,7 @@
 /* src/pages/Home/LandingSection.css */
 
 .landing-section {
-  background-image: url('/public/stock.jpg'); 
+  background-image: url('/public/landing_pic.jpeg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
