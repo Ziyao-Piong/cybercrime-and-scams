@@ -29,13 +29,10 @@
     position: relative;
     display: inline-block;
     width: 400px;
-<<<<<<< HEAD
     top: 60px;
-=======
-    top: 200px;
->>>>>>> c04918e16854dd51283ee102d23ab5ce5afd148a
     z-index: 90;
     padding-bottom: 200px;
+    left: 75px;
   }
   
   .step {
