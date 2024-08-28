@@ -1,3 +1,11 @@
+.navbar-brand .logo {
+    height: 40px; 
+    margin-right: 10px; /* Space between logo and text */
+    vertical-align: middle; 
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -32,6 +40,40 @@ body {
     z-index: 2;
     text-align: center;
 }
+
+.quotes-section {
+    padding: 60px 0;
+    background-color: #001f3f; /* Navy blue background */
+    color: white; /* White text */
+    text-align: center;
+}
+
+.quotes-section h2 {
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.quotes-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    animation: fadeInOut 10s linear infinite;
+    opacity: 0;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    25%, 75% { opacity: 1; }
+}
+
 
 .footer {
     padding: 20px 0;
