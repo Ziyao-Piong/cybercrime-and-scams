@@ -214,7 +214,7 @@ var scrollVis = function () {
                 return data_class === "final" ? width / 2.4 : x0_scale(d[data_class]) + x1_scale(d.column);
             })
             .attr("cy", function (d) {
-                return data_class === "final" ? top_bottom_margin + -180 : y_scale(d.row); // Adjusted to better center under title
+                return data_class === "final" ? top_bottom_margin - 250 : y_scale(d.row); // Adjusted to better center under title
             })
             .attr("fill", function (d) {
                 if (fill_type === "year") {
@@ -237,7 +237,9 @@ var scrollVis = function () {
                     return total_scam_count_colour;
                 }
             })
-            .attr("r", my_radius)
+            .attr("r", function (d) {
+                return data_class === "final" ? my_radius * 3 : my_radius;  // Make the dot grow to 3x size in the final section
+            })
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
 
         var x_axis_selection = d3.select(".x_axis")
