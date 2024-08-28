@@ -103,6 +103,7 @@ var scrollVis = function () {
         activateFunctions[5] = ["gender", "gender", 2000, "Percentage of Reported Scams by Gender"]; // Gender (Male and Female only)
         activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Reported Scams by Lost Amount Range"]; // LostAmountRange
         activateFunctions[7] = ["month", "month", 2000, "Percentage of Reported Scams by Month"]; // Month
+        activateFunctions[8] = ["final", "final", 2000, "Don't be the one to fall victim to a scam"]; // Final section for the single dot
     };
 
     chart.update = function (index, progress) {
@@ -140,8 +141,12 @@ var scrollVis = function () {
 
         my_group.select(".bar_text")
             .attr("visibility", "hidden")
-            .attr("x", function (d) { return x0_scale(d) + (x0_scale.bandwidth() * 0.45); })
-            .attr("y", function (d) { return y_scale(d3.max(my_data.filter(m => m[data_class] === d), m => m.row)) - 15; })
+            .attr("x", function (d) {
+                return data_class === "final" ? width / 2 : x0_scale(d) + (x0_scale.bandwidth() * 0.45);
+            })
+            .attr("y", function (d) {
+                return data_class === "final" ? height / 2 - 15 : y_scale(d3.max(my_data.filter(m => m[data_class] === d), m => m.row)) - 15;
+            })
             .attr("fill", function (d) {
                 if (fill_type === "year") {
                     return year_colours[d];
@@ -157,6 +162,8 @@ var scrollVis = function () {
                     return lost_amount_color_scale(d); // Use LostAmountRange color scale
                 } else if (fill_type === "month") {
                     return month_color_scale(d); // Use month color scale
+                } else if (fill_type === "final") {
+                    return total_scam_count_colour;
                 } else {
                     return total_scam_count_colour;
                 }
@@ -173,6 +180,8 @@ var scrollVis = function () {
                     var monthReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                     var percentage = ((monthReports / totalReports) * 100).toFixed(1);
                     return `${percentage}%`; // Display the percentage for month
+                } else if (data_class === "final") {
+                    return ""; // No text for the final dot
                 } else {
                     return my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                 }
@@ -180,7 +189,9 @@ var scrollVis = function () {
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")")
             .transition()
             .delay(transition * 1.2)
-            .attr("visibility", "visible");
+            .attr("visibility", function (d) {
+                return data_class === "final" ? "hidden" : "visible";
+            });
 
         var dot_group = svg.selectAll(".dots_group")
             .data(my_data);
@@ -198,8 +209,12 @@ var scrollVis = function () {
         dot_group.select(".circle_dot")
             .transition()
             .duration(transition)
-            .attr("cx", function (d) { return x0_scale(d[data_class]) + x1_scale(d.column); })
-            .attr("cy", function (d) { return y_scale(d.row); })
+            .attr("cx", function (d) {
+                return data_class === "final" ? width / 2 : x0_scale(d[data_class]) + x1_scale(d.column);
+            })
+            .attr("cy", function (d) {
+                return data_class === "final" ? height / 2 : y_scale(d.row);
+            })
             .attr("fill", function (d) {
                 if (fill_type === "year") {
                     return year_colours[d[data_class]];
@@ -215,6 +230,8 @@ var scrollVis = function () {
                     return lost_amount_color_scale(d[data_class]); // Use LostAmountRange color scale
                 } else if (fill_type === "month") {
                     return month_color_scale(d[data_class]); // Use month color scale
+                } else if (fill_type === "final") {
+                    return total_scam_count_colour;
                 } else {
                     return total_scam_count_colour;
                 }
@@ -223,16 +240,18 @@ var scrollVis = function () {
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
 
         var x_axis_selection = d3.select(".x_axis")
-            .attr("transform", "translate(" + left_right_margin + "," + ((top_bottom_margin * 1.2) + y_scale.range()[0]) + ")")
-            .call(d3.axisBottom(x0_scale));
+            .attr("transform", "translate(" + left_right_margin + "," + ((top_bottom_margin * 1.2) + y_scale.range()[0]) + ")");
 
-        // Rotate x-axis labels for specific sections
+        // Show axis only when not in final section
         if (["contact_mode", "state", "lost_amount_range", "month"].includes(data_class)) {
+            x_axis_selection.call(d3.axisBottom(x0_scale));
             x_axis_selection.selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "-0.8em")
                 .attr("dy", "0.15em")
                 .attr("transform", "rotate(-45)");
+        } else {
+            x_axis_selection.selectAll("*").remove();
         }
 
         // Display the title
@@ -277,6 +296,7 @@ function convert_data(my_data) {
     var gender_data = [];
     var lost_amount_range_data = [];
     var month_data = [];
+    var final_data = [{ final: "Scam Reports", row: 0, column: 0 }];
 
     // Aggregate the number of reports by state
     var state_aggregated_data = d3.rollups(
@@ -437,10 +457,10 @@ function convert_data(my_data) {
         state: state_scam_data, // Add state data
         gender: gender_data, // Add gender data (Male and Female only)
         lost_amount_range: lost_amount_range_data, // Add lost amount range data
-        month: month_data // Add month data
+        month: month_data, // Add month data
+        final: final_data // Add final data for the single dot
     };
 }
-
 
 // Load data and display
 d3.json('http://127.0.0.1:8000/scam-by-year').then(display).catch(function(error) {
