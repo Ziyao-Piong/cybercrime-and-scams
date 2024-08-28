@@ -2,8 +2,8 @@ var scrollVis = function () {
     // Define constants
     var width = 1000;
     var left_right_margin = 100;
-    var top_bottom_margin = 250;
-    var height = 720;
+    var top_bottom_margin = 280;
+    var height = 730;
 
     // Define scroll index tracking vars
     var lastIndex = -1;
