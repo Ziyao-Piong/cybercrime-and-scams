@@ -77,7 +77,7 @@
     text-align: Left;
     width: 40%; /* Adjust width as needed */
     padding: 20px;
-    background-color: white; /* Optional: add background to make it stand out */
+    background-color: rgb(255, 255, 255); /* Optional: add background to make it stand out */
     z-index: 100; /* Ensure it's on top */
     font-family: "TiemposTextWeb-Regular", "Georgia", serif; /* Matching the font family */
     font-size: 16px; /* Matching the font size */
@@ -90,7 +90,7 @@
     font-size: 18px; /* Matching the title font size */
     font-weight: bold; /* Matching the title font weight */
     margin-bottom: 10px;
-    color: #262626; /* Matching the title color */
+    color: hsl(0, 0%, 15%); /* Matching the title color */
     line-height: 1.4em;
   }
   
