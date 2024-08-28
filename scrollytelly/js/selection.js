@@ -1,6 +1,6 @@
 var scrollVis = function () {
     // Define constants
-    var width = 1000;
+    var width = 1100;
     var left_right_margin = 100;
     var top_bottom_margin = 280;
     var height = 730;
@@ -46,12 +46,16 @@ var scrollVis = function () {
     var state_color_scale = d3.scaleOrdinal(d3.schemeCategory10); // Color scale for states
     var gender_color_scale = d3.scaleOrdinal().domain(["Male", "Female"]).range(["#1f78b4", "#e31a1c"]); // Color scale for Male and Female
     var lost_amount_color_scale = d3.scaleOrdinal().domain([
+        '0',
         '0 - 10,000',
         '10,001 - 50,000',
         '50,001 - 200,000',
         '200,001 - 1,000,000',
         '1,000,001 - 7,000,000'
     ]).range(d3.schemeCategory10); // Color scale for LostAmountRange
+
+    var month_color_scale = d3.scaleOrdinal(d3.schemeCategory10)
+        .domain(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
 
     // Define functions for the current scroll setting
     var activateFunctions = [];
@@ -91,13 +95,14 @@ var scrollVis = function () {
     };
 
     var set_up_sections = function () {
-        activateFunctions[0] = ["total_count", "total_count", 2000, "Total Number of Scams"]; // Total Count
-        activateFunctions[1] = ["year", "year", 2000, "Number of Scams by Year"]; // Year
-        activateFunctions[2] = ["scam_type", "scam_type", 2000, "Number of Scams by Scam Type"]; // Scam Type
-        activateFunctions[3] = ["contact_mode", "contact_mode", 2000, "Number of Scams by Contact Mode"]; // Contact Mode
-        activateFunctions[4] = ["state", "state", 2000, "Number of Scams by State"]; // State
-        activateFunctions[5] = ["gender", "gender", 2000, "Number of Scams by Gender"]; // Gender (Male and Female only)
-        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Scams by Lost Amount Range"]; // LostAmountRange
+        activateFunctions[0] = ["total_count", "total_count", 2000, "Total Number of Reported Scams"]; // Total Count
+        activateFunctions[1] = ["year", "year", 2000, "Number of Reported Scams by Year"]; // Year
+        activateFunctions[2] = ["scam_type", "scam_type", 2000, "Number of Scams by Reported Scam Type"]; // Scam Type
+        activateFunctions[3] = ["contact_mode", "contact_mode", 2000, "Number of Reported Scams by Contact Mode"]; // Contact Mode
+        activateFunctions[4] = ["state", "state", 2000, "Number of Reported Scams by State"]; // State
+        activateFunctions[5] = ["gender", "gender", 2000, "Percentage of Reported Scams by Gender"]; // Gender (Male and Female only)
+        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Reported Scams by Lost Amount Range"]; // LostAmountRange
+        activateFunctions[7] = ["month", "month", 2000, "Percentage of Reported Scams by Month"]; // Month
     };
 
     chart.update = function (index, progress) {
@@ -128,6 +133,11 @@ var scrollVis = function () {
 
         my_group = my_group.merge(enter);
 
+        // Calculate the total number of reports for the month data
+        if (data_class === "month") {
+            var totalReports = d3.sum(my_data, m => m.NumberOfReports);
+        }
+
         my_group.select(".bar_text")
             .attr("visibility", "hidden")
             .attr("x", function (d) { return x0_scale(d) + (x0_scale.bandwidth() * 0.45); })
@@ -145,6 +155,8 @@ var scrollVis = function () {
                     return gender_color_scale(d); // Use gender color scale (Male and Female only)
                 } else if (fill_type === "lost_amount_range") {
                     return lost_amount_color_scale(d); // Use LostAmountRange color scale
+                } else if (fill_type === "month") {
+                    return month_color_scale(d); // Use month color scale
                 } else {
                     return total_scam_count_colour;
                 }
@@ -153,10 +165,14 @@ var scrollVis = function () {
                 if (data_class === "total_count") {
                     return "120001"; // Display the full count above the dots
                 } else if (data_class === "gender") {
-                    var totalReports = d3.sum(my_data, m => m.NumberOfReports);
+                    var totalGenderReports = d3.sum(my_data, m => m.NumberOfReports);
                     var genderReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
-                    var percentage = ((genderReports / totalReports) * 100).toFixed(1);
+                    var percentage = ((genderReports / totalGenderReports) * 100).toFixed(1);
                     return `${percentage}%`; // Display the percentage for gender
+                } else if (data_class === "month") {
+                    var monthReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
+                    var percentage = ((monthReports / totalReports) * 100).toFixed(1);
+                    return `${percentage}%`; // Display the percentage for month
                 } else {
                     return my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                 }
@@ -197,6 +213,8 @@ var scrollVis = function () {
                     return gender_color_scale(d[data_class]); // Use gender color scale (Male and Female only)
                 } else if (fill_type === "lost_amount_range") {
                     return lost_amount_color_scale(d[data_class]); // Use LostAmountRange color scale
+                } else if (fill_type === "month") {
+                    return month_color_scale(d[data_class]); // Use month color scale
                 } else {
                     return total_scam_count_colour;
                 }
@@ -208,8 +226,8 @@ var scrollVis = function () {
             .attr("transform", "translate(" + left_right_margin + "," + ((top_bottom_margin * 1.2) + y_scale.range()[0]) + ")")
             .call(d3.axisBottom(x0_scale));
 
-        // Rotate x-axis labels for Section 3, Section 4, and Section 6
-        if (data_class === "contact_mode" || data_class === "state" || data_class === "lost_amount_range") {
+        // Rotate x-axis labels for specific sections
+        if (["contact_mode", "state", "lost_amount_range", "month"].includes(data_class)) {
             x_axis_selection.selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "-0.8em")
@@ -258,6 +276,7 @@ function convert_data(my_data) {
     var state_scam_data = [];
     var gender_data = [];
     var lost_amount_range_data = [];
+    var month_data = [];
 
     // Aggregate the number of reports by state
     var state_aggregated_data = d3.rollups(
@@ -376,6 +395,29 @@ function convert_data(my_data) {
         }
     });
 
+    // Aggregate the number of reports by month
+    var month_aggregated_data = d3.rollups(
+        my_data,
+        v => d3.sum(v, d => d.NumberOfReports),
+        d => d.Month
+    ).map(([month, NumberOfReports]) => ({ month, NumberOfReports }));
+
+    // Sort months by natural order
+    const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    month_aggregated_data.sort((a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month));
+
+    month_aggregated_data.forEach(function (d, index) {
+        var numDots = Math.ceil(d.NumberOfReports / 100); // Divide by 250 for better rendering
+        for (var i = 0; i < numDots; i++) {
+            month_data.push({
+                month: d.month,
+                row: Math.floor(i / dots_per_row),
+                column: i % dots_per_row,
+                NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
+            });
+        }
+    });
+
     // Reducing the number of dots for better rendering performance
     var reduced_scam_count = Math.ceil(120001 / 100); // Display 120001/1200 dots
     for (var i = 0; i < reduced_scam_count; i++) {
@@ -394,7 +436,8 @@ function convert_data(my_data) {
         contact_mode: contact_mode_data,
         state: state_scam_data, // Add state data
         gender: gender_data, // Add gender data (Male and Female only)
-        lost_amount_range: lost_amount_range_data // Add lost amount range data
+        lost_amount_range: lost_amount_range_data, // Add lost amount range data
+        month: month_data // Add month data
     };
 }
 
