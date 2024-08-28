@@ -43,6 +43,7 @@ var scrollVis = function () {
     };
 
     var total_scam_count_colour = '#1f78b4';
+    var final_dot_colour = '#e31a1c';  // Red color for the final section dot
     var state_color_scale = d3.scaleOrdinal(d3.schemeCategory10); // Color scale for states
     var gender_color_scale = d3.scaleOrdinal().domain(["Male", "Female"]).range(["#1f78b4", "#e31a1c"]); // Color scale for Male and Female
     var lost_amount_color_scale = d3.scaleOrdinal().domain([
@@ -163,7 +164,7 @@ var scrollVis = function () {
                 } else if (fill_type === "month") {
                     return month_color_scale(d); // Use month color scale
                 } else if (fill_type === "final") {
-                    return total_scam_count_colour;
+                    return final_dot_colour; // Red color for the final dot
                 } else {
                     return total_scam_count_colour;
                 }
@@ -210,10 +211,10 @@ var scrollVis = function () {
             .transition()
             .duration(transition)
             .attr("cx", function (d) {
-                return data_class === "final" ? width / 2 : x0_scale(d[data_class]) + x1_scale(d.column);
+                return data_class === "final" ? width / 2.4 : x0_scale(d[data_class]) + x1_scale(d.column);
             })
             .attr("cy", function (d) {
-                return data_class === "final" ? height / 2 : y_scale(d.row);
+                return data_class === "final" ? top_bottom_margin + -180 : y_scale(d.row); // Adjusted to better center under title
             })
             .attr("fill", function (d) {
                 if (fill_type === "year") {
@@ -231,7 +232,7 @@ var scrollVis = function () {
                 } else if (fill_type === "month") {
                     return month_color_scale(d[data_class]); // Use month color scale
                 } else if (fill_type === "final") {
-                    return total_scam_count_colour;
+                    return final_dot_colour; // Red color for the final dot
                 } else {
                     return total_scam_count_colour;
                 }
@@ -347,7 +348,7 @@ function convert_data(my_data) {
     ).map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }));
 
     scam_type_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             scam_type_data.push({
                 scam_type: d.scam_type,
@@ -366,7 +367,7 @@ function convert_data(my_data) {
     ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }));
 
     contact_mode_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             contact_mode_data.push({
                 contact_mode: d.contact_mode,
