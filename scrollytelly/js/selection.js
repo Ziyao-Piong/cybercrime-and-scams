@@ -238,7 +238,7 @@ var scrollVis = function () {
                 }
             })
             .attr("r", function (d) {
-                return data_class === "final" ? my_radius * 3 : my_radius;  // Make the dot grow to 3x size in the final section
+                return data_class === "final" ? my_radius * 5 : my_radius;  // Make the dot grow to 5x size in the final section
             })
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
 
