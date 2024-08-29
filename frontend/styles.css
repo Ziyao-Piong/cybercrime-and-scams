@@ -1,19 +1,31 @@
-/* Navbar */
-.navbar-brand .logo {
-  height: 40px; 
-  margin-right: 10px; /* Space between logo and text */
-  vertical-align: middle; 
-}
-
-/* Body */
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Navbar */
+.navbar-brand .logo {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+  color: #002147; /* Navy blue text */
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0056b3; /* Darker blue on hover */
 }
 
 /* Landing Section */
 .landing-section {
   display: flex;
-  padding: 0;
   justify-content: center;
   align-items: center;
   background-image: url('resources/landing_pic.jpeg');
@@ -23,8 +35,8 @@ body {
   position: relative;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  min-height: 666px;
-  z-index: 1; /* Ensure the section has a base z-index */
+  min-height: 700px; /* Increased height for better coverage */
+  padding: 40px 20px;
 }
 
 .landing-section::before {
@@ -35,81 +47,157 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1; /* Keep the overlay beneath the content */
+  z-index: 1;
 }
 
 .landing-section .container {
   position: relative;
-  z-index: 2; /* Ensure the content is on top of the overlay */
+  z-index: 2;
   text-align: center;
 }
 
-/* Button Styling */
+.landing-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.landing-section p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  z-index: 3; /* Ensure the button is on top of everything */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add some shadow for visibility */
+  background-color: #ff9d00;
+  border-color: #ff9d00;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem; /* Slightly larger button text */
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background-color: #e69200;
+  border-color: #e69200;
 }
-
-
 
 /* Quotes Section */
 .quotes-section {
-  background-color: #002147; /* Navy blue background */
+  background-color: #002147;
   color: white;
-  padding: 100px 20px; /* Increased padding for more vertical space */
+  padding: 100px 20px;
   text-align: center;
-  min-height: 800px; /* Increased height for more content space and scrolling */
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* Ensure content is centered vertically */
+  flex-direction: column;
 }
 
 .quotes-section h2 {
-  font-size: 30px; /* Increased font size for the heading */
-  margin-bottom: 40px; /* Increased margin for spacing */
+  font-size: 2.5rem;
+  margin-bottom: 40px;
 }
 
 .quote-text {
-  font-size: 24px; /* Increased font size for quotes */
+  font-size: 1.5rem;
   font-style: italic;
-  max-width: 1000px; /* Wider width for quotes */
-  margin: 0 auto; /* Center the text */
-  line-height: 1.5; /* Improve readability */
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
 }
 
 .gold-btn {
-  background-color: #FFD700; /* Gold color */
-  color: #002147; /* Navy text color */
+  background-color: #ff9d00;
+  color: #002147;
   border: none;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 12px 30px;
+  font-size: 1.2rem;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
+  margin-top: 30px;
 }
 
 .gold-btn:hover {
-  background-color: #e6c200; /* Slightly darker gold on hover */
+  background-color: #e69200;
 }
 
 /* Trending Scams Section */
 .trending-scams-section {
-  padding: 100px 20px; /* Padding for the trending scams section */
+  padding: 80px 20px;
+  background-color: #f7f7f7;
+}
+
+.trending-scams-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.trending-scams-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
 }
 
 /* Footer */
 .footer {
-  padding: 8px 0;
+  padding: 20px 0;
   background-color: #f8f9fa;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  margin-top: 20px;
+}
+
+.footer h5 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #002147;
+}
+
+.footer p, .footer a {
+  color: #555;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.footer i {
+  font-size: 1.5rem;
+  color: #002147;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.footer i:hover {
+  color: #0056b3;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 10px;
+}
+
+.footer hr {
+  margin: 20px 0;
+  border-color: #eaeaea;
+}
+
+.footer .text-muted {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .landing-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .quotes-section h2 {
+    font-size: 2rem;
+  }
+
+  .trending-scams-section h2 {
+    font-size: 2rem;
+  }
 }

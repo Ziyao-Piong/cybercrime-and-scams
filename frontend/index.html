@@ -15,6 +15,42 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <style>
+      /* Existing CSS */
+      .quotes-section {
+        background-color: #333;
+        padding: 40px 0;
+        color: white;
+      }
+
+      .quote-text {
+        font-size: 24px;
+        font-style: italic;
+        max-width: 1000px;
+        margin: 0 auto;
+        line-height: 1.5;
+        min-height: 60px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .quote-text.visible {
+        opacity: 1;
+      }
+
+      .gold-btn {
+        background-color: gold;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .gold-btn:hover {
+        background-color: darkgoldenrod;
+      }
+    </style>
   </head>
 
   <body>
@@ -77,7 +113,9 @@
     <section class="quotes-section text-center">
       <div class="container">
         <h2 class="display-5 text-white">Stay Vigilant, Stay Safe</h2>
-        <div class="quote-text">"Scams don't target the foolish, they target the trusting." - Unknown</div>
+        <div id="quote-text" class="quote-text visible">
+          "Australians lost a record amount of more than $2.7 billion to scams in 2023."
+        </div>
         <button class="btn gold-btn mt-4" onclick="scrollToTrendingScams()">Explore Trending Scams</button>
       </div>
     </section>
@@ -125,6 +163,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+      const quotes = [
+        "Australians lost a record amount of more than $2.7 billion to scams in 2023.",
+        "Have you been scammed?",
+        "Seniors are often targeted by scammers due to their perceived vulnerability.",
+        "Over 70% of scam victims aged 65 and older report financial losses."
+      ];
+
+      let currentQuoteIndex = 0;
+
+      function changeQuote() {
+        const quoteElement = document.getElementById('quote-text');
+        quoteElement.classList.remove('visible'); // Hide the current quote
+
+        setTimeout(() => {
+          quoteElement.textContent = quotes[currentQuoteIndex]; // Update the text
+          quoteElement.classList.add('visible'); // Show the new quote
+          currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+        }, 1000); // Delay for 1 second for smooth fading
+      }
+
+      // Change quote every 3 seconds (3000 ms)
+      setInterval(changeQuote, 3000);
+
       function scrollToTrendingScams() {
         document.getElementById('trending-scams').scrollIntoView({ behavior: 'smooth' });
       }
