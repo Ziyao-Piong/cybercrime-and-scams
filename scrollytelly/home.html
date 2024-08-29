@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senior Safe</title>
+    <link href="styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="js/scroller.js"></script>
+    <script src="js/selection.js"></script>
+
+    <style>
+      /* Existing CSS */
+      .quotes-section {
+        background-color: #333;
+        padding: 40px 0;
+        color: white;
+      }
+
+      .quote-text {
+        font-size: 24px;
+        font-style: italic;
+        max-width: 1000px;
+        margin: 0 auto;
+        line-height: 1.5;
+        min-height: 60px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .quote-text.visible {
+        opacity: 1;
+      }
+
+      .gold-btn {
+        background-color: gold;
+        color: black;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .gold-btn:hover {
+        background-color: darkgoldenrod;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+            src="resources/logof.jpg"
+            alt="Senior Safe Logo"
+            class="logo"
+          />Senior Safe
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="home.html"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="data.html">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Landing Section -->
+    <section class="landing-section text-center">
+      <div class="container">
+        <h1 class="display-4">Welcome to Senior Safe</h1>
+        <p class="lead">
+          Scam is an illegal act of obtaining others' property or sensitive
+          information through deceptive means. Common types of scams include
+          investment, false billing, phishing, and lottery scams. With the
+          widespread use of the internet and social media, scam tactics have
+          become increasingly sophisticated and far-reaching. Therefore, staying
+          vigilant and understanding common scam methods are crucial to
+          protecting oneself from losses.
+        </p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quotes-section text-center">
+      <div class="container">
+        <h2 class="display-5 text-white">Stay Vigilant, Stay Safe</h2>
+        <div id="quote-text" class="quote-text visible">
+          "Australians lost a record amount of more than $2.7 billion to scams
+          in 2023."
+        </div>
+        <button class="btn gold-btn mt-4" onclick="scrollToTrendingScams()">
+          Explore Trending Scams
+        </button>
+      </div>
+    </section>
+
+    <!-- Trending Scams Section -->
+    <section class="trending-scams-section text-center" id="trending-scams">
+      <div class="container">
+        <h2 class="display-5">Trending Scams</h2>
+        <p class="lead">Learn about the latest scams targeting seniors.</p>
+        <!-- Content for Trending Scams goes here -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p>
+              Email:
+              <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a>
+            </p>
+            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+          </div>
+          <div class="col-md-4">
+            <h5>Follow Us</h5>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Statistics</a></li>
+              <li><a href="#">Features</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
