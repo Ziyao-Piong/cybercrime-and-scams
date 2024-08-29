@@ -264,7 +264,7 @@ body {
   #vis {
     display: inline-block;
     position: fixed;
-    top: 80px;
+    top: 200px;
     z-index: 1;
     margin-left: 0;
   }
