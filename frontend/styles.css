@@ -1,79 +1,115 @@
 /* Navbar */
 .navbar-brand .logo {
-    height: 40px; 
-    margin-right: 10px; /* Space between logo and text */
-    vertical-align: middle; 
-  }
-  
-  /* Body */
-  body {
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Landing Section */
-  .landing-section {
-    display: flex;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    background-image: url('resources/landing_pic.jpeg'); /* Replace with your image path */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    min-height: 666px;
-  }
-  
-  .landing-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay */
-  }
-  
-  .landing-section .container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-  }
-  
-  /* Quotes Section */
-  .quotes-section {
-    background-color: #002147; /* Navy blue background */
-    color: white;
-    padding: 100px 20px; /* Increased padding for more vertical space */
-    text-align: center;
-    min-height: 800px; /* Increased height for more content space and scrolling */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Ensure content is centered vertically */
-  }
-  
-  .quotes-section h2 {
-    font-size: 30px; /* Increased font size for the heading */
-    margin-bottom: 40px; /* Increased margin for spacing */
-  }
-  
-  .quote-text {
-    font-size: 24px; /* Increased font size for quotes */
-    font-style: italic;
-    max-width: 1000px; /* Wider width for quotes */
-    margin: 0 auto; /* Center the text */
-    line-height: 1.5; /* Improve readability */
-  }
-  
-  /* Footer */
-  .footer {
-    padding: 20px 0;
-    background-color: #f8f9fa;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-  }
-  
+  height: 40px; 
+  margin-right: 10px; /* Space between logo and text */
+  vertical-align: middle; 
+}
+
+/* Body */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Landing Section */
+.landing-section {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background-image: url('resources/landing_pic.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  min-height: 666px;
+  z-index: 1; /* Ensure the section has a base z-index */
+}
+
+.landing-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1; /* Keep the overlay beneath the content */
+}
+
+.landing-section .container {
+  position: relative;
+  z-index: 2; /* Ensure the content is on top of the overlay */
+  text-align: center;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  z-index: 3; /* Ensure the button is on top of everything */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add some shadow for visibility */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+
+
+/* Quotes Section */
+.quotes-section {
+  background-color: #002147; /* Navy blue background */
+  color: white;
+  padding: 100px 20px; /* Increased padding for more vertical space */
+  text-align: center;
+  min-height: 800px; /* Increased height for more content space and scrolling */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Ensure content is centered vertically */
+}
+
+.quotes-section h2 {
+  font-size: 30px; /* Increased font size for the heading */
+  margin-bottom: 40px; /* Increased margin for spacing */
+}
+
+.quote-text {
+  font-size: 24px; /* Increased font size for quotes */
+  font-style: italic;
+  max-width: 1000px; /* Wider width for quotes */
+  margin: 0 auto; /* Center the text */
+  line-height: 1.5; /* Improve readability */
+}
+
+.gold-btn {
+  background-color: #FFD700; /* Gold color */
+  color: #002147; /* Navy text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.gold-btn:hover {
+  background-color: #e6c200; /* Slightly darker gold on hover */
+}
+
+/* Trending Scams Section */
+.trending-scams-section {
+  padding: 100px 20px; /* Padding for the trending scams section */
+}
+
+/* Footer */
+.footer {
+  padding: 8px 0;
+  background-color: #f8f9fa;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
