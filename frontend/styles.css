@@ -56,6 +56,23 @@ body {
   text-align: center;
 }
 
+.landing-section h1, .landing-section p {
+  animation: moveText 5s ease-in-out infinite;
+}
+
+/* Keyframes for text animation */
+@keyframes moveText {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-20px); /* Adjust this value to control the vertical movement */
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
 .landing-section h1 {
   font-size: 3rem;
   margin-bottom: 20px;
@@ -81,7 +98,7 @@ body {
 
 /* Quotes Section */
 .quotes-section {
-  background-color: #002147;
+  background-color: #1F3C88;
   color: white;
   padding: 100px 20px;
   text-align: center;
@@ -152,7 +169,7 @@ body {
 }
 
 .footer p, .footer a {
-  color: #555;
+  color: #1F3C88;
   font-size: 0.9rem;
   text-decoration: none;
 }
@@ -184,20 +201,20 @@ body {
 
 .footer .text-muted {
   font-size: 0.85rem;
-  color: #777;
+  color: #1F3C88;
 }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .landing-section h1 {
-    font-size: 2.5rem;
+      font-size: 2.5rem;
   }
 
   .quotes-section h2 {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 
   .trending-scams-section h2 {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 }
