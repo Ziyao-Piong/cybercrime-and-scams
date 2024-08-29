@@ -1,15 +1,17 @@
+/* Navbar */
 .navbar-brand .logo {
     height: 40px; 
-    margin-right: 20px; /* Space between logo and text */
-    vertical-align: left; 
-}
-
-
-body {
+    margin-right: 10px; /* Space between logo and text */
+    vertical-align: middle; 
+  }
+  
+  /* Body */
+  body {
     font-family: Arial, sans-serif;
-}
-
-.landing-section {
+  }
+  
+  /* Landing Section */
+  .landing-section {
     display: flex;
     padding: 0;
     justify-content: center;
@@ -22,9 +24,9 @@ body {
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     min-height: 666px;
-}
-
-.landing-section::before {
+  }
+  
+  .landing-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -32,90 +34,46 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay */
-}
-
-.landing-section .container {
+  }
+  
+  .landing-section .container {
     position: relative;
     z-index: 2;
     text-align: center;
-}
-
-.quotes-section {
-    padding: 60px 0;
-    background-color: #001f3f; /* Navy blue background */
-    color: white; /* White text */
+  }
+  
+  /* Quotes Section */
+  .quotes-section {
+    background-color: #002147; /* Navy blue background */
+    color: white;
+    padding: 100px 20px; /* Increased padding for more vertical space */
     text-align: center;
-}
-
-.quotes-section h2 {
-    margin-bottom: 40px;
-    font-weight: bold;
-    font-size: 2.5rem;
-}
-
-.quotes-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-}
-
-.quote {
-    font-size: 1.5rem;
+    min-height: 800px; /* Increased height for more content space and scrolling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure content is centered vertically */
+  }
+  
+  .quotes-section h2 {
+    font-size: 30px; /* Increased font size for the heading */
+    margin-bottom: 40px; /* Increased margin for spacing */
+  }
+  
+  .quote-text {
+    font-size: 24px; /* Increased font size for quotes */
     font-style: italic;
-    margin-bottom: 20px;
-    animation: fadeInOut 10s linear infinite;
-    opacity: 0;
-}
-
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    25%, 75% { opacity: 1; }
-}
-
-
-.footer {
-    padding: 40px 0;
+    max-width: 1000px; /* Wider width for quotes */
+    margin: 0 auto; /* Center the text */
+    line-height: 1.5; /* Improve readability */
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 20px 0;
     background-color: #f8f9fa;
-    color: #333;
-    position: relative;
+    position: fixed;
     width: 100%;
-    text-align: center;
-}
-
-.footer h5 {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.footer p,
-.footer a {
-    color: #333;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: #007bff;
-    text-decoration: underline;
-}
-
-.footer .social-icon {
-    width: 24px;
-    margin: 0 10px;
-    vertical-align: middle;
-}
-
-.footer .social-icon:hover {
-    opacity: 0.7;
-}
-
-.footer hr {
-    margin: 30px 0;
-    border-top: 1px solid #ddd;
-}
-
-.footer .text-muted {
-    margin-top: 20px;
-    font-size: 0.9rem;
-}
+    bottom: 0;
+  }
+  
