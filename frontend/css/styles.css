@@ -219,6 +219,7 @@ body {
   }
 }
 
+/* Trending scams */
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, auto); /* Creates 3 columns of automatic width */
@@ -231,11 +232,75 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
-  padding: 5%;
-  margin: 8%;
+  padding: 2%;
+  margin: 0 8%;
 
   border-radius: 20px;
   box-shadow: 0 0 10px 1px rgba(17, 53, 115, 0.25);
 
   backdrop-filter: blur(15px);
+}
+
+.what-to-do-section {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;   
+  align-items: center;      
+}
+
+.list-container {
+  width: 50%;
+}
+
+/* Reference: https://codepen.io/erinesullivan/pen/qGrdGV */
+ol.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+}
+
+ol.gradient-list > li {
+  background: rgba(200, 201, 212, 0.445);
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  counter-increment: gradient-counter;
+  margin-top: 1rem;
+  min-height: 3rem;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+}
+
+ol.gradient-list > li::before, ol.gradient-list > li::after {
+  background: linear-gradient(135deg, #83e4e2 0%, #2064a0 100%);
+  border-radius: 1rem 1rem 0 1rem;
+  content: "";
+  height: 3rem;
+  left: -1rem;
+  overflow: hidden;
+  position: absolute;
+  top: -1rem;
+  width: 3rem;
+}
+
+ol.gradient-list > li::before {
+  align-items: flex-end;
+  content: counter(gradient-counter);
+  color: #1d1f20;
+  display: flex;
+  font: 900 1.5em/1 "Montserrat";
+  justify-content: flex-end;
+  padding: 0.125em 0.25em;
+  z-index: 1;
+}
+ol.gradient-list > li:nth-child(10n+1):before {
+  background: linear-gradient(135deg, rgba(162, 237, 86, 0.2) 0%, rgba(253, 220, 50, 0.2) 100%);
+}
+ol.gradient-list > li:nth-child(10n+2):before {
+  background: linear-gradient(135deg, rgba(162, 237, 86, 0.4) 0%, rgba(253, 220, 50, 0.4) 100%);
+}
+ol.gradient-list > li:nth-child(10n+3):before {
+  background: linear-gradient(135deg, rgba(162, 237, 86, 0.6) 0%, rgba(253, 220, 50, 0.6) 100%);
+}
+ol.gradient-list > li + li {
+  margin-top: 2rem;
 }
