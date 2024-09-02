@@ -218,3 +218,24 @@ body {
       font-size: 2rem;
   }
 }
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto); /* Creates 3 columns of automatic width */
+  align-content: center;
+}
+
+/* Reference: https://codepen.io/_rahul/pen/NWXjOXW */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  padding: 5%;
+  margin: 8%;
+
+  border-radius: 20px;
+  box-shadow: 0 0 10px 1px rgba(17, 53, 115, 0.25);
+
+  backdrop-filter: blur(15px);
+}
