@@ -23,6 +23,26 @@ body {
   color: #0056b3; /* Darker blue on hover */
 }
 
+.navbar .dropdown-menu {
+  background-color: #f8f9fa;
+  border: none; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  padding: 10px 15px;
+  color: #343a40;
+  font-size: 0.9rem;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  background-color: #e9ecef; 
+  color: #1f60a7;
+}
+
 /* Landing Section */
 .landing-section {
   display: flex;
@@ -224,28 +244,6 @@ body {
   padding-bottom: 1%;
 }
 
-/* Trending scams */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(3, auto); /* Creates 3 columns of automatic width */
-  align-content: center;
-}
-
-/* Reference: https://codepen.io/_rahul/pen/NWXjOXW */
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 250px;
-  padding: 2%;
-  margin: 0 8%;
-
-  border-radius: 20px;
-  box-shadow: 0 0 10px 1px rgba(17, 53, 115, 0.25);
-
-  backdrop-filter: blur(15px);
-}
-
 .what-to-do-section {
   padding: 5%;
   display: flex;
@@ -308,4 +306,136 @@ ol.gradient-list > li:nth-child(10n+3):before {
 }
 ol.gradient-list > li + li {
   margin-top: 2rem;
+}
+
+.what-to-do-section.text-center .check-out-link {
+  background-image: linear-gradient(
+    to right,
+    #54b3d6,
+    #54b3d6 50%,
+    #000 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.what-to-do-section.text-center .check-out-link:before{
+  content: '';
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.what-to-do-section.text-center .check-out-link:hover {
+ background-position: 0;
+}
+.what-to-do-section.text-center .check-out-link:hover::before{
+  width: 100%;
+}
+
+/* Card Ref: https://codepen.io/AlexZab/pen/GREpYqp */
+
+.card-container {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	justify-content: space-between;
+  gap: 20px;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 40px 0;
+}
+
+.card-container .card {
+	position: relative;
+	width: 300px;
+	height: 400px;
+	background: rgba(115, 115, 115, 0.05);
+	margin: 20px;
+	box-shadow: 0 15px 35px rgba(173, 173, 173, 0.5);
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(10px);
+  border: none;
+}
+
+.card-container .card .content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	transition: 0.5s;
+}
+
+.card-container .card:hover .content {
+	transform: translateY(-20px);
+}
+
+.card-container .card .content .imgBx {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+}
+
+.card-container .card .content .imgBx img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.card-container .card .content .contentBx h3 {
+	color: #000000;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 500;
+	font-size: 18px;
+	text-align: center;
+	margin: 20px 0 10px;
+	line-height: 1.1em;
+}
+
+.card-container .card .content .contentBx h3 span {
+	font-size: 18px;
+	font-weight: 500;
+	text-transform: initial;
+}
+
+.card-container .card a {
+	position: absolute;
+	bottom: 50px;
+}
+
+.card-container .card a{
+	list-style: none;
+	transform: translateY(40px);
+	transition: 0.5s;
+	opacity: 0;
+}
+
+.card-container .card:hover a {
+	transform: translateY(0px);
+	opacity: 1;
+}
+
+.card-container .card a {
+	color: #3082e0;
+	font-size: 18px;
 }

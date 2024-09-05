@@ -46,10 +46,17 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Statistics</a>
+            <a class="nav-link" href="#">Discover</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Trending Scams
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="clonePhishing.html">Clone Phishing</a>
+              <a class="dropdown-item" href="smishingPhishing.html">Smishing</a>
+              <a class="dropdown-item" href="voicePhishing.html">Voice Phishing</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -74,38 +81,61 @@
       <div id="quote-text" class="quote-text visible">
         "Australians lost a record amount of more than $2.7 billion to scams in 2023."
       </div>
-      <button class="btn gold-btn mt-4" onclick="scrollToTrendingScams()">Explore Trending Scams</button>
     </div>
   </section>
 
   <!-- Trending Scams Section -->
   <section class="trending-scams-section text-center" id="trending-scams">
     <h2 class="display-5">Most common scam types among the elderly</h2>
+
     <div class="card-container">
-      <!-- Content for Trending Scams goes here -->
+			<div class="card">
+				<div class="content">
+					<div class="imgBx">
+            <!-- Ref: https://www.freepik.com/free-vector/steal-data-concept_8268968.htm#query=clone%20phishing&position=7&from_view=keyword&track=ais_hybrid&uuid=b10037ea-8885-479f-98ec-de3c56467716 -->
+						<img src="./assets/clonePhishingSmall.jpg">
+					</div>
+          <br>
+					<div class="contentBx">
+						<h3>Clone Phishing</h3>
+					</div>
+        </div>
+        <a href="clonePhishing.html"> Learn More </a>
+			</div>
+
       <div class="card">
-        False Billing
-      </div>
+				<div class="content">
+					<div class="imgBx">
+            <!-- Ref: https://www.freepik.com/free-vector/phishing-account-concept_8088554.htm#fromView=search&page=1&position=5&uuid=a6530a06-bff5-44c7-ae7e-2c0adc835ef9 -->
+						<img src="./assets/SMSPhishingSmall.jpg">
+					</div>
+          <br>
+					<div class="contentBx">
+						<h3>Smishing (SMS Phishing)</h3>
+					</div>
+        </div>
+        <a href="smishingPhishing.html"> Learn More </a>
+			</div>
+
       <div class="card">
-        Investment
-      </div>
-      <div class="card">
-        Phishing
-      </div>
-    </div>
+				<div class="content">
+					<div class="imgBx">
+            <!-- Ref: https://www.freepik.com/free-vector/identity-theft-illustration-internet-criminal-victim-cartoon-characters-online-profile-hacking-hacker-holding-magnet-stealing-personal-information-cyber-security-threat_27399142.htm#fromView=search&page=1&position=6&uuid=97c651d4-55b4-40c8-884f-48243636467d -->
+						<img src="./assets/voicePhishingSmall.jpg">
+					</div>
+          <br>
+					<div class="contentBx">
+						<h3>Voice Phishing</h3>
+					</div>
+        </div>
+        <a href="voicePhishing.html"> Learn More </a>
+			</div>
+		</div>
   </section>
 
-  <!-- What To Do Section -->
+  <!-- Check out Section -->
   <section class="what-to-do-section text-center">
-    <h2> What to do if you think you've been scammed</h2>
-    <br>
-    <div class="list-container">
-      <ol class="gradient-list">
-        <li>Use our tools to verify if the email is a scam</li>
-        <li>TO DO ...</li>
-        <li>Click here to report</li>
-      </ol>
-    </div>
+    <h3><a class="check-out-link" href="https://www.scamwatch.gov.au/" target="_blank">Check out the <b>official website</b> for more information</a></h3>
   </section>
 
   <!-- Footer -->
@@ -127,8 +157,7 @@
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Statistics</a></li>
-            <li><a href="#">Features</a></li>
+            <li><a href="#">Discover</a></li>
           </ul>
         </div>
       </div>
