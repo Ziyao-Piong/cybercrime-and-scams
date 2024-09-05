@@ -87,15 +87,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html"
-                >Home <span class="sr-only">(current)</span></a
-              >
+              <a class="nav-link" href="../frontend/index.html"
+                >Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="data.html">Latest Scam Trends</a>
+              <a class="nav-link" href="#">Discover</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Trending Scams
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="../frontend/clonePhishing.html">Clone Phishing</a>
+                <a class="dropdown-item" href="../frontend/smishingPhishing.html">Smishing</a>
+                <a class="dropdown-item" href="../frontend/voicePhishing.html">Voice Phishing</a>
+              </div>
             </li>
           </ul>
         </div>
@@ -209,35 +215,31 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h5>Contact Us</h5>
-            <p>
-              Email:
-              <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a>
-            </p>
-            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-          </div>
-          <div class="col-md-4">
-            <h5>Follow Us</h5>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-          <div class="col-md-4">
-            <h5>Quick Links</h5>
-            <ul class="list-unstyled">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Latest Scam Trends</a></li>
-              <li><a href="#">Features</a></li>
-            </ul>
-          </div>
+  <footer class="footer bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <p>Email: <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a></p>
+          <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
         </div>
-        <hr />
-        <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+        <div class="col-md-4">
+          <h5>Follow Us</h5>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="../frontend/index.html">Home</a></li>
+            <li><a href="#">Discover</a></li>
+          </ul>
+        </div>
       </div>
-    </footer>
+      <hr />
+      <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+    </div>
+  </footer>
   </body>
 </html>
