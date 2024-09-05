@@ -1,0 +1,118 @@
+h1, h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+section {
+    padding: 2% 8%;
+}
+
+.scam-real-life-examples-section {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 25px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f8f9fa;
+  }
+  
+  .scam-real-life-examples-section .content,
+  .scam-real-life-examples-section .image-container {
+    flex: 1; 
+  }
+  
+  .scam-real-life-examples-section .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .scam-real-life-examples-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+.smishing-example {
+  max-width: 500px;
+  max-height: 300px;
+}
+
+.scam-real-life-examples-section .video-container {
+  display: flex; /* To center the iframe */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.scam-real-life-examples-section iframe {
+  max-width: 100%; /* Make iframe responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: Rounded corners for the iframe */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: Add a soft shadow */
+}
+
+.scam-prevent-section {
+    display: flex;
+    flex-direction: column;   
+    align-items: center;      
+  }
+  
+  .list-container {
+    width: 90%;
+  }
+  
+  /* Reference: https://codepen.io/erinesullivan/pen/qGrdGV */
+  ol.gradient-list {
+    counter-reset: gradient-counter;
+    list-style: none;
+    margin: 1.75rem 0;
+    padding-left: 1rem;
+  }
+  
+  ol.gradient-list > li {
+    background: rgba(200, 201, 212, 0.445);
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    counter-increment: gradient-counter;
+    margin-top: 1rem;
+    min-height: 3rem;
+    padding: 1rem 1rem 1rem 3rem;
+    position: relative;
+  }
+  
+  ol.gradient-list > li::before, ol.gradient-list > li::after {
+    background: linear-gradient(135deg, #83e4e2 0%, #2064a0 100%);
+    border-radius: 1rem 1rem 0 1rem;
+    content: "";
+    height: 3rem;
+    left: -1rem;
+    overflow: hidden;
+    position: absolute;
+    top: -1rem;
+    width: 3rem;
+  }
+  
+  ol.gradient-list > li::before {
+    align-items: flex-end;
+    content: counter(gradient-counter);
+    color: #1d1f20;
+    display: flex;
+    font: 900 1.5em/1 "Montserrat";
+    justify-content: flex-end;
+    padding: 0.125em 0.25em;
+    z-index: 1;
+  }
+  ol.gradient-list > li:nth-child(10n+1):before {
+    background: linear-gradient(135deg, rgba(162, 237, 86, 0.2) 0%, rgba(253, 220, 50, 0.2) 100%);
+  }
+  ol.gradient-list > li:nth-child(10n+2):before {
+    background: linear-gradient(135deg, rgba(162, 237, 86, 0.4) 0%, rgba(253, 220, 50, 0.4) 100%);
+  }
+  ol.gradient-list > li:nth-child(10n+3):before {
+    background: linear-gradient(135deg, rgba(162, 237, 86, 0.6) 0%, rgba(253, 220, 50, 0.6) 100%);
+  }
+  ol.gradient-list > li + li {
+    margin-top: 2rem;
+  }
+  
