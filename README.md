@@ -1,4 +1,11 @@
-# cybercrime-and-scams
+# CYBERCRIME & SCAMS
+
+# Frontend Setup
+Follow these steps to start the frontend:
+
+1. **Navigate to the `frontend` Directory:**
+2. **Open the Home Page:**
+   - Double-click on `index.html` to open the home page in the web browser
 
 # How to run Scrollystory
 # 1. In the scrollytelly file, there are 2 main files:
