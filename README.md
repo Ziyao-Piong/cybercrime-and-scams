@@ -31,7 +31,7 @@ Follow these steps to run the Scrollystory:
    uvicorn data:app --reload
 ```
 
-5. **Run the `data.html` file in the web browser**
+5. **(Optional) Run the `data.html` file in the web browser**
    - Download the `Live Server` extension in the Visual Studio Code
    - Open the `data.html` file in the VS Code
    - Right-click on the file and select `open with Live Server`
