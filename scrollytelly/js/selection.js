@@ -2,15 +2,15 @@ var scrollVis = function () {
     // Define constants
     var width = 1100;
     var left_right_margin = 100;
-    var top_bottom_margin = 280;
-    var height = 730;
+    var top_bottom_margin = 200;
+    var height = 650;
 
     // Define scroll index tracking vars
     var lastIndex = -1;
     var activeIndex = 0;
 
     // Define scales
-    var x0_scale = d3.scaleBand().padding(0.1).range([0, width - (left_right_margin * 2)]);
+    var x0_scale = d3.scaleBand().padding(0.5).range([0, width - (left_right_margin * 2)]);
     var x1_scale = d3.scaleLinear();
     var y_scale = d3.scaleLinear().range([height - (top_bottom_margin * 2), 0]);
 
@@ -42,17 +42,17 @@ var scrollVis = function () {
         "unspecified": '#cab2d6'
     };
 
-    var total_scam_count_colour = '#1f78b4';
+    var total_scam_count_colour = '#1f78b4'; // Blue color for section 0 dots
     var final_dot_colour = '#e31a1c';  // Red color for the final section dot
     var state_color_scale = d3.scaleOrdinal(d3.schemeCategory10); // Color scale for states
     var gender_color_scale = d3.scaleOrdinal().domain(["Male", "Female"]).range(["#1f78b4", "#e31a1c"]); // Color scale for Male and Female
     var lost_amount_color_scale = d3.scaleOrdinal().domain([
-        '0',
-        '0 - 10,000',
-        '10,001 - 50,000',
-        '50,001 - 200,000',
-        '200,001 - 1,000,000',
-        '1,000,001 - 7,000,000'
+        '$0',
+        '$1 - $10,000',
+        '$10,001 - $50,000',
+        '$50,001 - $200,000',
+        '$200,001 - $1,000,000',
+        '$1,000,001+'
     ]).range(d3.schemeCategory10); // Color scale for LostAmountRange
 
     var month_color_scale = d3.scaleOrdinal(d3.schemeCategory10)
@@ -135,11 +135,6 @@ var scrollVis = function () {
 
         my_group = my_group.merge(enter);
 
-        // Calculate the total number of reports for the month data
-        if (data_class === "month") {
-            var totalReports = d3.sum(my_data, m => m.NumberOfReports);
-        }
-
         my_group.select(".bar_text")
             .attr("visibility", "hidden")
             .attr("x", function (d) {
@@ -149,6 +144,7 @@ var scrollVis = function () {
                 return data_class === "final" ? height / 2 - 15 : y_scale(d3.max(my_data.filter(m => m[data_class] === d), m => m.row)) - 15;
             })
             .attr("fill", function (d) {
+                // Use appropriate color scale based on the data type
                 if (fill_type === "year") {
                     return year_colours[d];
                 } else if (fill_type === "scam_type") {
@@ -170,19 +166,12 @@ var scrollVis = function () {
                 }
             })
             .text(function (d) {
-                if (data_class === "total_count") {
-                    return "120001"; // Display the full count above the dots
-                } else if (data_class === "gender") {
+                // Display appropriate text based on the data class
+                if (data_class === "gender") {
                     var totalGenderReports = d3.sum(my_data, m => m.NumberOfReports);
                     var genderReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                     var percentage = ((genderReports / totalGenderReports) * 100).toFixed(1);
                     return `${percentage}%`; // Display the percentage for gender
-                } else if (data_class === "month") {
-                    var monthReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
-                    var percentage = ((monthReports / totalReports) * 100).toFixed(1);
-                    return `${percentage}%`; // Display the percentage for month
-                } else if (data_class === "final") {
-                    return ""; // No text for the final dot
                 } else {
                     return my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                 }
@@ -214,9 +203,12 @@ var scrollVis = function () {
                 return data_class === "final" ? width / 2.4 : x0_scale(d[data_class]) + x1_scale(d.column);
             })
             .attr("cy", function (d) {
-                return data_class === "final" ? top_bottom_margin - 250 : y_scale(d.row); // Adjusted to better center under title
+                return data_class === "final" ? top_bottom_margin - 100 : y_scale(d.row); // Adjusted to better center under title
             })
             .attr("fill", function (d) {
+                if (data_class === "total_count") {
+                    return total_scam_count_colour; // Section 0 circles in blue
+                }
                 if (fill_type === "year") {
                     return year_colours[d[data_class]];
                 } else if (fill_type === "scam_type") {
@@ -226,15 +218,13 @@ var scrollVis = function () {
                 } else if (fill_type === "state") {
                     return state_color_scale(d[data_class]); // Use state color scale
                 } else if (fill_type === "gender") {
-                    return gender_color_scale(d[data_class]); // Use gender color scale (Male and Female only)
+                    return gender_color_scale(d[data_class]);
                 } else if (fill_type === "lost_amount_range") {
-                    return lost_amount_color_scale(d[data_class]); // Use LostAmountRange color scale
+                    return lost_amount_color_scale(d[data_class]);
                 } else if (fill_type === "month") {
-                    return month_color_scale(d[data_class]); // Use month color scale
+                    return month_color_scale(d[data_class]);
                 } else if (fill_type === "final") {
-                    return final_dot_colour; // Red color for the final dot
-                } else {
-                    return total_scam_count_colour;
+                    return final_dot_colour;
                 }
             })
             .attr("r", function (d) {
@@ -242,20 +232,17 @@ var scrollVis = function () {
             })
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
 
+        // X-axis rendering
         var x_axis_selection = d3.select(".x_axis")
-            .attr("transform", "translate(" + left_right_margin + "," + ((top_bottom_margin * 1.2) + y_scale.range()[0]) + ")");
+            .attr("transform", "translate(" + left_right_margin + "," + (height - top_bottom_margin) + ")");
 
-        // Show axis only when not in final section
-        if (["contact_mode", "state", "lost_amount_range", "month"].includes(data_class)) {
-            x_axis_selection.call(d3.axisBottom(x0_scale));
-            x_axis_selection.selectAll("text")
-                .style("text-anchor", "end")
-                .attr("dx", "-0.8em")
-                .attr("dy", "0.15em")
-                .attr("transform", "rotate(-45)");
-        } else {
-            x_axis_selection.selectAll("*").remove();
-        }
+        // Show x-axis for every section
+        x_axis_selection.call(d3.axisBottom(x0_scale));
+        x_axis_selection.selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-0.8em")
+            .attr("dy", "0.15em")
+            .attr("transform", "rotate(-45)");
 
         // Display the title
         svg.select(".chart-title")
@@ -307,9 +294,6 @@ function convert_data(my_data) {
         v => d3.sum(v, d => d.NumberOfReports),
         d => d.State
     ).map(([state, NumberOfReports]) => ({ state, NumberOfReports }));
-
-    // Sort by number of reports in descending order
-    state_aggregated_data.sort((a, b) => b.NumberOfReports - a.NumberOfReports);
 
     state_aggregated_data.forEach(function (d, index) {
         var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
@@ -406,6 +390,10 @@ function convert_data(my_data) {
         d => d.AmountLostRange
     ).map(([AmountLostRange, NumberOfReports]) => ({ AmountLostRange, NumberOfReports }));
 
+    // Specify the order for lost amount ranges
+    const lostAmountOrder = ['$0', '$1 - $10,000', '$10,001 - $50,000', '$50,001 - $200,000', '$200,001 - $1,000,000', '$1,000,001+'];
+    lost_amount_range_aggregated_data.sort((a, b) => lostAmountOrder.indexOf(a.AmountLostRange) - lostAmountOrder.indexOf(b.AmountLostRange));
+
     lost_amount_range_aggregated_data.forEach(function (d, index) {
         var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
@@ -425,7 +413,6 @@ function convert_data(my_data) {
         d => d.Month
     ).map(([month, NumberOfReports]) => ({ month, NumberOfReports }));
 
-    // Sort months by natural order
     const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     month_aggregated_data.sort((a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month));
 
@@ -442,13 +429,18 @@ function convert_data(my_data) {
     });
 
     // Reducing the number of dots for better rendering performance
-    var reduced_scam_count = Math.ceil(120001 / 100); // Display 120001/1200 dots
+    // First, calculate the total sum of reports dynamically from your dataset
+    var total_scam_count = d3.sum(my_data, d => d.NumberOfReports); // Dynamically calculate the sum
+
+    // Divide by 1000 to determine how many dots are needed
+    var reduced_scam_count = Math.ceil(total_scam_count / 1000); 
+
     for (var i = 0; i < reduced_scam_count; i++) {
         total_count_data.push({
             total_count: "Scam Reports",
             row: Math.floor(i / dots_per_row),
-            column: i % 60,
-            NumberOfReports: i === 0 ? "Total Scam Reports: 120001" : 0 // Display custom text above the dots
+            column: i % dots_per_row,
+            NumberOfReports: i === 0 ? total_scam_count : 0 // Display the total only for the first dot
         });
     }
 
