@@ -87,4 +87,4 @@ def get_scam_by_year():
         raise HTTPException(status_code=500, detail="Data retrieval failed")
 
 # Run the server with:
-# uvicorn scrollytelly.data:app --reload
+# uvicorn data:app --reload

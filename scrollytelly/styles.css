@@ -1,312 +1,337 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-  
-  /* Navbar */
-  .navbar-brand .logo {
-    height: 40px;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  
-  .navbar-nav .nav-link {
-    color: #002147; /* Navy blue text */
-    font-weight: bold;
-  }
-  
-  .navbar-nav .nav-link:hover {
-    color: #0056b3; /* Darker blue on hover */
-  }
-  
-  /* Landing Section */
-  .landing-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('resources/landing_pic.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    min-height: 700px; /* Increased height for better coverage */
-    padding: 40px 20px;
-  }
-  
-  .landing-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-  
-  .landing-section .container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Navbar */
+.navbar-brand .logo {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+  color: #002147; /* Navy blue text */
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Landing Section */
+.landing-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('resources/landing_pic.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  min-height: 700px; /* Increased height for better coverage */
+  padding: 40px 20px;
+}
+.landing-section2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Set background color */
+  /* Optionally use an image background: background-image: url('path-to-image.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: rgba(0, 0, 0, 0.71); /* Text color */
+  text-shadow: 2px 2px 4px rgb(255, 255, 255); /* Optional text shadow */
+  min-height: 100px; /* Height of the section */
+  padding: 10px 0px; /* Padding around the content */
+}
+
+.landing-section2 h1 {
+  font-size: 2rem; /* Font size for the heading */
+  margin-bottom: 20px;
+}
+
+.landing-section2 p {
+  font-size: .8rem; /* Font size for paragraph text */
+  margin-bottom: 30px;
+}
+
+
+.landing-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.landing-section .container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.landing-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.landing-section p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #ff9d00;
+  border-color: #ff9d00;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem; /* Slightly larger button text */
+}
+
+.btn-primary:hover {
+  background-color: #e69200;
+  border-color: #e69200;
+}
+
+/* Quotes Section */
+.quotes-section {
+  background-color: #002147;
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.quotes-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.gold-btn {
+  background-color: #ff9d00;
+  color: #002147;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.gold-btn:hover {
+  background-color: #e69200;
+}
+
+/* Trending Scams Section */
+.trending-scams-section {
+  padding: 80px 20px;
+  background-color: #f7f7f7;
+}
+
+.trending-scams-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.trending-scams-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  margin-top: 20px;
+}
+
+.footer h5 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #002147;
+}
+
+.footer p, .footer a {
+  color: #555;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.footer i {
+  font-size: 1.5rem;
+  color: #002147;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.footer i:hover {
+  color: #0056b3;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 10px;
+}
+
+.footer hr {
+  margin: 20px 0;
+  border-color: #eaeaea;
+}
+
+.footer .text-muted {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .landing-section h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
   }
-  
-  .landing-section p {
-    font-size: 1.25rem;
-    margin-bottom: 30px;
-  }
-  
-  .btn-primary {
-    background-color: #ff9d00;
-    border-color: #ff9d00;
-    z-index: 3;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 1.2rem; /* Slightly larger button text */
-  }
-  
-  .btn-primary:hover {
-    background-color: #e69200;
-    border-color: #e69200;
-  }
-  
-  /* Quotes Section */
-  .quotes-section {
-    background-color: #002147;
-    color: white;
-    padding: 100px 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
+
   .quotes-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 2rem;
   }
-  
-  .quote-text {
-    font-size: 1.5rem;
-    font-style: italic;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-  
-  .gold-btn {
-    background-color: #ff9d00;
-    color: #002147;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 30px;
-  }
-  
-  .gold-btn:hover {
-    background-color: #e69200;
-  }
-  
-  /* Trending Scams Section */
-  .trending-scams-section {
-    padding: 80px 20px;
-    background-color: #f7f7f7;
-  }
-  
+
   .trending-scams-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 2rem;
   }
-  
-  .trending-scams-section p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-  
-  /* Footer */
-  .footer {
-    padding: 20px 0;
-    background-color: #f8f9fa;
-    text-align: center;
-    border-top: 1px solid #eaeaea;
-    margin-top: 20px;
-  }
-  
-  .footer h5 {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    color: #002147;
-  }
-  
-  .footer p, .footer a {
-    color: #555;
-    font-size: 0.9rem;
-    text-decoration: none;
-  }
-  
-  .footer a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-  }
-  
-  .footer i {
-    font-size: 1.5rem;
-    color: #002147;
-    margin: 0 10px;
-    transition: color 0.3s;
-  }
-  
-  .footer i:hover {
-    color: #0056b3;
-  }
-  
-  .footer .list-unstyled li {
-    margin-bottom: 10px;
-  }
-  
-  .footer hr {
-    margin: 20px 0;
-    border-color: #eaeaea;
-  }
-  
-  .footer .text-muted {
-    font-size: 0.85rem;
-    color: #777;
-  }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .landing-section h1 {
-      font-size: 2.5rem;
-    }
-  
-    .quotes-section h2 {
-      font-size: 2rem;
-    }
-  
-    .trending-scams-section h2 {
-      font-size: 2rem;
-    }
-  }
-  
-  /* ----- data styles ------ */
-  .container {
-    width: 900px;
-  }
-  
-  #graphic {
-    padding-top: 60px;
-  }
-  
-  .x_axis path, .x_axis line{
-    display: none;
-  }
-  
-  .x_axis text {
-    font-size: 16px;
-  }
-  
-  .bar_text {
-    font-size: 30px; 
-    text-anchor: middle;
-  }
-  
-  .note {
-    font-size: 10px;
-    font-style: italic;
-    line-height: 12px;
-  }
-  
-  #sections {
-    position: relative;
-    display: inline-block;
-    width: 400px;
-    top: 160px;
-    z-index: 90;
-    padding-bottom: 200px;
-    left: 75px;
-  }
-  
-  .step {
-    margin-bottom: 200px;
-    font-family: "TiemposTextWeb-Regular","Georgia";
-    font-size: 16px;
-    line-height: 23px;
-    color: #767678;
-  }
-  
-  #sections .title {
-    font-family: Arial,Helvetica,"san-serif";
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #262626;
-    line-height: 1.4em;
-  }
-  
-  #extra-space {
-    height: 300px;
-  }
-  
-  #vis {
-    display: inline-block;
-    position: fixed;
-    top: 200px;
-    z-index: 1;
-    margin-left: 0;
-  }
-  
-  .highlight {
-    fill: #008080;
-    font-weight: bold;
-  }
-  
-  .top-center {
-    position: absolute;
-    top: 24%;
-    left: 60%;
-    transform: translate(-50%, -50%);
-    text-align: Left;
-    width: 40%; /* Adjust width as needed */
-    padding: 20px;
-    background-color: rgb(255, 255, 255); /* Optional: add background to make it stand out */
-    z-index: 100; /* Ensure it's on top */
-    font-family: "TiemposTextWeb-Regular", "Georgia", serif; /* Matching the font family */
-    font-size: 16px; /* Matching the font size */
-    line-height: 23px; /* Matching the line height */
-    color: #767678; /* Matching the text color */
-  }
-  
-  .top-center .title {
-    font-family: Arial, Helvetica, "sans-serif"; /* Matching the title font family */
-    font-size: 18px; /* Matching the title font size */
-    font-weight: bold; /* Matching the title font weight */
-    margin-bottom: 10px;
-    color: hsl(0, 0%, 15%); /* Matching the title color */
-    line-height: 1.4em;
-  }
-  
-  .scroll-container {
-    width: 900px;
-    margin-top: 250px; /* Adjust to ensure the remaining content is below the centered section */
-  }
-  
+}
+
+/* ----- data styles ------ */
+.container {
+  width: 900px;
+}
+
+#graphic {
+  padding-top: 60px;
+}
+
+.x_axis path, .x_axis line{
+  display: none;
+}
+
+.x_axis text {
+  font-size: 16px;
+}
+
+.bar_text {
+  font-size: 30px; 
+  text-anchor: middle;
+}
+
+.note {
+  font-size: 10px;
+  font-style: italic;
+  line-height: 12px;
+}
+
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  top: 60px;
+  z-index: 90;
+  padding-bottom: 200px;
+  left: 75px;
+}
+
+.step {
+  margin-bottom: 200px;
+  font-family: "TiemposTextWeb-Regular","Georgia";
+  font-size: 16px;
+  line-height: 23px;
+  color: #767678;
+}
+
+#sections .title {
+  font-family: Arial,Helvetica,"san-serif";
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #262626;
+  line-height: 1.4em;
+}
+
+#extra-space {
+  height: 300px;
+}
+
+#vis {
+  display: inline-block;
+  position: fixed;
+  top: 200px;
+  z-index: 1;
+  margin-left: 0;
+}
+
+.highlight {
+  fill: #008080;
+  font-weight: bold;
+}
+
+.top-center {
+  position: absolute;
+  top: 24%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  text-align: Left;
+  width: 40%; /* Adjust width as needed */
+  padding: 20px;
+  background-color: rgb(255, 255, 255); /* Optional: add background to make it stand out */
+  z-index: 100; /* Ensure it's on top */
+  font-family: "TiemposTextWeb-Regular", "Georgia", serif; /* Matching the font family */
+  font-size: 16px; /* Matching the font size */
+  line-height: 23px; /* Matching the line height */
+  color: #767678; /* Matching the text color */
+}
+
+.top-center .title {
+  font-family: Arial, Helvetica, "sans-serif"; /* Matching the title font family */
+  font-size: 18px; /* Matching the title font size */
+  font-weight: bold; /* Matching the title font weight */
+  margin-bottom: 10px;
+  color: hsl(0, 0%, 15%); /* Matching the title color */
+  line-height: 1.4em;
+}
+
+.scroll-container {
+  width: 900px;
+  margin-top: -100px; /* Adjust to ensure the remaining content is below the centered section */
+}
 
 
 
 
-  
-  
+
+
