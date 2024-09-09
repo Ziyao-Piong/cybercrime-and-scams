@@ -72,28 +72,25 @@
             </div>
         </nav>
 
-        <!-- Reference: all the text contents come from https://www.kaspersky.com/resource-center/threats/what-is-smishing-and-how-to-defend-against-it -->
+        <!-- Reference: all the text contents come from https://cheapsslsecurity.com/blog/what-is-voice-phishing-vishing-definition-meaning/ -->
         <section class="scam-introduction-section">
-            <h1>Smishing (SMS Phishing)</h1>
-            <p>Smishing is a type of scam that happens through text messages on your phone. 
-                Scammers try to trick you into giving personal information, like passwords or bank details. 
-                Sometimes they use fake websites or bad apps to help with their scam. 
-                This can happen on regular text messages or other messaging apps you use on your phone.</p>
-            <p>
-                Usually, they'll try to get you to click on a malicious link, download malware, or provide sensitive information like passwords or credit card numbers.</p>
-            </p>
+            <h1>Pop-up Phishing</h1>
+            <p>Pop-up phishing often uses a pop-up about a problem with your computer’s security or some other issue to trick you into clicking. 
+              You are then directed to download a file, which ends up being malware, 
+              or to call what is supposed to be a support center.</p>
         </section>
 
         <section class="scam-real-life-examples-section">
             <div class="content">
                 <h2>Real-Life Examples</h2>
                 <p>
-                    A more common smishing attack uses brand names with purported links to the brand’s site. 
-                    Usually, an attacker tells the user that they’ve won money or provides a malicious link for tracking packages
+                  Users have sometimes received pop-ups saying they can qualify for AppleCare renewal, 
+                  which would supposedly avail them of extended protection for their Apple devices. However, the offer is fake.
                 </p>
             </div>
             <div class="image-container">
-                <img class="smishing-example" src="./assets/smishing.jpg" alt="Real-life example illustration" />
+                <!-- Image Reference: https://support.intego.com/hc/en-us/articles/207113578-About-the-Web-Browser-Pop-up-Alert-Scam/ -->
+                <img src="./assets/popupPhishingSmall.jpg" alt="Real-life example illustration" />
             </div>
         </section>
 
@@ -101,17 +98,17 @@
             <h2>How to Prevent</h2>
             <div class="list-container">
                 <ol class="gradient-list">
-                    <li>Even replying with “STOP” can let scammers know your number is active. Just ignore the message.</li>
-                    <li>If a message seems urgent, be cautious—it could be a scam. Take your time before doing anything.</li>
-                    <li>If you're unsure, call your bank or company directly using official contact info. They don’t ask for personal details over text.</li>
-                    <li>Don’t use any links or phone numbers from suspicious texts. Always go to the company’s official website or contact line.</li>
+                  <li>Turn on pop-up blockers in your browser settings to prevent unwanted pop-ups.</li>
+                  <li>Do not click any buttons or links in pop-ups that claim urgent issues or prizes. Close the pop-up instead.</li>
+                  <li>Install reliable antivirus software to help detect and block phishing pop-ups.</li>
+                  <li>Only enter personal information on websites with “https” in the address bar for added security.</li>
                 </ol>
             </div>
         </section>
 
         <!-- Add a navigation button to the next scam page -->
         <div class="btn-container">
-          <button class="button-22" id="smishingPhishingNextBtn">Go to the Next Scam Page</button>
+          <button class="button-22" id="popupPhishingNextBtn">Go to the Next Scam Page</button>
         </div>
 
         <!-- Footer -->
@@ -143,8 +140,8 @@
         </footer>
 
         <script>
-          document.getElementById('smishingPhishingNextBtn').addEventListener('click', function() {
-            window.location.href = 'voicePhishing.html';
+          document.getElementById('popupPhishingNextBtn').addEventListener('click', function() {
+            window.location.href = 'searchEnginePhishing.html';
           });
         </script>
 

@@ -72,28 +72,31 @@
             </div>
         </nav>
 
-        <!-- Reference: all the text contents come from https://www.kaspersky.com/resource-center/threats/what-is-smishing-and-how-to-defend-against-it -->
+        <!-- Reference: all the text contents come from https://cheapsslsecurity.com/blog/what-is-voice-phishing-vishing-definition-meaning/ -->
         <section class="scam-introduction-section">
-            <h1>Smishing (SMS Phishing)</h1>
-            <p>Smishing is a type of scam that happens through text messages on your phone. 
-                Scammers try to trick you into giving personal information, like passwords or bank details. 
-                Sometimes they use fake websites or bad apps to help with their scam. 
-                This can happen on regular text messages or other messaging apps you use on your phone.</p>
-            <p>
-                Usually, they'll try to get you to click on a malicious link, download malware, or provide sensitive information like passwords or credit card numbers.</p>
-            </p>
+            <h1>Spear Phishing</h1>
+            <p>Spear phishing is like a scam message made just for you.
+              <br><br>
+              Imagine a scammer pretending to be someone you know, like a bank employee or a friend. 
+              They send you an email or a text that looks very real, maybe saying something like, "There's a problem with your account" or "Click here to update your information." 
+              Because the scammer knows some personal details about you, 
+              the message seems trustworthy, almost as if it came from someone you know.
+              <br><br>
+              But in reality, they’re trying to trick you into clicking a link or giving them important information like your password or bank card number. 
+              This type of scam is especially dangerous because it's “designed just for you,” making it much harder to spot than a mass-sent scam.</p>
         </section>
 
         <section class="scam-real-life-examples-section">
             <div class="content">
                 <h2>Real-Life Examples</h2>
                 <p>
-                    A more common smishing attack uses brand names with purported links to the brand’s site. 
-                    Usually, an attacker tells the user that they’ve won money or provides a malicious link for tracking packages
+                  Between 2013 and 2015, Evaldas Rimasauskas impersonated a Taiwanese hardware supplier, Quanta Computer, whose services were used by two tech giants, Google and Facebook. 
+                  He sent out fake invoices worth $122 million ($99 million and $23 million to Google and Facebook, respectively) to these companies for almost three years until he was arrested and prisoned for 30 years.
                 </p>
             </div>
             <div class="image-container">
-                <img class="smishing-example" src="./assets/smishing.jpg" alt="Real-life example illustration" />
+                <!-- Image Reference: https://www.tessian.com/blog/5-real-world-examples-of-phishing-attacks/ -->
+                <img src="./assets/spearPhishingSmall.jpg" alt="Real-life example illustration" />
             </div>
         </section>
 
@@ -101,17 +104,17 @@
             <h2>How to Prevent</h2>
             <div class="list-container">
                 <ol class="gradient-list">
-                    <li>Even replying with “STOP” can let scammers know your number is active. Just ignore the message.</li>
-                    <li>If a message seems urgent, be cautious—it could be a scam. Take your time before doing anything.</li>
-                    <li>If you're unsure, call your bank or company directly using official contact info. They don’t ask for personal details over text.</li>
-                    <li>Don’t use any links or phone numbers from suspicious texts. Always go to the company’s official website or contact line.</li>
+                    <li>If someone asks for personal info suddenly, verify their identity by calling or contacting them through another way.</li>
+                    <li>Look closely at the sender's email to make sure it’s really from someone you know. Scammers often use addresses that look almost the same.</li>
+                    <li>Before clicking a link in an email, hover your mouse over it to check if it leads to a trusted website.</li>
+                    <li>Turn on two-factor authentication for your accounts. Even if someone gets your password, they won’t be able to log in easily.</li>
                 </ol>
             </div>
         </section>
 
         <!-- Add a navigation button to the next scam page -->
         <div class="btn-container">
-          <button class="button-22" id="smishingPhishingNextBtn">Go to the Next Scam Page</button>
+          <button class="button-22" id="spearPhishingNextBtn">Go to the Next Scam Page</button>
         </div>
 
         <!-- Footer -->
@@ -143,8 +146,8 @@
         </footer>
 
         <script>
-          document.getElementById('smishingPhishingNextBtn').addEventListener('click', function() {
-            window.location.href = 'voicePhishing.html';
+          document.getElementById('spearPhishingNextBtn').addEventListener('click', function() {
+            window.location.href = 'businessEmailCompromisePhishing.html';
           });
         </script>
 

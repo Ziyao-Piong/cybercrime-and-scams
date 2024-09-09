@@ -72,15 +72,12 @@
             </div>
         </nav>
 
-        <!-- Reference: all the text contents come from https://www.kaspersky.com/resource-center/threats/what-is-smishing-and-how-to-defend-against-it -->
+        <!-- Reference: all the text contents come from https://cheapsslsecurity.com/blog/what-is-voice-phishing-vishing-definition-meaning/ -->
         <section class="scam-introduction-section">
-            <h1>Smishing (SMS Phishing)</h1>
-            <p>Smishing is a type of scam that happens through text messages on your phone. 
-                Scammers try to trick you into giving personal information, like passwords or bank details. 
-                Sometimes they use fake websites or bad apps to help with their scam. 
-                This can happen on regular text messages or other messaging apps you use on your phone.</p>
+            <h1>Business Email Compromise Phishing</h1>
             <p>
-                Usually, they'll try to get you to click on a malicious link, download malware, or provide sensitive information like passwords or credit card numbers.</p>
+              Business email compromise (BEC) is a type of cybercrime where the scammer uses email to trick someone into sending money or divulging confidential company info. 
+              The culprit poses as a trusted figure, then asks for a fake bill to be paid or for sensitive data they can use in another scam. 
             </p>
         </section>
 
@@ -88,12 +85,13 @@
             <div class="content">
                 <h2>Real-Life Examples</h2>
                 <p>
-                    A more common smishing attack uses brand names with purported links to the brand’s site. 
-                    Usually, an attacker tells the user that they’ve won money or provides a malicious link for tracking packages
+                  Even smaller charities are vulnerable. Treasure Island, a homeless charity, lost $625,000 to a BEC scam. 
+                  Hackers impersonated Executive Director Sherry Williams in an email, manipulated the information on a legitimate invoice, and changed the wire transfer instructions to serve their own purposes.
                 </p>
             </div>
             <div class="image-container">
-                <img class="smishing-example" src="./assets/smishing.jpg" alt="Real-life example illustration" />
+                <!-- Image Reference: https://www.mailguard.com.au/blog/whaling-ceo-fraud-business-email-compromise-targeted-spear-phishing-attacks-continue-to-trouble-businesses -->
+                <img src="./assets/BECsmall.jpg" alt="Real-life example illustration" />
             </div>
         </section>
 
@@ -101,17 +99,17 @@
             <h2>How to Prevent</h2>
             <div class="list-container">
                 <ol class="gradient-list">
-                    <li>Even replying with “STOP” can let scammers know your number is active. Just ignore the message.</li>
-                    <li>If a message seems urgent, be cautious—it could be a scam. Take your time before doing anything.</li>
-                    <li>If you're unsure, call your bank or company directly using official contact info. They don’t ask for personal details over text.</li>
-                    <li>Don’t use any links or phone numbers from suspicious texts. Always go to the company’s official website or contact line.</li>
+                    <li>If someone asks for a money transfer or important information, call to confirm. Don’t just reply to the email.</li>
+                    <li>Set up two-factor authentication for company emails so it’s harder for others to access, even if the password is stolen.</li>
+                    <li>Only allow necessary people to access critical company information, and set up alerts for unusual activities.</li>
+                    <li>Teach employees how to recognize suspicious emails, especially urgent ones that seem to come from executives.</li>
                 </ol>
             </div>
         </section>
 
         <!-- Add a navigation button to the next scam page -->
         <div class="btn-container">
-          <button class="button-22" id="smishingPhishingNextBtn">Go to the Next Scam Page</button>
+          <button class="button-22" id="BECNextBtn">Go to the Next Scam Page</button>
         </div>
 
         <!-- Footer -->
@@ -143,8 +141,8 @@
         </footer>
 
         <script>
-          document.getElementById('smishingPhishingNextBtn').addEventListener('click', function() {
-            window.location.href = 'voicePhishing.html';
+          document.getElementById('BECNextBtn').addEventListener('click', function() {
+            window.location.href = 'popupPhishing.html';
           });
         </script>
 
