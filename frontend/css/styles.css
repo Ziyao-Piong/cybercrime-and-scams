@@ -347,14 +347,14 @@ ol.gradient-list > li + li {
 /* Card Ref: https://codepen.io/AlexZab/pen/GREpYqp */
 
 .card-container {
+  padding: 2% 8%;
 	position: relative;
 	z-index: 1;
 	display: flex;
 	justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
 	align-items: center;
 	flex-wrap: wrap;
-	margin: 40px 0;
 }
 
 .card-container .card {
@@ -362,7 +362,6 @@ ol.gradient-list > li + li {
 	width: 300px;
 	height: 400px;
 	background: rgba(115, 115, 115, 0.05);
-	margin: 20px;
 	box-shadow: 0 15px 35px rgba(173, 173, 173, 0.5);
 	border-radius: 15px;
 	display: flex;
