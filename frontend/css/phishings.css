@@ -65,53 +65,57 @@ section {
   
   /* Reference: https://codepen.io/erinesullivan/pen/qGrdGV */
   ol.gradient-list {
-    counter-reset: gradient-counter;
     list-style: none;
     margin: 1.75rem 0;
     padding-left: 1rem;
   }
   
   ol.gradient-list > li {
+    /*
     background: rgba(200, 201, 212, 0.445);
+    */
+    background: #0d40c1bc;
     border-radius: 0 0.5rem 0.5rem 0.5rem;
-    counter-increment: gradient-counter;
     margin-top: 1rem;
     min-height: 3rem;
     padding: 1rem 1rem 1rem 3rem;
     position: relative;
   }
-  
-  ol.gradient-list > li::before, ol.gradient-list > li::after {
-    background: linear-gradient(135deg, #83e4e2 0%, #2064a0 100%);
-    border-radius: 1rem 1rem 0 1rem;
-    content: "";
-    height: 3rem;
-    left: -1rem;
-    overflow: hidden;
-    position: absolute;
-    top: -1rem;
-    width: 3rem;
+
+  ol.gradient-list > li {
+    color: white;
   }
-  
+
+
   ol.gradient-list > li::before {
     align-items: flex-end;
-    content: counter(gradient-counter);
-    color: #1d1f20;
+    background-color: white;
+    color: white;
     display: flex;
     font: 900 1.5em/1 "Montserrat";
     justify-content: flex-end;
     padding: 0.125em 0.25em;
     z-index: 1;
   }
+
+  
+  ol.gradient-list > li::after {
+    background: none;
+  }
+
   ol.gradient-list > li:nth-child(10n+1):before {
-    background: linear-gradient(135deg, rgba(162, 237, 86, 0.2) 0%, rgba(253, 220, 50, 0.2) 100%);
+    background: transparent;
   }
   ol.gradient-list > li:nth-child(10n+2):before {
-    background: linear-gradient(135deg, rgba(162, 237, 86, 0.4) 0%, rgba(253, 220, 50, 0.4) 100%);
+    background: transparent;
   }
   ol.gradient-list > li:nth-child(10n+3):before {
-    background: linear-gradient(135deg, rgba(162, 237, 86, 0.6) 0%, rgba(253, 220, 50, 0.6) 100%);
+    background: transparent;
   }
+  ol.gradient-list > li:nth-child(10n+4):before {
+    background: transparent;
+  }
+
   ol.gradient-list > li + li {
     margin-top: 2rem;
   }
