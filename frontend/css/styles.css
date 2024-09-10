@@ -8,9 +8,13 @@ body {
 }
 
 /* Navbar */
+.navbar {
+  margin-left: -70px;
+}
+
 .navbar-brand .logo {
   height: 40px;
-  margin-right: 10px;
+  margin-right: 25px;
   vertical-align: middle;
 }
 
@@ -28,12 +32,11 @@ body {
   border: none; 
   border-radius: 5px; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  padding: 0.5rem 0;
   overflow: hidden;
 }
 
 .navbar .dropdown-menu .dropdown-item {
-  padding: 10px 15px;
+  padding: 10px 10px;
   color: #343a40;
   font-size: 0.9rem;
 }
@@ -264,7 +267,6 @@ ol.gradient-list {
 }
 
 ol.gradient-list > li {
-  background: rgba(200, 201, 212, 0.445);
   border-radius: 0 0.5rem 0.5rem 0.5rem;
   counter-increment: gradient-counter;
   margin-top: 1rem;
@@ -274,7 +276,6 @@ ol.gradient-list > li {
 }
 
 ol.gradient-list > li::before, ol.gradient-list > li::after {
-  background: linear-gradient(135deg, #83e4e2 0%, #2064a0 100%);
   border-radius: 1rem 1rem 0 1rem;
   content: "";
   height: 3rem;
@@ -294,18 +295,6 @@ ol.gradient-list > li::before {
   justify-content: flex-end;
   padding: 0.125em 0.25em;
   z-index: 1;
-}
-ol.gradient-list > li:nth-child(10n+1):before {
-  background: linear-gradient(135deg, rgba(162, 237, 86, 0.2) 0%, rgba(253, 220, 50, 0.2) 100%);
-}
-ol.gradient-list > li:nth-child(10n+2):before {
-  background: linear-gradient(135deg, rgba(162, 237, 86, 0.4) 0%, rgba(253, 220, 50, 0.4) 100%);
-}
-ol.gradient-list > li:nth-child(10n+3):before {
-  background: linear-gradient(135deg, rgba(162, 237, 86, 0.6) 0%, rgba(253, 220, 50, 0.6) 100%);
-}
-ol.gradient-list > li + li {
-  margin-top: 2rem;
 }
 
 .what-to-do-section.text-center .check-out-link {
