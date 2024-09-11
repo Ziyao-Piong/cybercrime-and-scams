@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senior Safe</title>
+    <link href="../frontend/css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="email_detection.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <!-- <a class="navbar-brand" href="#">
+          <img
+            src="resources/logof.jpg"
+            alt="Senior Safe Logo"
+            class="logo"
+          />Senior Safe
+        </a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../scrollytelly/data.html"
+                >Trending Scams</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Discover
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="businessEmailCompromisePhishing.html"
+                  >Business Email Compromise Phishing</a
+                >
+                <a class="dropdown-item" href="clonePhishing.html"
+                  >Clone Phishing</a
+                >
+                <a class="dropdown-item" href="popupPhishing.html"
+                  >Pop-up Phishing</a
+                >
+                <a class="dropdown-item" href="searchEnginePhishing.html"
+                  >Search Engine Phishing</a
+                >
+                <a class="dropdown-item" href="smishingPhishing.html"
+                  >Smishing</a
+                >
+                <a class="dropdown-item" href="spearPhishing.html"
+                  >Spear Phishing</a
+                >
+                <a class="dropdown-item" href="voicePhishing.html"
+                  >Voice Phishing</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h1>Phishing Email Detection</h1>
+      <p>
+        Try out our phishing email detection tool powered by machine learning
+        now.
+      </p>
+      <div class="form-group">
+        <label for="emailContent"
+          >Copy and paste your email content here:</label
+        >
+        <textarea class="form-control" id="emailContent" rows="10"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary float-right">
+        Check now
+      </button>
+    </div>
+
+    <!-- Section to display prediction result -->
+    <div class="container mt-5">
+      <h3>Prediction Result</h3>
+      <p id="predictionResult">Your result will appear here after detection.</p>
+      <div class="result" id="result"></div>
+    </div>
+  </body>
+</html>
