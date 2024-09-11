@@ -147,3 +147,156 @@ max_sequence_length=350
 loaded_model = LSTMDropoutClassifier(vocab_size, embedding_dim, hidden_dim, output_size, num_layers, dropout)
 loaded_model.load_state_dict(torch.load("deeper_bilstm_with_dropout.pth"))
 loaded_model.eval()
+
+#Process user's input
+
+#Define a function to check if the user's input is mostly English
+def is_mostly_english(text, threshold=0.5):
+    tokens = [word.lower() for word in text.split() if word.isalpha()]
+    english_count = sum(1 for word in tokens if word in english_words)
+
+    if len(tokens) == 0:
+      return False
+    english_ratio = english_count / len(tokens)
+    if english_ratio > threshold:
+      return(True)
+    else:
+      return(False)
+
+
+# Use the model to analyze user's email and return email type, reasons and recommendation
+def take_clean_input(email_content):
+  if not is_mostly_english(email_content):
+    print('The email content are not mostly in English, please enter English content')
+  else:
+    processed_email_tensor = process_single_text(email_content, vocab, max_sequence_length=350, unk_index=vocab["<unk>"])
+    processed_email_tensor = processed_email_tensor.unsqueeze(0)
+    with torch.no_grad():  # No need to track gradients during inference
+      logits = loaded_model(processed_email_tensor)
+
+    probabilities = torch.softmax(logits, dim=1)
+    label = torch.argmax(probabilities, dim=1).item()
+    label = int(label)
+    if label == 0:
+      email_type = "Safe email"
+      reason = 'The email content does not raise any red flags and appears to be routine communication.'
+      recommendation = 'No special action is required. Handle this email as you would with any other legitimate message.'
+    elif label == 1:
+      email_type = "Phishing email"
+      reason = 'The email contains a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+    elif label == 2:
+      email_type = "Phishing email"
+      reason = 'The email contains general characteristics of a phishing attempt, such as unsolicited offers or abnormal requests for action.'
+      recommendation = 'Exercise caution with this email. If you are unsure about its legitimacy, report it as phishing. Always verify the source before taking any action.'
+
+    elif label == 3:
+      email_type = "Safe email"
+      reason = 'The email includes discussion of a project update or report, which are typical of legitimate professional communication.'
+      recommendation = 'This appears to be a normal email. You can proceed as usual.'
+
+    elif label == 4 :
+      email_type = 'Safe Email'
+      reason = 'The email includes mention of scheduling a meeting or appointment, discussion of a project update or report, which are typical of legitimate professional communication.'
+      recommendation = 'This appears to be a normal email. You can proceed as usual.'
+
+    elif label == 5:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'',  which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+    elif label == 6:
+      email_type = 'Safe Email'
+      reason = 'The email includes mention of scheduling a meeting or appointment, which are typical of legitimate professional communication.'
+      recommendation = 'This appears to be a normal email. You can proceed as usual.'
+
+    elif label == 7:
+      email_type = 'Phishing Email'
+      reason = 'The email contains an unsolicited discount or special offer, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+    elif label == 8:
+      email_type = 'Phishing Email'
+      reason = 'The email contains urgent language like ''Urgent'' or ''Immediate action required'' and a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 9:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+    elif label == 10:
+      email_type = 'Phishing Email'
+      reason = 'The email contains urgent language like ''Urgent'' or ''Immediate action required'', which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 11:
+      email_type = 'Phishing Email'
+      reason = 'The email contains an offer of a prize or reward, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 12:
+      email_type = 'Phishing Email'
+      reason = 'The email contains an unsolicited discount or special offer, a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 13:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an unsolicited discount or special offer, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 14:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', urgent language like ''Urgent'' or ''Immediate action required'', which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 15:
+      email_type = 'Phishing Email'
+      reason = 'The email contains an offer of a prize or reward, a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+    elif label == 16 or label == 19:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an unsolicited discount or special offer, a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 17:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an offer of a prize or reward, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 18:
+      email_type = 'Phishing Email'
+      reason = 'The email contains an offer of a prize or reward, an unsolicited discount or special offer, a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 20 or label == 21:
+      email_type = 'Phishing Email'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an offer of a prize or reward, a suspicious link, which could lead to a phishing site, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    elif label == 22 or label == 23:
+      email_type = 'Phishing Email'
+      reason = 'The email contains urgent language like ''Urgent'' or ''Immediate action required'', an offer of a prize or reward, which are common indicators of phishing.'
+      recommendation = 'Avoid interacting with this email. Do not click on any links or provide personal information. Instead, verify the authenticity of the message through official channels. Report the email as phishing if you suspect it is not legitimate.'
+
+
+    return email_type, reason, recommendation
+
+email_content = input("Please input your email content: ")
+
+email_type, reason, recommendation = take_clean_input(email_content)
+
+output = 'This email is most likely a {}, the reason is that {}, the remommendation is that{}'.format(email_type, reason, recommendation)
+print(output)
