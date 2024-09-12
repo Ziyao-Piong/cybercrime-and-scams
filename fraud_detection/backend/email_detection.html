@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Senior Safe</title>
-    <link href="../frontend/css/styles.css" rel="stylesheet" />
+    <link href="../../frontend/css/styles.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -109,9 +109,13 @@
         <label for="emailContent"
           >Copy and paste your email content here:</label
         >
-        <textarea class="form-control" id="emailContent" rows="10"></textarea>
+        <textarea class="form-control" id="emailContents" rows="10"></textarea>
       </div>
-      <button type="button" class="btn btn-primary float-right">
+      <button
+        type="button"
+        class="btn btn-primary float-right"
+        onclick="makePrediction()"
+      >
         Check now
       </button>
     </div>

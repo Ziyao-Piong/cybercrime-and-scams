@@ -1,12 +1,21 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from backend.main_file import predict  # Import the predict function
+from main_file import predict  # Import the predict function
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
 # Define the request body for the prediction
 class PredictRequest(BaseModel):
     features: str
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows any origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+)
 
 # Define a prediction route
 @app.post("/predict")

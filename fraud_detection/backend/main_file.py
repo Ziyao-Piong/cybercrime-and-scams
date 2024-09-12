@@ -295,7 +295,6 @@ def predict(features: str) -> str:
     loaded_model = LSTMDropoutClassifier(vocab_size, embedding_dim, hidden_dim, output_size, num_layers, dropout)
     loaded_model.load_state_dict(torch.load("deeper_bilstm_with_dropout.pth", weights_only=True))
     loaded_model.eval()
-    
 
 
     email_type, reason, recommendation = take_clean_input(features, vocab, loaded_model)

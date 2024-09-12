@@ -1,7 +1,5 @@
 async function makePrediction() {
-    const feature1 = document.getElementById('emailContent').value;
- 
-    const features = [parseFloat(feature1)];
+    const feature = document.getElementById('emailContents').value;
 
     const response = await fetch('http://127.0.0.1:8000/predict', {
         method: 'POST',
@@ -9,7 +7,7 @@ async function makePrediction() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            features: features
+            features: feature,
         }),
     });
 
