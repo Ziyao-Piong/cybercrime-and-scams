@@ -58,6 +58,36 @@ def remove_non_english_words(text):
     # Join the filtered words back into a string
     return ' '.join(english_only)
 
+import re
+
+def replace_sql_keywords(user_input):
+    # Define a dictionary of SQL keywords and their replacements
+    keyword_replacements = {
+        r"\bselect\b": "retrieve",  
+        r"\binsert\b": "add",       
+        r"\bupdate\b": "modify",    
+        r"\bdelete\b": "remove",    
+        r"\bcreate\b": "build",     
+        r"\balter\b": "change",     
+        r"\bdrop\b": "discard",     
+        r"\bbegin\b": "start",      
+        r"\bcommit\b": "finalize",  
+        r"\brollback\b": "undo",   
+        r"\bgrant\b": "allow",      
+        r"\brevoke\b": "deny",      
+    }
+
+    # Convert input to lowercase for case-insensitive matching
+    user_input_lower = user_input.lower()
+
+    # Check for each SQL keyword pattern and replace the first occurrence
+    for pattern, replacement in keyword_replacements.items():
+        # If a pattern is found, replace the first occurrence and stop
+        if re.search(pattern, user_input_lower):
+            user_input = re.sub(pattern, replacement, user_input, count=1, flags=re.IGNORECASE)
+            break
+
+    return user_input
 
 # define a function to process user's input
 def process_single_text(text, vocab, max_sequence_length=350, unk_index=None):
@@ -106,7 +136,11 @@ def is_mostly_english(text, threshold=0.5):
 def take_clean_input(email_content, vocab, model):
   if not is_mostly_english(email_content):
     print('The email content are not mostly in English, please enter English content')
+  elif len(email_content.split()) > 150:
+     print('Input email content can only contains no more than 150 words')
+
   else:
+    email_content = replace_sql_keywords(email_content)
     processed_email_tensor = process_single_text(email_content, vocab, max_sequence_length=350, unk_index=vocab["<unk>"])
     processed_email_tensor = processed_email_tensor.unsqueeze(0)
     with torch.no_grad():  # No need to track gradients during inference
@@ -302,7 +336,7 @@ def predict(features: str) -> str:
     reason = reason.lower()
     recommendation = recommendation.lower()
 
-    prediction = 'This email is most likely a {}, the reason is that {} The remommendation is that {}'.format(email_type, reason, recommendation)
+    prediction = 'This email is most likely a {}, the reason is that {}. The remommendation is that {}'.format(email_type, reason, recommendation)
     return prediction
 
 
