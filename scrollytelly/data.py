@@ -1,8 +1,7 @@
 import pymysql
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
 
 # Database connection function
 def get_connection():
@@ -65,26 +64,18 @@ ORDER BY
     df = df.fillna(0).replace([float('inf'), float('-inf')], 0)
     return df
 
-# FastAPI app initialization
-app = FastAPI()
 
-# CORS middleware configuration
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows any origin
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods
-    allow_headers=["*"],  # Allows all headers
+router = APIRouter(
+    prefix='/data',
+    tags=['scam_data']
 )
 
+
 # API endpoint to get scam data by year
-@app.get("/scam-by-year")
+@router.get("/scam-by-year")
 def get_scam_by_year():
     try:
         df = fetch_scam_by_year_data()
         return JSONResponse(df.to_dict(orient="records"))
     except Exception as e:
         raise HTTPException(status_code=500, detail="Data retrieval failed")
-
-# Run the server with:
-# uvicorn data:app --reload

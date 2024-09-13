@@ -458,6 +458,6 @@ function convert_data(my_data) {
 }
 
 // Load data and display
-d3.json('http://127.0.0.1:8000/scam-by-year').then(display).catch(function(error) {
+d3.json('http://127.0.0.1:8000/data/scam-by-year').then(display).catch(function(error) {
     console.error("Error loading data: ", error);
 });

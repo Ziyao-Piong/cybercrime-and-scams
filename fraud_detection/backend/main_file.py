@@ -314,7 +314,7 @@ class LSTMDropoutClassifier(nn.Module):
 ####### Prediction function called by backend ########
 def predict(features: str) -> str:
     #load vocab
-    with open('vocab.json', 'r') as file:
+    with open('fraud_detection/backend/vocab.json', 'r') as file:
         vocab = json.load(file)
     
     #Load model
@@ -327,7 +327,7 @@ def predict(features: str) -> str:
 
 
     loaded_model = LSTMDropoutClassifier(vocab_size, embedding_dim, hidden_dim, output_size, num_layers, dropout)
-    loaded_model.load_state_dict(torch.load("deeper_bilstm_with_dropout.pth", weights_only=True))
+    loaded_model.load_state_dict(torch.load("fraud_detection/backend/deeper_bilstm_with_dropout.pth", weights_only=True))
     loaded_model.eval()
 
 
