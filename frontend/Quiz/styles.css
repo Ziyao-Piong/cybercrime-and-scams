@@ -1,0 +1,466 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Navbar */
+.navbar {
+  margin-left: -70px;
+}
+
+.navbar-brand .logo {
+  height: 40px;
+  margin-right: 25px;
+  vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+  color: #002147; /* Navy blue text */
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+.navbar .dropdown-menu {
+  background-color: #f8f9fa;
+  border: none; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  overflow: hidden;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  padding: 10px 10px;
+  color: #343a40;
+  font-size: 0.9rem;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  background-color: #e9ecef; 
+  color: #1f60a7;
+}
+
+/* Landing Section */
+.landing-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../resources/landing_pic.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  min-height: 700px; /* Increased height for better coverage */
+  padding: 40px 20px;
+}
+
+.landing-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.landing-section .container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.landing-section h1, .landing-section p {
+  animation: moveText 5s ease-in-out infinite;
+}
+
+.landing-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.landing-section p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.btn-blue {
+  background-color: #0f58ace3;
+  color: #e0e1dd;
+  padding: 1.2%;
+  border-radius: 15px;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem; /* Slightly larger button text */
+  font-weight: bold;
+}
+
+.btn-blue:hover {
+  background-color: #2375d3e3;
+  color: #e0e1dd;
+  text-decoration: none;
+}
+
+/* YES and NO Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;  /* Center the buttons horizontally */
+  margin-top: 20px;         /* Add space between the question and buttons */
+}
+
+.button-container .btn {
+  margin: 0 10px;           /* Add space between the buttons */
+}
+
+/* Styling YES button */
+.btn-yes {
+  background-color: #3082e0;  
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-yes:hover {
+  background-color: #3082e0; 
+}
+
+/* Styling NO button */
+.btn-no {
+  background-color: #3082e0;   
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-no:hover {
+  background-color: #3082e0; /* Darker red on hover */
+}
+
+/* Quotes Section */
+.quotes-section {
+  background-color: #1F3C88;
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.quotes-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.gold-btn {
+  background-color: #ff9d00;
+  color: #002147;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.gold-btn:hover {
+  background-color: #e69200;
+}
+
+/* Trending Scams Section */
+.trending-scams-section {
+  padding: 80px 20px;
+  background-color: #f7f7f7;
+}
+
+.trending-scams-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.trending-scams-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  margin-top: 20px;
+}
+
+.footer h5 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #002147;
+}
+
+.footer p, .footer a {
+  color: #1F3C88;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.footer i {
+  font-size: 1.5rem;
+  color: #002147;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.footer i:hover {
+  color: #0056b3;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 10px;
+}
+
+.footer hr {
+  margin: 20px 0;
+  border-color: #eaeaea;
+}
+
+.footer .text-muted {
+  font-size: 0.85rem;
+  color: #1F3C88;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .landing-section h1 {
+      font-size: 2.5rem;
+  }
+
+  .quotes-section h2 {
+      font-size: 2rem;
+  }
+
+  .trending-scams-section h2 {
+      font-size: 2rem;
+  }
+}
+
+/* Additional Styles for Sections */
+.intro-title {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding-bottom: 2%;
+}
+
+.intro-body {
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding-bottom: 1%;
+}
+
+.what-to-do-section {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;   
+  align-items: center;      
+}
+
+.list-container {
+  width: 50%;
+}
+
+/* Ordered List with Gradient */
+ol.gradient-list {
+  counter-reset: gradient-counter;
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+}
+
+ol.gradient-list > li {
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  counter-increment: gradient-counter;
+  margin-top: 1rem;
+  min-height: 3rem;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+}
+
+ol.gradient-list > li::before {
+  align-items: flex-end;
+  content: counter(gradient-counter);
+  color: #1d1f20;
+  display: flex;
+  font: 900 1.5em/1 "Montserrat";
+  justify-content: flex-end;
+  padding: 0.125em 0.25em;
+  z-index: 1;
+}
+
+.what-to-do-section.text-center .check-out-link {
+  background-image: linear-gradient(to right, #54b3d6, #54b3d6 50%, #000 50%);
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.what-to-do-section.text-center .check-out-link:before {
+  content: '';
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.what-to-do-section.text-center .check-out-link:hover {
+ background-position: 0;
+}
+
+.what-to-do-section.text-center .check-out-link:hover::before {
+  width: 100%;
+}
+
+/* Card Styling */
+.card-container {
+  padding: 2% 8%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-container .card {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  background: rgba(115, 115, 115, 0.05);
+  box-shadow: 0 15px 35px rgba(173, 173, 173, 0.5);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: none;
+}
+
+.card-container .card .content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.5s;
+}
+
+.card-container .card:hover .content {
+  transform: translateY(-20px);
+}
+
+.card-container .card .content .imgBx {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.card-container .card .content .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-container .card .content .contentBx h3 {
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0 10px;
+  line-height: 1.1em;
+}
+
+.card-container .card .content .contentBx h3 span {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: initial;
+}
+
+.card-container .card a {
+  position: absolute;
+  bottom: 50px;
+}
+
+.card-container .card a {
+  list-style: none;
+  transform: translateY(40px);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.card-container .card:hover a {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.card-container .card a {
+  color: #3082e0;
+  font-size: 18px;
+}
+
+/* Progress Bar */
+.progress {
+  margin-top: 20px;
+  height: 20px;
+  margin-left: -10px;
+}
+
+.progress-bar {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}

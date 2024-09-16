@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Safe - Phishing Quiz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="styles.css" rel="stylesheet">
+    <link href="../css/phishings.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/cybercrime-and-scams/frontend/resources/logof.jpg" alt="Senior Safe Logo" class="logo" style="height: 50px; max-width: 150px; width: auto;">
+                 Senior Safe
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../scrollytelly/data.html">Trending Scams</a>
+                    </li>
+                    <li class="nav-item"></li>
+                     <a class="nav-link" href="../../fraud_detection/backend/email_detection.html">Fraud Email Detection</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"
+                          >Test Your Knowledge <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Discover
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../businessEmailCompromisePhishing.html">Business Email Compromise Phishing</a>
+                            <a class="dropdown-item" href="../clonePhishing.html">Clone Phishing</a>
+                            <a class="dropdown-item" href="../popupPhishing.html">Pop-up Phishing</a>
+                            <a class="dropdown-item" href="../searchEnginePhishing.html">Search Engine Phishing</a>
+                            <a class="dropdown-item" href="../smishingPhishing.html">Smishing</a>
+                            <a class="dropdown-item" href="../spearPhishing.html">Spear Phishing</a>
+                            <a class="dropdown-item" href="../voicePhishing.html">Voice Phishing</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <h1 class="text-center my-4">Can you spot the phishing scams?</h1>
+
+            <div class="quiz-section">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Phishing Awareness Tips</h2>
+                </div>
+
+                <p>Identifying phishing scams is crucial in today's digital world. By staying vigilant and knowing 
+                    what to look for, you can protect yourself from falling victim to these scams.</p>
+
+                    <ul>
+                        <li>Check the sender's email address: Look for misspellings or suspicious domains.</li>
+                        <li>Be wary of urgent or threatening language: Scammers often create a false sense of urgency.</li>
+                        <li>Hover over links before clicking: Verify that the URL matches the legitimate website.</li>
+                        <li>Look for generic greetings: Phishing emails often use "Dear Sir/Madam" instead of your name.</li>
+                        <li>Be cautious of requests for sensitive information: Legitimate organisations rarely ask for personal data via email.</li>
+                    </ul>
+                <p><b>Test your knowledge:</b></p>
+
+                    <div class="progress" style="width: 250px; float: right;">
+                        <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+                    </div> 
+                
+                <div id="question-container" style="background-color: lightgrey; padding: 20px; border-radius: 3px;"></div>
+
+                <div class="button-container d-flex justify-content-start align-items-center">
+                    <button class="btn btn-answer btn-primary mr-2 btn-back btn-yes" style="display: none; background: grey;">Back</button>
+                    <button class="btn btn-answer btn-primary mr-2 btn-yes">YES</button>
+                    <button class="btn btn-answer btn-primary mr-2 btn-no">NO</button>
+                    <div class="next-button-placeholder"></div> 
+                </div>
+                
+            </div>
+            <div id="results-chart-container" class="chart-container" style="height:80vh;">
+                <canvas id="resultsChart"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-light text-center mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a></p>
+                    <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../../scrollytelly/data.html">Trending Scams</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>
