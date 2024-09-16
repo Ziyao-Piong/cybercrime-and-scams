@@ -34,3 +34,10 @@ setInterval(changeQuote, 5000);
 function scrollToTrendingScams() {
     document.getElementById('trending-scams').scrollIntoView({ behavior: 'smooth' });
 }
+
+function scrollDown() {
+    window.scrollBy({ 
+        top: window.innerHeight, // Scroll down by one viewport height
+        behavior: 'smooth' 
+    });
+}
