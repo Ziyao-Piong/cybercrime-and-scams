@@ -11,7 +11,7 @@ body {
 
 .navbar-brand .logo {
   height: 40px;
-  margin-right: 25px;
+  margin-right: 2px;
   vertical-align: middle;
 }
 
@@ -237,7 +237,7 @@ body {
   /* font-family: 'comic sans ms', cursive; */
   font-weight: bolder;
   font-size: 1.5rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   padding-bottom: 2%;
 }
 
