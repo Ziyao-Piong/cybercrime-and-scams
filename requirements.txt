@@ -2,3 +2,8 @@ fastapi
 pandas
 pymysql
 uvicorn
+pydantic
+re
+torch
+nltk
+json
