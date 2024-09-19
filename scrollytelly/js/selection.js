@@ -117,26 +117,26 @@ var scrollVis = function () {
 
     var draw_dots = function (data_class, fill_type, transition, chartTitle) {
         var my_data = data_class === "none" ? [] : vis_data[data_class];
-
+    
         x0_scale.domain(Array.from(new Set(my_data.map(d => d[data_class]))));
         x1_scale.domain([0, d3.max(my_data, d => d.column) + 1]).range([0, x0_scale.bandwidth()]);
         y_scale.domain([0, d3.max(my_data, d => d.row) + 1]);
-
+    
         var my_radius = 4.5;
-
+    
         var my_group = svg.selectAll(".labels_group")
             .data(x0_scale.domain(), function (d) { return d; });
-
+    
         my_group.exit().remove();
-
+    
         var enter = my_group.enter()
             .append("g")
             .attr("class", "labels_group");
-
+    
         enter.append("text").attr("class", "bar_text");
-
+    
         my_group = my_group.merge(enter);
-
+    
         my_group.select(".bar_text")
             .attr("visibility", "hidden")
             .attr("x", function (d) {
@@ -193,20 +193,20 @@ var scrollVis = function () {
             .attr("visibility", function (d) {
                 return data_class === "final" ? "hidden" : "visible";
             });
-
+    
         var dot_group = svg.selectAll(".dots_group")
             .data(my_data);
-
+    
         dot_group.exit().remove();
-
+    
         var enter_dots = dot_group.enter()
             .append("g")
             .attr("class", "dots_group");
-
+    
         enter_dots.append("circle").attr("class", "circle_dot");
-
+    
         dot_group = dot_group.merge(enter_dots);
-
+    
         dot_group.select(".circle_dot")
             .transition()
             .duration(transition)
@@ -242,19 +242,52 @@ var scrollVis = function () {
                 return data_class === "final" ? my_radius * 5 : my_radius;  // Make the dot grow to 5x size in the final section
             })
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
-
+    
         // X-axis rendering
         var x_axis_selection = d3.select(".x_axis")
             .attr("transform", "translate(" + left_right_margin + "," + (height - top_bottom_margin) + ")");
-
+    
         // Show x-axis for every section
         x_axis_selection.call(d3.axisBottom(x0_scale));
+    
+        // Conditional logic for label rotation
         x_axis_selection.selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-0.8em")
-            .attr("dy", "0.15em")
-            .attr("transform", "rotate(-45)");
-
+            .style("text-anchor", function () {
+                // Sections 0, 1, 2, 5, 6 have horizontal labels
+                if ([0, 1, 2, 5, 6].includes(activeIndex)) {
+                    return "middle";
+                } else {
+                    return "end";
+                }
+            })
+            .attr("dx", function () {
+                // Horizontal alignment for sections 0, 1, 2, 5, 6
+                if ([0, 1, 2, 5].includes(activeIndex)) {
+                    return "0";
+                }
+                if ([8].includes(activeIndex)) {
+                    return "3.5em";
+                } else {
+                    return "-0.8em";
+                }
+            })
+            .attr("dy", function () {
+                // Adjust vertical alignment for horizontal labels
+                if ([0, 1, 2, 5, 8].includes(activeIndex)) {
+                    return "0.85em";
+                } else {
+                    return "0.15em";
+                }
+            })
+            .attr("transform", function () {
+                // Horizontal for sections 0, 1, 2, 5, 8, and rotated otherwise
+                if ([0, 1, 2, 5, 8].includes(activeIndex)) {
+                    return "rotate(0)"; // No rotation
+                } else {
+                    return "rotate(-45)"; // 45-degree rotation for all other sections
+                }
+            });
+    
         // Display the title
         svg.select(".chart-title")
             .text(chartTitle)
@@ -262,6 +295,7 @@ var scrollVis = function () {
             .delay(transition * 1.2)
             .attr("visibility", "visible");
     };
+    
 
     return chart;
 };
