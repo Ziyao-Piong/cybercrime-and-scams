@@ -14,6 +14,8 @@ var scrollVis = function () {
     var x1_scale = d3.scaleLinear();
     var y_scale = d3.scaleLinear().range([height - (top_bottom_margin * 2), 0]);
 
+    var formatThousands = d3.format(",");  // Adds thousands separator
+
     // Define colors
     var year_colours = {
         "2020": '#1f78b4',
@@ -172,10 +174,19 @@ var scrollVis = function () {
                     var genderReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
                     var percentage = ((genderReports / totalGenderReports) * 100).toFixed(1);
                     return `${percentage}%`; // Display the percentage for gender
+                } else if (data_class === "month") {
+                    // Calculate the total number of reports
+                    var totalReports = d3.sum(my_data, m => m.NumberOfReports);
+                    // Calculate the reports for the specific month
+                    var monthReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
+                    // Calculate the percentage of reports for the month
+                    var monthPercentage = ((monthReports / totalReports) * 100).toFixed(1);
+                    return `${monthPercentage}%`; // Display the percentage for the month
                 } else {
-                    return my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
+                    var totalReports = my_data.filter(m => m[data_class] === d).reduce((acc, cur) => acc + cur.NumberOfReports, 0);
+                    return formatThousands(totalReports); // Use the thousands separator for other cases
                 }
-            })
+            })            
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")")
             .transition()
             .delay(transition * 1.2)
