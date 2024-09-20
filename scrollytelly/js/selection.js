@@ -261,12 +261,15 @@ var scrollVis = function () {
                 }
             })
             .attr("dx", function () {
-                // Horizontal alignment for sections 0, 1, 2, 5, 6
+                // Horizontal alignment for sections 0, 1, 2, 5
                 if ([0, 1, 2, 5].includes(activeIndex)) {
                     return "0";
                 }
                 if ([8].includes(activeIndex)) {
                     return "3.5em";
+                }
+                if ([6].includes(activeIndex)) {
+                    return "-5em";
                 } else {
                     return "-0.8em";
                 }
@@ -275,6 +278,9 @@ var scrollVis = function () {
                 // Adjust vertical alignment for horizontal labels
                 if ([0, 1, 2, 5, 8].includes(activeIndex)) {
                     return "0.85em";
+                }
+                if ([6].includes(activeIndex)) {
+                    return "1em";
                 } else {
                     return "0.15em";
                 }

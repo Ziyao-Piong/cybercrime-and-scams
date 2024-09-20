@@ -9,8 +9,8 @@
     background-repeat: no-repeat;
     position: relative;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    min-height: 700px; /* Increased height for better coverage */
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+    min-height: 00px; /* Increased height for better coverage */
     padding: 40px 20px;
   }
   .landing-section2 {
@@ -18,20 +18,19 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0; /* Set background color */
-    /* Optionally use an image background: background-image: url('path-to-image.jpg'); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    color: rgba(0, 0, 0, 0.71); /* Text color */
+    color: rgb(0, 0, 0); /* Text color */
     text-shadow: 2px 2px 4px rgb(255, 255, 255); /* Optional text shadow */
     min-height: 100px; /* Height of the section */
     padding: 10px 0px; /* Padding around the content */
   }
   
   .landing-section2 h1 {
-    font-size: 2rem; /* Font size for the heading */
-    margin-bottom: 20px;
+    font-size: 2.5rem; /* Font size for the heading */
+    margin-bottom: 18px;
   }
   
   .landing-section2 p {
