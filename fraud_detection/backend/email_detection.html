@@ -106,7 +106,7 @@
     </nav>
 
     <div class="container mt-5">
-      <h1>Phishing Email Detection</h1>
+      <h1>Phishing Email and URL Detection</h1>
       <p>
         Try out our phishing email detection tool powered by machine learning
         now.
@@ -127,10 +127,21 @@
     </div>
 
     <!-- Section to display prediction result -->
+
+    <!-- <div class="container mt-5">
+      <h1 id="probability" style="font-size: 4rem"></h1>
+    </div>
+    
     <div class="container mt-5">
-      <h3>Prediction Result</h3>
-      <p id="predictionResult">Your result will appear here after detection.</p>
+      <p id="predictionResult"></p>
       <div class="result" id="result"></div>
+    </div> -->
+
+    <div class="container mt-5">
+      <div id="predictionResultWrapper" class="p-4"  style="margin-top: 60px;"> <!-- Add a wrapper with padding -->
+        <h1 id="probability" style="font-size: 4rem;"></h1> <!-- Probability -->
+        <div id="result" class="mt-3"></div> <!-- Prediction result -->
+      </div>
     </div>
 
     <!-- Footer -->
