@@ -115,6 +115,9 @@ section {
   ol.gradient-list > li:nth-child(10n+4):before {
     background: transparent;
   }
+  ol.gradient-list > li:nth-child(10n+5):before {
+    background: transparent;
+  }
 
   ol.gradient-list > li + li {
     margin-top: 2rem;
