@@ -9,19 +9,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import uuid
-import uvicorn
+from fastapi import APIRouter
 
-# Create FastAPI app instance
-app = FastAPI(docs_url="/docs", redoc_url="/redoc")
-
-# Enable CORS (comment it out if unnecessary)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Adjust this for security in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+router = APIRouter(
+    prefix='/data',
+    tags=['report']
 )
+
 
 # Database connection configuration
 DB_CONFIG = {
@@ -116,13 +110,8 @@ def send_thank_you_email(email: str, receipt_number: str):
     except Exception as e:
         print(f"Error sending email: {str(e)}")
 
-# Root endpoint to test if the API is running
-@app.get("/")
-async def root():
-    return {"message": "Phishing Scam Reporting API"}
-
 # API endpoint for handling form submissions and database operations
-@app.post("/submit_report")
+@router.post("/api/submit_report")
 async def submit_report(report: ScamReport):
     connection = get_db_connection()
     if not connection:
@@ -161,12 +150,5 @@ async def submit_report(report: ScamReport):
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     finally:
         connection.close()
-
-if __name__ == "__main__":
-    # Use uvicorn to run the API, capturing any startup issues
-    try:
-        uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
-    except Exception as e:
-        print(f"Failed to start API: {e}")
 
         # uvicorn app:app --reload

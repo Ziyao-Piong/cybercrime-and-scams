@@ -35,14 +35,12 @@
             <a class="nav-link" href="../../frontend/index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../scrollytelly/data.html"
-              >Trending Scams</a
-            >
+            <a class="nav-link" href="../../scrollytelly/data.html">Trending Scams</a>
           </li>
-          <li class="nav-item"></li>
-              <a class="nav-link" href="../../fraud_detection/backend/email_detection.html">Fraud Email Detection</a>
-            </li>
-          <li class="nav-item"></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../fraud_detection/backend/email_detection.html">Fraud Email Detection</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" href="#">Report Phishing Scam</a>
           </li>
           <li class="nav-item">
@@ -61,29 +59,13 @@
               Discover
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a
-                class="dropdown-item"
-                href="../../frontend/businessEmailCompromisePhishing.html"
-                >Business Email Compromise Phishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/clonePhishing.html"
-                >Clone Phishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/popupPhishing.html"
-                >Pop-up Phishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/searchEnginePhishing.html"
-                >Search Engine Phishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/smishingPhishing.html"
-                >Smishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/spearPhishing.html"
-                >Spear Phishing</a
-              >
-              <a class="dropdown-item" href="../../frontend/voicePhishing.html"
-                >Voice Phishing</a
-              >
+              <a class="dropdown-item" href="../../frontend/businessEmailCompromisePhishing.html">Business Email Compromise Phishing</a>
+              <a class="dropdown-item" href="../../frontend/clonePhishing.html">Clone Phishing</a>
+              <a class="dropdown-item" href="../../frontend/popupPhishing.html">Pop-up Phishing</a>
+              <a class="dropdown-item" href="../../frontend/searchEnginePhishing.html">Search Engine Phishing</a>
+              <a class="dropdown-item" href="../../frontend/smishingPhishing.html">Smishing</a>
+              <a class="dropdown-item" href="../../frontend/spearPhishing.html">Spear Phishing</a>
+              <a class="dropdown-item" href="../../frontend/voicePhishing.html">Voice Phishing</a>
             </div>
           </li>
         </ul>
@@ -91,162 +73,176 @@
     </div>
   </nav>
 
-    <div class="container mt-5">
-        <h1>Report a Phishing Scam</h1>
+  <div class="container mt-5">
+    <h1>Report a Phishing Scam</h1>
 
-        <main>
-            <section class="description">
-                <p>If you've encountered a suspicious email, website, or message that you believe might be a phishing scam, we encourage you to report it using the form below. By sharing the details of the scam, you help us in our mission to protect others from falling victim to similar attacks. Your report will be included in our Trending Scams report. Please ensure you provide as much detail as possible to help others stay safe.</p>
-            </section>
-            <div class="form-group">
-                <label for="phishingUrl">Please enter the suspected phishing scam or URL:</label>
-                <textarea id="phishingUrl" name="phishingUrl" class="form-control" rows="9" oninput="countWords(this)"></textarea>
-                <small id="wordCount" class="form-text text-muted">0/500 words</small>
-            </div>
-            <form id="scamReportForm">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="scamDate">When did you receive the scam?<span class="required">*</span></label>
-                        <input type="date" id="scamDate" name="scamDate" required="">
-                    </div>
-                    <div class="form-group col-md-6 text-right">
-                        <p class="required-legend"><span class="required">*</span> Indicates a required field</p>
-                    </div>
-                </div>
+    <main>
+      <section class="description">
+        <p>If you've encountered a suspicious email, website, or message that you believe might be a phishing scam, we encourage you to report it using the form below. By sharing the details of the scam, you help us in our mission to protect others from falling victim to similar attacks. Your report will be included in our Trending Scams report. Please ensure you provide as much detail as possible to help others stay safe.</p>
+      </section>
 
-                <div class="form-group">
-                    <label for="addressState">Where were you when you received this scam?<span class="required">*</span></label>
-                    <select id="addressState" name="addressState" required="">
-                        <option value="">Select an option</option>
-                        <option value="Australian Capital Territory">Australian Capital Territory</option>
-                        <option value="New South Wales">New South Wales</option>
-                        <option value="Northern Territory">Northern Territory</option>
-                        <option value="Outside of Australia">Outside of Australia</option>
-                        <option value="Queensland">Queensland</option>
-                        <option value="South Australia">South Australia</option>
-                        <option value="Tasmania">Tasmania</option>
-                        <option value="Victoria">Victoria</option>
-                        <option value="Western Australia">Western Australia</option>
-                        <option value="Unspecified">Unspecified</option>
-                    </select>
-                </div>
+      <!-- Form starts here -->
+      <form id="scamReportForm" method="POST" action="http://127.0.0.1:8000/data/api/submit_report">
+        <div class="form-group">
+          <label for="phishingUrl">Please enter the suspected phishing scam or URL:</label>
+          <textarea id="phishingUrl" name="phishingUrl" class="form-control" rows="9" oninput="countWords(this)"></textarea>
+          <small id="wordCount" class="form-text text-muted">0/500 words</small>
+        </div>
 
-                <div class="form-group">
-                    <label for="contactMode">How did you receive the scam?<span class="required">*</span></label>
-                    <select id="contactMode" name="contactMode" required="">
-                        <option value="">Select an option</option>
-                        <option value="Email">Email</option>
-                        <option value="Fax">Fax</option>
-                        <option value="In person">In person</option>
-                        <option value="Internet">Internet</option>
-                        <option value="Mail">Mail</option>
-                        <option value="Mobile apps">Mobile apps</option>
-                        <option value="Phone Call">Phone Call</option>
-                        <option value="Social media">Social media</option>
-                        <option value="Text message">Text message</option>
-                        <option value="Unspecified">Unspecified</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="age">How Old Are You?<span class="required">*</span></label>
-                    <select id="age" name="age" required="">
-                        <option value="">Select an option</option>
-                        <option value="Under 18">Under 18</option>
-                        <option value="18 - 24">18 - 24</option>
-                        <option value="25 - 34">25 - 34</option>
-                        <option value="35 - 44">35 - 44</option>
-                        <option value="45 - 54">45 - 54</option>
-                        <option value="55 - 64">55 - 64</option>
-                        <option value="65 and over">65 and over</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="gender">What Is Your Gender?<span class="required">*</span></label>
-                    <select id="gender" name="gender" required="">
-                        <option value="">Select an option</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="categoryLevel2">How Would You Categorise Your Scam?<span class="required">*</span></label>
-                    <select id="categoryLevel2" name="categoryLevel2" required="">
-                        <option value="">Select an option</option>
-                        <option value="Attempts to gain your personal information">Attempts to gain your personal information</option>
-                        <option value="Buying or selling">Buying or selling</option>
-                        <option value="Investment scams">Investment scams</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="categoryLevel3">What Type of Scam did you Receive?<span class="required">*</span></label>
-                    <select id="categoryLevel3" name="categoryLevel3" required="">
-                        <option value="">Select an option</option>
-                        <option value="False billing">False billing</option>
-                        <option value="Phishing">Phishing</option>
-                        <option value="Investment scams">Investment scams</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="amountLost">In AUD, How Much Money Did You Lose?<span class="required">*</span></label>
-                    <input type="number" id="amountLost" name="amountLost" step="0.01" min="0" required="">
-                </div>
-
-                <div class="form-group">
-                    <label for="userEmail">Please enter your email address:<span class="required">*</span></label>
-                    <input type="email" id="userEmail" name="userEmail" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label for="verifyEmail">Verify Email Address:<span class="required">*</span></label>
-                    <input type="email" id="verifyEmail" name="verifyEmail" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="consent" name="consent" required="">
-                    <label for="consent">I confirm that the information provided does not contain personal data. I consent to the storage and processing of the submitted details for the purpose of phishing scam investigation and prevention. I understand that the information will be used solely for improving phishing detection and response efforts.<span class="required">*</span></label>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Report</button>
-            </form>
-        </main>
-    </div>
-
-    <footer class="footer bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h5>Contact Us</h5>
-            <p>Email: <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a></p>
-            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="scamDate">When did you receive the scam?<span class="required">*</span></label>
+            <input type="date" id="scamDate" name="StartOfMonth" required="">
           </div>
-          <div class="col-md-4">
-            <h5>Follow Us</h5>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-          <div class="col-md-4">
-            <h5>Quick Links</h5>
-            <ul class="list-unstyled">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Trending Scams</a></li>
-              <li><a href="#">Phishing Scam Report</a></li>
-              <li><a href="#">Test Your Knowledge</a></li>
-            </ul>
+          <div class="form-group col-md-6 text-right">
+            <p class="required-legend"><span class="required">*</span> Indicates a required field</p>
           </div>
         </div>
-        <hr>
-        <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
-      </div>
-    </footer>
 
-    <!-- Required JS libraries for Bootstrap's dropdown -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+        <div class="form-group">
+          <label for="addressState">Where were you when you received this scam?<span class="required">*</span></label>
+          <select id="addressState" name="Address_State" required="">
+            <option value="">Select an option</option>
+            <option value="Australian Capital Territory">Australian Capital Territory</option>
+            <option value="New South Wales">New South Wales</option>
+            <option value="Northern Territory">Northern Territory</option>
+            <option value="Outside of Australia">Outside of Australia</option>
+            <option value="Queensland">Queensland</option>
+            <option value="South Australia">South Australia</option>
+            <option value="Tasmania">Tasmania</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Western Australia">Western Australia</option>
+            <option value="Unspecified">Unspecified</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contactMode">How did you receive the scam?<span class="required">*</span></label>
+          <select id="contactMode" name="Scam_Contact_Mode" required="">
+            <option value="">Select an option</option>
+            <option value="Email">Email</option>
+            <option value="Fax">Fax</option>
+            <option value="In person">In person</option>
+            <option value="Internet">Internet</option>
+            <option value="Mail">Mail</option>
+            <option value="Mobile apps">Mobile apps</option>
+            <option value="Phone Call">Phone Call</option>
+            <option value="Social media">Social media</option>
+            <option value="Text message">Text message</option>
+            <option value="Unspecified">Unspecified</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="age">How Old Are You?<span class="required">*</span></label>
+          <select id="age" name="Complainant_Age" required="">
+            <option value="">Select an option</option>
+            <option value="Under 18">Under 18</option>
+            <option value="18 - 24">18 - 24</option>
+            <option value="25 - 34">25 - 34</option>
+            <option value="35 - 44">35 - 44</option>
+            <option value="45 - 54">45 - 54</option>
+            <option value="55 - 64">55 - 64</option>
+            <option value="65 and over">65 and over</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="gender">What Is Your Gender?<span class="required">*</span></label>
+          <select id="gender" name="Complainant_Gender" required="">
+            <option value="">Select an option</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="categoryLevel2">How Would You Categorise Your Scam?<span class="required">*</span></label>
+          <select id="categoryLevel2" name="Category_Level_2" required="">
+            <option value="">Select an option</option>
+            <option value="Attempts to gain your personal information">Attempts to gain your personal information</option>
+            <option value="Buying or selling">Buying or selling</option>
+            <option value="Investment scams">Investment scams</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="categoryLevel3">What Type of Scam did you Receive?<span class="required">*</span></label>
+          <select id="categoryLevel3" name="Category_Level_3" required="">
+            <option value="">Select an option</option>
+            <option value="False billing">False billing</option>
+            <option value="Phishing">Phishing</option>
+            <option value="Investment scams">Investment scams</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="amountLost">In AUD, How Much Money Did You Lose?<span class="required">*</span></label>
+          <input type="number" id="amountLost" name="Amount_lost" step="0.01" min="0" required="">
+        </div>
+
+        <div class="form-group">
+          <label for="userEmail">Please enter your email address:<span class="required">*</span></label>
+          <input type="email" id="userEmail" name="user_email" class="form-control" required="">
+        </div>
+        <div class="form-group">
+          <label for="verifyEmail">Verify Email Address:<span class="required">*</span></label>
+          <input type="email" id="verifyEmail" name="verify_email" class="form-control" required="">
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="consent" name="consent" required="">
+          <label for="consent">I confirm that the information provided does not contain personal data. I consent to the storage and processing of the submitted details for the purpose of phishing scam investigation and prevention. I understand that the information will be used solely for improving phishing detection and response efforts.<span class="required">*</span></label>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Report</button>
+      </form>
+    </main>
+  </div>
+
+  <footer class="footer bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <p>Email: <a href="mailto:info@seniorsafe.com">info@seniorsafe.com</a></p>
+          <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        </div>
+        <div class="col-md-4">
+          <h5>Follow Us</h5>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Trending Scams</a></li>
+            <li><a href="#">Phishing Scam Report</a></li>
+            <li><a href="#">Test Your Knowledge</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Required JS libraries for Bootstrap's dropdown -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Include the JavaScript for handling word count and other dynamic elements -->
+  <script src="script.js"></script>
+  <script>
+    function countWords(textarea) {
+      const text = textarea.value.trim();
+      const wordCount = text.split(/\s+/).length;
+      const wordLimit = 500;
+      document.getElementById("wordCount").textContent = `${wordCount}/${wordLimit} words`;
+    }
+  </script>
 </body>
 </html>

@@ -8,46 +8,30 @@ document.addEventListener('DOMContentLoaded', function () {
         const data = Object.fromEntries(formData.entries());
 
         // Validate email fields
-        if (data.userEmail !== data.verifyEmail) {
+        if (data.user_email !== data.verify_email) {
             alert('Email addresses do not match. Please check and try again.');
             return;
         }
 
+        // Validate that a date is provided and is valid
+        if (!data.StartOfMonth || isNaN(new Date(data.StartOfMonth).getTime())) {
+            alert('Please enter a valid date.');
+            return;
+        }
+
         // Convert date to the first day of the month
-        const scamDate = new Date(data.scamDate);
+        const scamDate = new Date(data.StartOfMonth);
         data.StartOfMonth = new Date(scamDate.getFullYear(), scamDate.getMonth(), 1).toISOString().split('T')[0];
 
-        // Remove the original scamDate field
-        delete data.scamDate;
+        // Convert amount lost to float
+        data.Amount_lost = parseFloat(data.Amount_lost);
 
-        // Rename fields to match backend expectations
-        data.Address_State = data.addressState;
-        data.Scam_Contact_Mode = data.contactMode;
-        data.Complainant_Age = data.age;
-        data.Complainant_Gender = data.gender;
-        data.Category_Level_2 = data.categoryLevel2;
-        data.Category_Level_3 = data.categoryLevel3;
-        data.Amount_lost = parseFloat(data.amountLost);
+        // Add a fixed number of reports
         data.Number_of_reports = 1;
-
-        // Ensure we correctly rename user_email and verify_email fields
-        data.user_email = data.userEmail; 
-        data.verify_email = data.verifyEmail; 
-
-        // Remove renamed fields from the object since we have renamed them
-        delete data.addressState;
-        delete data.contactMode;
-        delete data.age;
-        delete data.gender;
-        delete data.categoryLevel2;
-        delete data.categoryLevel3;
-        delete data.amountLost;
-        delete data.userEmail;  // Remove the original userEmail
-        delete data.verifyEmail;  // Remove the original verifyEmail
 
         console.log('Submitting data:', data);
 
-        fetch('http://127.0.0.1:8000/submit_report', {
+        fetch('http://127.0.0.1:8000/data/api/submit_report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
