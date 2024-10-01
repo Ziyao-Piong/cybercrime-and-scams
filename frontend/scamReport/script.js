@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('scamReportForm');
+    const scamDateInput = document.getElementById('scamDate'); // Get the scam date input field
+
+    // Dynamically set the max date for the scamDate input to today's date
+    const today = new Date().toISOString().split('T')[0];
+    scamDateInput.setAttribute('max', today);
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();

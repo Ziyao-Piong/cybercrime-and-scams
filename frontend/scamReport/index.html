@@ -12,52 +12,21 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img
-          src="../../frontend/resources/logof.jpg"
-          alt="Senior Safe Logo"
-          class="logo"
-        />Senior Safe
+        <img src="../../frontend/resources/logof.jpg" alt="Senior Safe Logo" class="logo" />
+        Senior Safe
       </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../../frontend/index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../scrollytelly/data.html">Trending Scams</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../fraud_detection/backend/email_detection.html">Fraud Email Detection</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Report Phishing Scam</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../frontend/Quiz/quiz.html">Test Your Knowledge</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="../../frontend/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../scrollytelly/data.html">Trending Scams</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../fraud_detection/backend/email_detection.html">Fraud Email Detection</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Report Phishing Scam</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../frontend/Quiz/quiz.html">Test Your Knowledge</a></li>
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Discover
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Discover</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../../frontend/businessEmailCompromisePhishing.html">Business Email Compromise Phishing</a>
               <a class="dropdown-item" href="../../frontend/clonePhishing.html">Clone Phishing</a>
@@ -92,7 +61,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="scamDate">When did you receive the scam?<span class="required">*</span></label>
-            <input type="date" id="scamDate" name="StartOfMonth" required="">
+            <input type="date" id="scamDate" name="StartOfMonth" required="" min="2020-01-01">
           </div>
           <div class="form-group col-md-6 text-right">
             <p class="required-legend"><span class="required">*</span> Indicates a required field</p>
