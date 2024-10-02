@@ -198,3 +198,31 @@ button[type="submit"]:hover {
         grid-column: span 1;
     }
 }
+
+#loading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #007bff;
+    margin-top: 20px;
+}
+
+.radio-group-horizontal {
+    display: inline-block;
+    margin-right: 20px;  /* Optional spacing between the radio buttons */
+}
+/* For modern browsers */
+#amountLost::placeholder {
+    color: grey;
+    opacity: 1; 
+}
+
+/* For Internet Explorer */
+#amountLost:-ms-input-placeholder {
+    color: grey;
+}
+
+/* For Microsoft Edge */
+#amountLost::-ms-input-placeholder {
+    color: grey;
+}
+

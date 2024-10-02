@@ -8,8 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import uuid
 from fastapi import APIRouter
+import random
+import time
 
 router = APIRouter(
     prefix='/data',
@@ -38,10 +39,8 @@ class ScamReport(BaseModel):
         'Mail', 'Social media', 'Mobile apps', 'Unspecified', 'Fax'
     ]
     Complainant_Age: Literal['Under 18', '18 - 24', '25 - 34', '35 - 44', '45 - 54', '55 - 64', '65 and over']
-    Complainant_Gender: Literal['Male', 'Female']
-    Category_Level_2: Literal[
-        'Attempts to gain your personal information', 'Buying or selling', 'Investment scams'
-    ]
+    Complainant_Gender: Literal['Male', 'Female', 'Other']
+
     Category_Level_3: Literal['False billing', 'Phishing', 'Investment scams']
     Amount_lost: float = Field(..., ge=0)
     Number_of_reports: int = Field(default=1)
@@ -90,14 +89,14 @@ def send_thank_you_email(email: str, receipt_number: str):
     body = f"""
     Dear User,
 
-    Thank you for submitting a phishing scam report. Your contribution helps us improve our detection and prevention efforts.
+    Thank you for submitting your phishing scam report. Your contribution helps us improve our detection and prevention efforts.
 
     Your report receipt number is: {receipt_number}
 
     If you have any questions, please don't hesitate to contact us.
 
     Best regards,
-    The Phishing Scam Reporting Team
+    Senior Safe
     """
 
     message.attach(MIMEText(body, "plain"))
@@ -109,6 +108,12 @@ def send_thank_you_email(email: str, receipt_number: str):
         print(f"Thank you email sent to {email}")
     except Exception as e:
         print(f"Error sending email: {str(e)}")
+
+# Function to generate a user-friendly receipt number
+def generate_receipt_number():
+    timestamp = int(time.time())  # Use the current Unix timestamp
+    random_suffix = random.randint(0, 99)  # Generate a random 4-digit number
+    return f"SeniorSafe-{timestamp}-{random_suffix}"
 
 # API endpoint for handling form submissions and database operations
 @router.post("/api/submit_report")
@@ -122,8 +127,8 @@ async def submit_report(report: ScamReport):
             query = """
             INSERT INTO ScamWatch
             (StartOfMonth, Address_State, Scam_Contact_Mode, Complainant_Age,
-            Complainant_Gender, Category_Level_2, Category_Level_3, Amount_lost, Number_of_reports)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            Complainant_Gender, Category_Level_3, Amount_lost, Number_of_reports)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             values = (
                 report.StartOfMonth,
@@ -131,7 +136,6 @@ async def submit_report(report: ScamReport):
                 report.Scam_Contact_Mode,
                 report.Complainant_Age,
                 report.Complainant_Gender,
-                report.Category_Level_2,
                 report.Category_Level_3,
                 report.Amount_lost,
                 report.Number_of_reports
@@ -140,7 +144,7 @@ async def submit_report(report: ScamReport):
             connection.commit()
 
         # Generate unique receipt number
-        receipt_number = str(uuid.uuid4())
+        receipt_number = generate_receipt_number()
 
         # Send thank you email
         send_thank_you_email(report.user_email, receipt_number)
