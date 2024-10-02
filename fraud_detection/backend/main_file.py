@@ -20,6 +20,20 @@ from torch.nn.utils.rnn import pad_sequence
 from nltk.corpus import stopwords, words as nltk_words
 from torch.nn.utils.rnn import pad_sequence
 
+import pandas as pd
+import numpy as np
+import re
+from urllib.parse import urlparse
+from urllib.parse import urlparse
+from tld import get_tld
+import joblib
+import sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder
+
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('words')
@@ -138,7 +152,8 @@ def take_clean_input(email_content, vocab, model):
     email_type = 'Could not tell'
     reason = 'There is no enought content input'
     recommendation = 'Please input your email content before clickng check'
-    return email_type, reason, recommendation
+    prob = None
+    return prob, email_type, reason, recommendation
 
 
   elif len(email_content.split()) <= 10:
@@ -350,8 +365,129 @@ class LSTMDropoutClassifier(nn.Module):
 
 
 
+# Backend functions for URL detection model
+def extract_url(t):
+   url_regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|)[a-z0-9.\-]+[.][a-z]{2,4}(?:/[^()\s<>]*|\([^()\s<>]*\))*[^()\s`!()\[\]{};:'\".,<>?«»“”‘’]*)"
+   result = re.findall(url_regex, t)
+   return(result) #List of URLs
+
+def having_ip_address(url):
+    match = re.search(
+        '(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.'
+        '([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\/)|'  # IPv4
+        '((0x[0-9a-fA-F]{1,2})\\.(0x[0-9a-fA-F]{1,2})\\.(0x[0-9a-fA-F]{1,2})\\.(0x[0-9a-fA-F]{1,2})\\/)' # IPv4 in hexadecimal
+        '(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}', url)  # Ipv6
+    return 1 if match else 0
+
+def abnormal_url(url):
+    hostname = urlparse(url).hostname
+    hostname = str(hostname)
+    match = re.search(hostname, url)
+    
+    return 1 if match else 0
+
+def no_of_dir(url):
+    urldir = urlparse(url).path
+    return urldir.count('/')
+
+def no_of_embed(url):
+    urldir = urlparse(url).path
+    return urldir.count('//')
+
+def suspicious_words(url):
+    match = re.search('PayPal|login|signin|bank|account|update|free|lucky|service|bonus|ebayisapi|webscr',
+                      url)
+    return 1 if match else 0
+
+def shortening_service(url):
+    match = re.search('bit\.ly|goo\.gl|shorte\.st|go2l\.ink|x\.co|ow\.ly|t\.co|tinyurl|tr\.im|is\.gd|cli\.gs|'
+                      'yfrog\.com|migre\.me|ff\.im|tiny\.cc|url4\.eu|twit\.ac|su\.pr|twurl\.nl|snipurl\.com|'
+                      'short\.to|BudURL\.com|ping\.fm|post\.ly|Just\.as|bkite\.com|snipr\.com|fic\.kr|loopt\.us|'
+                      'doiop\.com|short\.ie|kl\.am|wp\.me|rubyurl\.com|om\.ly|to\.ly|bit\.do|t\.co|lnkd\.in|'
+                      'db\.tt|qr\.ae|adf\.ly|goo\.gl|bitly\.com|cur\.lv|tinyurl\.com|ow\.ly|bit\.ly|ity\.im|'
+                      'q\.gs|is\.gd|po\.st|bc\.vc|twitthis\.com|u\.to|j\.mp|buzurl\.com|cutt\.us|u\.bb|yourls\.org|'
+                      'x\.co|prettylinkpro\.com|scrnch\.me|filoops\.info|vzturl\.com|qr\.net|1url\.com|tweez\.me|v\.gd|'
+                      'tr\.im|link\.zip\.net',
+                      url)
+    return 1 if match else 0
+
+def count_digit(url):
+    return sum(c.isdigit() for c in url)
+
+def count_letter(url):
+    return sum(c.isalpha() for c in url)
+
+def fd_length(url):
+    urlpath= urlparse(url).path
+    try:
+        return len(urlpath.split('/')[1])
+    except:
+        return 0
+    
+def tld_length(tld):
+    try:
+        return len(tld)
+    except:
+        return -1
+    
+
+def process_input_url(input):
+  feature_dict = {}
+  feature_dict['use_of_ip'] = []
+  feature_dict['abnormal_url'] = []
+  feature_dict['count.'] = []
+  feature_dict['count-www'] = []
+  feature_dict['count@'] = []
+  feature_dict['count_dir'] = []
+  feature_dict['count_embed_domian'] = []
+  feature_dict['sus_words'] = []
+  feature_dict['short_url'] = []
+  feature_dict['count-https'] = []
+  feature_dict['count-http'] =  []
+  feature_dict['count%'] =[]
+  feature_dict['count-'] = []
+  feature_dict['count='] = []
+  feature_dict['count-digits'] = []
+  feature_dict['count-letters'] = []
+  feature_dict['url_length'] = []
+  feature_dict['hostname_length'] = []
+  feature_dict['fd_length'] = []
+  feature_dict['tld_length'] = []
+  if extract_url(input):
+     url_list = extract_url(input)
+     for i in url_list:
+        feature_dict['use_of_ip'].append(having_ip_address(i)) 
+        feature_dict['abnormal_url'].append(abnormal_url(i)) 
+        feature_dict['count.'].append(i.count('.'))
+        feature_dict['count-www'].append(i.count('www')) 
+        feature_dict['count@'].append(i.count('@')) 
+        feature_dict['count_dir'].append(no_of_dir(i)) 
+        feature_dict['count_embed_domian'].append(no_of_embed(i)) 
+        feature_dict['sus_words'].append(suspicious_words(i))
+        feature_dict['short_url'].append(shortening_service(i))
+        feature_dict['count-https'].append(i.count('https'))
+        feature_dict['count-http'].append(i.count('http'))
+        feature_dict['count%'].append(i.count('%'))
+        feature_dict['count-'].append(i.count('-'))
+        feature_dict['count='].append(i.count('='))
+        feature_dict['count-digits'].append(count_digit(i))
+        feature_dict['count-letters'].append(count_letter(i))
+        feature_dict['url_length'].append(len(str(i)))
+        feature_dict['hostname_length'].append(len(urlparse(i).netloc))
+        feature_dict['fd_length'].append(fd_length(i))
+        tld = get_tld(i, fail_silently=True)
+        feature_dict['tld_length'].append(tld_length(tld))
+
+     df = pd.DataFrame(feature_dict)
+     return(df)
+  else: 
+     return(None)
+
+
+
 ####### Prediction function called by backend ########
 def predict(features: str) -> str:
+    # Fraud email detection
     #load vocab
     with open('fraud_detection/backend/vocab.json', 'r') as file:
         vocab = json.load(file)
@@ -375,7 +511,46 @@ def predict(features: str) -> str:
     reason = reason.lower()
     recommendation = recommendation.lower()
 
-    prediction = 'This email is most likely a {}, with probability {} %.<br> The reason is that {}.<br>  The remommendation is that {}'.format(email_type, prob, reason, recommendation)
+    # URL detection
+    label_mapping = ['safe', 'defacement', 'malware', 'phishing']
+    url_list = extract_url(features)
+    url_features = process_input_url(features)
+    if url_features is not None:
+       with open('rf.joblib', 'rb') as f:
+          loaded_rf = joblib.load(f)       
+       url_predictions = loaded_rf.predict(url_features)
+       url_predictions = url_predictions.tolist()
+       url_types = [label_mapping[i] for i in url_predictions]
+       url_num = len(url_types)
+
+    # Converage the predictions together
+
+    # If user only input the URL or the input content except the URL is too short
+    if url_features is not None and prob is None:
+       url_print = ''
+       for i in range(url_num):
+          url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])
+       prediction = '{} URL detected, the identified type for the URLs is as following: <br>'.format(url_num) + url_print
+
+    elif url_features is not None and prob is not None:
+      url_print = ''
+      for i in range(url_num):
+         if url_types[i] != 'safe':
+            url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])
+
+      if url_print != '':
+         prediction ='The email content is most likely a phishing email, with probability {} %. Because at least one malicious website link was detected.<br> The detected malicious links are listed as below:<br>'.format(prob) + url_print
+
+      else:
+         prediction = 'This email is most likely a {}, with probability {} %.<br> The reason is that {}.<br>  The remommendation is that {}'.format(email_type, prob, reason, recommendation)
+         
+
+    elif url_features is None and prob is None:
+       prediction = 'We could not identify the safety of the input, the reason is that {}, please{}'.format(reason, recommendation)
+
+    else:
+       prediction = 'This email is most likely a {}, with probability {} %.<br> The reason is that {}.<br>  The remommendation is that {}'.format(email_type, prob, reason, recommendation)
+   
     return prediction
 
 

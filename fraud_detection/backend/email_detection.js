@@ -22,15 +22,13 @@ async function makePrediction() {
             const probability = probabilityMatch[0];  
             document.getElementById('probability').textContent = `How Sure We Are: ${probability}`;
         } else {
-            document.getElementById('probability').textContent = `Probability not found in prediction.`;
+            document.getElementById('probability').textContent = ``;
         }
 
-        if (data.prediction.includes("phishing email")) {
+        if (data.prediction.includes("phishing email") || data.prediction.includes("defacement") || data.prediction.includes("malware") || data.prediction.includes("phishing")) {
             document.getElementById('predictionResultWrapper').style.backgroundColor = '#f8d7da'; // Red background
-        } else if (data.prediction.includes("safe email")) {
-            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background
         } else {
-            document.getElementById('predictionResultWrapper').style.backgroundColor = ' #cce5ff';
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background
         }
         
     } else {
