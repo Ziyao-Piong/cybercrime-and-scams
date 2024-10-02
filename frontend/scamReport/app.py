@@ -96,6 +96,7 @@ def send_thank_you_email(email: str, receipt_number: str):
     If you have any questions, please don't hesitate to contact us.
 
     Best regards,
+    
     Senior Safe
     """
 
