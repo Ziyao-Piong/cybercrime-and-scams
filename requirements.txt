@@ -10,3 +10,7 @@ json
 pydantic
 typing-extensions
 email-validator
+urllib
+tld
+joblib
+sklearn
