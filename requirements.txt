@@ -7,3 +7,6 @@ re
 torch
 nltk
 json
+pydantic
+typing-extensions
+email-validator

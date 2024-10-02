@@ -78,8 +78,8 @@ def get_db_connection():
 
 # Function to send a thank-you email
 def send_thank_you_email(email: str, receipt_number: str):
-    sender_email = "seniorsafeta06@gmail.com"  # Replace with your email
-    sender_password = "MonashTA06!"  # Replace with your email password
+    sender_email = "seniorsafeta06@gmail.com"  
+    sender_password = "lzoacaaepqjymmha"  
 
     message = MIMEMultipart()
     message["From"] = sender_email
@@ -155,4 +155,7 @@ async def submit_report(report: ScamReport):
     finally:
         connection.close()
 
+
+
         # uvicorn app:app --reload
+
