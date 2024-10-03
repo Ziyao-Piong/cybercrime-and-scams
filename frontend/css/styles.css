@@ -523,3 +523,43 @@ ol.gradient-list > li::before {
 .email-detection-what-to-do-section li {
   padding: 0.5%;
 }
+
+
+.wrapper {
+  display: grid; 
+  grid-template-columns: 20% 80%;
+}
+
+.sidebar {
+  background-color: #f8f9fa;
+  height: 101.5%;
+  padding-top: 30px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  padding: 3%;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #4d4d4dd2;
+  font-weight: normal;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.sidebar ul li a.active {
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.sidebar ul li a:hover {
+  color: #3661e1;
+}
+
+
