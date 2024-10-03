@@ -61,7 +61,7 @@
                     <a class="nav-link" href="./Quiz/quiz.html">Test Your Knowledge</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="businessEmailCompromisePhishing.html">Scam Overview</a>
+                    <a class="nav-link" href="./businessEmailCompromisePhishing.html">Scam Overview</a>
                   </li>
                 </ul>
               </div>
@@ -146,11 +146,17 @@
         </footer>
 
         <script>
-          document.getElementById('BECNextBtn').addEventListener('click', function() {
-            window.location.href = 'clonePhishing.html';
+          const sidebarLinks = document.querySelectorAll('.sidebar ul li a');
+
+          sidebarLinks.forEach(link => {
+              link.classList.remove('active');
+
+              const hrefValue = link.getAttribute('href');
+              if (hrefValue.includes('business')) {
+                  link.classList.add('active');
+              }
           });
         </script>
-
     </body>
 
 </html>
