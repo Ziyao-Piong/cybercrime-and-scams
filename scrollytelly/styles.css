@@ -23,7 +23,6 @@
     background-repeat: no-repeat;
     position: relative;
     color: rgb(0, 0, 0); /* Text color */
-    text-shadow: 2px 2px 4px rgb(255, 255, 255); /* Optional text shadow */
     min-height: 100px; /* Height of the section */
     padding: 10px 0px; /* Padding around the content */
   }
@@ -34,7 +33,7 @@
   }
   
   .landing-section2 p {
-    font-size: .8rem; /* Font size for paragraph text */
+    font-size: 1rem; /* Font size for paragraph text */
     margin-bottom: 30px;
   }
   
@@ -66,59 +65,7 @@
     margin-bottom: 30px;
   }
   
-  .btn-primary {
-    background-color: #ff9d00;
-    border-color: #ff9d00;
-    z-index: 3;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 1.2rem; /* Slightly larger button text */
-  }
-  
-  .btn-primary:hover {
-    background-color: #e69200;
-    border-color: #e69200;
-  }
-  
-  /* Quotes Section */
-  .quotes-section {
-    background-color: #002147;
-    color: white;
-    padding: 100px 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .quotes-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-  }
-  
-  .quote-text {
-    font-size: 1.5rem;
-    font-style: italic;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-  
-  .gold-btn {
-    background-color: #ff9d00;
-    color: #002147;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 30px;
-  }
-  
-  .gold-btn:hover {
-    background-color: #e69200;
-  }
+
   
   /* Trending Scams Section */
   .trending-scams-section {
@@ -244,14 +191,14 @@
   
   .step {
     margin-bottom: 200px;
-    font-family: "TiemposTextWeb-Regular","Georgia";
-    font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
     line-height: 23px;
     color: #767678;
   }
   
   #sections .title {
-    font-family: Arial,Helvetica,"san-serif";
+    font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -286,14 +233,14 @@
     padding: 20px;
     background-color: rgb(255, 255, 255); /* Optional: add background to make it stand out */
     z-index: 100; /* Ensure it's on top */
-    font-family: "TiemposTextWeb-Regular", "Georgia", serif; /* Matching the font family */
+    font-family: Arial, sans-serif; /* Matching the font family */
     font-size: 16px; /* Matching the font size */
     line-height: 23px; /* Matching the line height */
     color: #767678; /* Matching the text color */
   }
   
   .top-center .title {
-    font-family: Arial, Helvetica, "sans-serif"; /* Matching the title font family */
+    font-family: Arial, sans-serif; /* Matching the title font family */
     font-size: 18px; /* Matching the title font size */
     font-weight: bold; /* Matching the title font weight */
     margin-bottom: 10px;

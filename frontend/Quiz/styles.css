@@ -50,7 +50,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../resources/landing_pic.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -184,10 +183,6 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 30px;
-}
-
-.gold-btn:hover {
-  background-color: #e69200;
 }
 
 /* Trending Scams Section */

@@ -45,5 +45,5 @@ function updateWordCount() {
     const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
     
     // Update the word count display
-    document.getElementById('wordCounter').textContent = `Word Count: ${wordCount}`;
+    document.getElementById('wordCounter').textContent = `${wordCount}`;
   }

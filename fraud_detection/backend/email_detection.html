@@ -111,16 +111,26 @@
     <div class="container mt-5">
       <h1>Phishing Email and URL Detection</h1>
       <p>
-        Try out our phishing email detection tool powered by machine learning
-        now.
+        Try out our phishing email detection tool.
       </p>
       <div class="form-group">
         <label for="emailContent"
           >Copy and paste your email content here:</label
         >
-        <textarea class="form-control" id="emailContents" rows="10" oninput="updateWordCount()"></textarea>
-          <!-- Word counter -->
-        <div id="wordCounter" class="mt-2" style="font-size: 1rem; font-weight: bold; color: #444;">Word Count: 0</div>
+        <textarea class="form-control" id="emailContents" rows="10" oninput="countWords(this)"></textarea>
+<!-- Word counter -->
+<div id="wordCounter" class="mt-2" style="font-size: 0.8rem; color: #6c757d"; fontsize: 0.9em>0/500 words</div>
+
+<script>
+  function countWords(textarea) {
+    const text = textarea.value.trim();
+    // Count words by splitting on spaces and filtering out empty values
+    const wordCount = text === "" ? 0 : text.split(/\s+/).length;
+    const wordLimit = 500;
+    document.getElementById("wordCounter").textContent = `${wordCount}/${wordLimit} words`;
+  }
+</script>
+
 
       </div>
       <button
