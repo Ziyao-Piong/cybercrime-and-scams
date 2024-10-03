@@ -151,7 +151,7 @@ def take_clean_input(email_content, vocab, model):
   if email_content == '':
     email_type = 'Could not tell'
     reason = 'There is no enought content input'
-    recommendation = 'Please input your email content before clickng check'
+    recommendation = 'input your email content before clickng check'
     prob = None
     return prob, email_type, reason, recommendation
 
@@ -159,22 +159,22 @@ def take_clean_input(email_content, vocab, model):
   elif len(email_content.split()) <= 10:
     email_type = 'Could not tell'
     reason = 'There is no enought content input'
-    recommendation = 'Please input more words'
+    recommendation = 'input more words'
     prob = None
     return  prob, email_type, reason, recommendation
 
 
   elif not is_mostly_english(email_content):
     email_type = 'Could not tell'
-    reason = 'The email content are not mostly in English'
-    recommendation = 'The email content are not mostly in English, please enter English content'
+    reason = 'the email content are not mostly in English'
+    recommendation = 'make sure the content you input is in English'
     prob = None
     return prob, email_type, reason, recommendation
   
   elif len(email_content.split()) > 150:
     email_type = 'Could not tell'
-    reason = 'Too many words'
-    recommendation = 'Input email content can only contains no more than 150 words'
+    reason = 'there are too many words'
+    recommendation = 'make sure you input no more than 150 words'
     prob = None
     return prob, email_type, reason, recommendation
   

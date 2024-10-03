@@ -35,3 +35,15 @@ async function makePrediction() {
         document.getElementById('result').textContent = `Error: ${data.detail}`;
     }
 }
+
+
+function updateWordCount() {
+    // Get the text from the input box
+    const text = document.getElementById('emailContents').value;
+    
+    // Count words by splitting the text on spaces, tabs, and newlines
+    const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    
+    // Update the word count display
+    document.getElementById('wordCounter').textContent = `Word Count: ${wordCount}`;
+  }

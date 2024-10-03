@@ -118,7 +118,10 @@
         <label for="emailContent"
           >Copy and paste your email content here:</label
         >
-        <textarea class="form-control" id="emailContents" rows="10"></textarea>
+        <textarea class="form-control" id="emailContents" rows="10" oninput="updateWordCount()"></textarea>
+          <!-- Word counter -->
+        <div id="wordCounter" class="mt-2" style="font-size: 1rem; font-weight: bold; color: #444;">Word Count: 0</div>
+
       </div>
       <button
         type="button"
@@ -143,7 +146,7 @@
     <div class="container mt-5">
       <div id="predictionResultWrapper" class="p-4"  style="margin-top: 60px;"> <!-- Add a wrapper with padding -->
         <h1 id="probability" style="font-size: 4rem;"></h1> <!-- Probability -->
-        <div id="result" class="mt-3"></div> <!-- Prediction result -->
+        <div id="result" class="mt-3" style="font-size: 1.5rem; font-weight: bold; color: #444;"></div> <!-- Prediction result -->
       </div>
     </div>
 
