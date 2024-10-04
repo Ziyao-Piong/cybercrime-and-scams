@@ -15,6 +15,56 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.5rem; /* Increase content section size */
+        padding: 20px;
+      }
+
+      .funny-message {
+        font-size: 2rem; /* Larger font for the funny message */
+        font-weight: bold;
+        color: #007bff; /* Accent color for the message */
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        padding: 5px 0;
+        position: sticky;
+        width: 100%;
+        bottom: 0;
+        font-size: 0.875rem; /* Shrink the font size */
+      }
+
+      footer h5 {
+        font-size: 1rem; /* Smaller header size */
+      }
+
+      footer p, footer a {
+        margin: 0; /* Remove extra margin to save space */
+      }
+
+      footer .col-md-4 {
+        padding: 5px; /* Reduce padding inside the columns */
+      }
+
+      hr {
+        margin: 10px 0; /* Reduce space above and below the divider */
+      }
+    </style>
   </head>
 
   <body>
@@ -49,7 +99,7 @@
             <li class="nav-item">
               <a class="nav-link" href="Quiz/quiz.html">Test Your Knowledge</a>
             </li>
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Discover
               </a>
@@ -69,19 +119,15 @@
     </nav>
 
     <!-- 404 Content Section -->
-    <section class="text-center mt-5">
-      <div class="container">
-        <h1 class="display-1">404</h1>
-        <h2>Oops! Page Not Found</h2>
-        <p class="lead">
-          It looks like the page you're looking for doesn't exist or has been moved.
-        </p>
-        <a href="index.html" class="btn btn-primary">Go Back to Home</a>
-      </div>
-    </section>
+    <div class="content">
+      <h1 class="display-1">404</h1>
+      <h2>Oops! Page Not Found</h2>
+      <p class="funny-message">It's not a scam, you've just landed on the wrong page.</p>
+      <a href="index.html" class="btn btn-primary">Go Back to Home</a>
+    </div>
 
     <!-- Footer -->
-    <footer class="footer bg-light text-center mt-5">
+    <footer class="footer bg-light text-center">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
