@@ -347,12 +347,12 @@ function convert_data(my_data) {
     ).map(([state, NumberOfReports]) => ({ state, NumberOfReports }));
 
     state_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 600); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             state_scam_data.push({
                 state: d.state,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -366,12 +366,12 @@ function convert_data(my_data) {
     ).map(([year, NumberOfReports]) => ({ year, NumberOfReports }));
 
     year_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Same scaling factor as state
+        var numDots = Math.ceil(d.NumberOfReports / 500); // Same scaling factor as state
         for (var i = 0; i < numDots; i++) {
             year_data.push({
                 year: d.year,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 5,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -385,7 +385,7 @@ function convert_data(my_data) {
     ).map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }));
 
     scam_type_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 1500); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             scam_type_data.push({
                 scam_type: d.scam_type,
@@ -404,12 +404,12 @@ function convert_data(my_data) {
     ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }));
 
     contact_mode_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 750); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             contact_mode_data.push({
                 contact_mode: d.contact_mode,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -423,7 +423,7 @@ function convert_data(my_data) {
     ).map(([gender, NumberOfReports]) => ({ gender, NumberOfReports }));
 
     gender_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 175); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             gender_data.push({
                 gender: d.gender,
@@ -446,12 +446,12 @@ function convert_data(my_data) {
     lost_amount_range_aggregated_data.sort((a, b) => lostAmountOrder.indexOf(a.AmountLostRange) - lostAmountOrder.indexOf(b.AmountLostRange));
 
     lost_amount_range_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 750); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             lost_amount_range_data.push({
                 lost_amount_range: d.AmountLostRange,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -468,12 +468,12 @@ function convert_data(my_data) {
     month_aggregated_data.sort((a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month));
 
     month_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 100); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 150); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             month_data.push({
                 month: d.month,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 3,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
