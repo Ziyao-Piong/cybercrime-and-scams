@@ -171,10 +171,10 @@ def take_clean_input(email_content, vocab, model):
     prob = None
     return prob, email_type, reason, recommendation
   
-  elif len(email_content.split()) > 150:
+  elif len(email_content.split()) > 500:
     email_type = 'Could not tell'
     reason = 'there are too many words'
-    recommendation = 'make sure you input no more than 150 words'
+    recommendation = 'make sure you input no more than 500 words'
     prob = None
     return prob, email_type, reason, recommendation
   
