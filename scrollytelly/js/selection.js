@@ -3,7 +3,7 @@ var scrollVis = function () {
     var width = 1100;
     var left_right_margin = 100;
     var top_bottom_margin = 200;
-    var height = 650;
+    var height = 500;
 
     // Define scroll index tracking vars
     var lastIndex = -1;
@@ -214,7 +214,7 @@ var scrollVis = function () {
                 return data_class === "final" ? width / 2.4 : x0_scale(d[data_class]) + x1_scale(d.column);
             })
             .attr("cy", function (d) {
-                return data_class === "final" ? top_bottom_margin - 100 : y_scale(d.row); // Adjusted to better center under title
+                return data_class === "final" ? top_bottom_margin - 150 : y_scale(d.row); // Adjusted to better center under title
             })
             .attr("fill", function (d) {
                 if (data_class === "total_count") {
@@ -484,7 +484,7 @@ function convert_data(my_data) {
     var total_scam_count = d3.sum(my_data, d => d.NumberOfReports); // Dynamically calculate the sum
 
     // Divide by 1000 to determine how many dots are needed
-    var reduced_scam_count = Math.ceil(total_scam_count / 1000); 
+    var reduced_scam_count = Math.ceil(total_scam_count / 2000); 
 
     for (var i = 0; i < reduced_scam_count; i++) {
         total_count_data.push({

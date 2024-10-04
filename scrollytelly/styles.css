@@ -195,7 +195,13 @@
     font-size: 18px;
     line-height: 23px;
     color: #767678;
-  }
+}
+
+.step:last-of-type {
+    margin-bottom: 125px; /* Override margin for the final step */
+}
+
+
   
   #sections .title {
     font-family: Arial, sans-serif;
@@ -213,6 +219,10 @@
     top: 200px;
     z-index: 1;
     margin-left: 0;
+  }
+
+  #vis :last-of-type{
+    top: 150px;
   }
   
   .highlight {
