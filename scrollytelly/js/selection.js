@@ -3,7 +3,7 @@ var scrollVis = function () {
     var width = 1100;
     var left_right_margin = 100;
     var top_bottom_margin = 200;
-    var height = 650;
+    var height = 475;
 
     // Define scroll index tracking vars
     var lastIndex = -1;
@@ -106,7 +106,7 @@ var scrollVis = function () {
         activateFunctions[5] = ["gender", "gender", 2000, "Percentage of Reported Scams by Gender"]; // Gender (Male and Female only)
         activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Reported Scams by Lost Amount Range"]; // LostAmountRange
         activateFunctions[7] = ["month", "month", 2000, "Percentage of Reported Scams by Month"]; // Month
-        activateFunctions[8] = ["final", "final", 2000, "Don't be the one to fall victim to a scam"]; // Final section for the single dot
+        activateFunctions[8] = ["final", "final", 2000, "Don't be tricked by a phishing scam"]; // Final section for the single dot
     };
 
     chart.update = function (index, progress) {
@@ -214,7 +214,7 @@ var scrollVis = function () {
                 return data_class === "final" ? width / 2.4 : x0_scale(d[data_class]) + x1_scale(d.column);
             })
             .attr("cy", function (d) {
-                return data_class === "final" ? top_bottom_margin - 100 : y_scale(d.row); // Adjusted to better center under title
+                return data_class === "final" ? top_bottom_margin - 150 : y_scale(d.row); // Adjusted to better center under title
             })
             .attr("fill", function (d) {
                 if (data_class === "total_count") {
@@ -243,13 +243,36 @@ var scrollVis = function () {
             })
             .attr("transform", "translate(" + left_right_margin + "," + top_bottom_margin + ")");
 
-            dot_group.select(".circle_dot")
-        .on("click", function (d) {
+            // Create a div element for the tooltip
+        var tooltip = d3.select("body").append("div")
+        .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+
+        dot_group.select(".circle_dot")
+        .on("mouseover", function(event, d) {
+        // Show the tooltip on hover
+        tooltip.transition().duration(200).style("opacity", 1);
+        tooltip.html("Think before you click!")
+        .style("left", (event.pageX + 10) + "px")  // Position tooltip near the cursor
+        .style("top", (event.pageY - 20) + "px");
+    })
+        .on("mouseout", function(d) {
+            // Hide the tooltip when the mouse leaves the dot
+            tooltip.transition().duration(200).style("opacity", 0);
+        })
+        .on("click", function(d) {
             if (data_class === "final") {
                 // Redirect to the target URL when the dot is clicked
-                window.location.href = "https://www.google.com";  // Replace with your target URL
+                window.location.href = "/cybercrime-and-scams/frontend/caution.html";  // Replace with your target URL
             }
         });
+    
     
         // X-axis rendering
         var x_axis_selection = d3.select(".x_axis")
@@ -269,12 +292,15 @@ var scrollVis = function () {
                 }
             })
             .attr("dx", function () {
-                // Horizontal alignment for sections 0, 1, 2, 5, 6
+                // Horizontal alignment for sections 0, 1, 2, 5
                 if ([0, 1, 2, 5].includes(activeIndex)) {
                     return "0";
                 }
                 if ([8].includes(activeIndex)) {
                     return "3.5em";
+                }
+                if ([6].includes(activeIndex)) {
+                    return "-5em";
                 } else {
                     return "-0.8em";
                 }
@@ -283,6 +309,9 @@ var scrollVis = function () {
                 // Adjust vertical alignment for horizontal labels
                 if ([0, 1, 2, 5, 8].includes(activeIndex)) {
                     return "0.85em";
+                }
+                if ([6].includes(activeIndex)) {
+                    return "1em";
                 } else {
                     return "0.15em";
                 }
@@ -339,7 +368,7 @@ function convert_data(my_data) {
     var gender_data = [];
     var lost_amount_range_data = [];
     var month_data = [];
-    var final_data = [{ final: "Click Me!", row: 0, column: 0 }];
+    var final_data = [{ final: "", row: 0, column: 0 }];
 
     // Aggregate the number of reports by state
     var state_aggregated_data = d3.rollups(
@@ -349,12 +378,12 @@ function convert_data(my_data) {
     ).map(([state, NumberOfReports]) => ({ state, NumberOfReports }));
 
     state_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 600); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             state_scam_data.push({
                 state: d.state,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -368,12 +397,12 @@ function convert_data(my_data) {
     ).map(([year, NumberOfReports]) => ({ year, NumberOfReports }));
 
     year_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Same scaling factor as state
+        var numDots = Math.ceil(d.NumberOfReports / 650); // Same scaling factor as state
         for (var i = 0; i < numDots; i++) {
             year_data.push({
                 year: d.year,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 5,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -387,7 +416,7 @@ function convert_data(my_data) {
     ).map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }));
 
     scam_type_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 1500); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             scam_type_data.push({
                 scam_type: d.scam_type,
@@ -406,12 +435,12 @@ function convert_data(my_data) {
     ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }));
 
     contact_mode_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 500); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 750); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             contact_mode_data.push({
                 contact_mode: d.contact_mode,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -425,7 +454,7 @@ function convert_data(my_data) {
     ).map(([gender, NumberOfReports]) => ({ gender, NumberOfReports }));
 
     gender_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 275); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             gender_data.push({
                 gender: d.gender,
@@ -448,12 +477,12 @@ function convert_data(my_data) {
     lost_amount_range_aggregated_data.sort((a, b) => lostAmountOrder.indexOf(a.AmountLostRange) - lostAmountOrder.indexOf(b.AmountLostRange));
 
     lost_amount_range_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 250); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 950); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             lost_amount_range_data.push({
                 lost_amount_range: d.AmountLostRange,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -470,12 +499,12 @@ function convert_data(my_data) {
     month_aggregated_data.sort((a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month));
 
     month_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 100); // Divide by 250 for better rendering
+        var numDots = Math.ceil(d.NumberOfReports / 150); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
             month_data.push({
                 month: d.month,
                 row: Math.floor(i / dots_per_row),
-                column: i % dots_per_row,
+                column: i % 3,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
@@ -486,7 +515,7 @@ function convert_data(my_data) {
     var total_scam_count = d3.sum(my_data, d => d.NumberOfReports); // Dynamically calculate the sum
 
     // Divide by 1000 to determine how many dots are needed
-    var reduced_scam_count = Math.ceil(total_scam_count / 1000); 
+    var reduced_scam_count = Math.ceil(total_scam_count / 2000); 
 
     for (var i = 0; i < reduced_scam_count; i++) {
         total_count_data.push({
@@ -511,6 +540,6 @@ function convert_data(my_data) {
 }
 
 // Load data and display
-d3.json('https://www.seniorsafe.info/api/data/scam-by-year').then(display).catch(function(error) {
+d3.json('http://127.0.0.1:8000/data/scam-by-year').then(display).catch(function(error) {
     console.error("Error loading data: ", error);
 });
