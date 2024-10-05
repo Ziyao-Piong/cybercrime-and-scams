@@ -482,6 +482,28 @@ ol.gradient-list > li::before {
   background-color: #1C84FF;
 }
 
+.up-arrow {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: #0056b3;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.up-arrow:hover {
+  background-color: rgba(0, 86, 179, 0.7);
+  color: white;
+}
+
+
+
 .down-arrow {
   position: fixed;
   bottom: 20px;
@@ -499,7 +521,7 @@ ol.gradient-list > li::before {
 
 .down-arrow:hover {
   background-color: rgba(0, 86, 179, 0.7);
-  color: white;
+  color: white;
 }
 
 .email-detection-what-to-do-section {
