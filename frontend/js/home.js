@@ -39,5 +39,12 @@ function scrollDown() {
     window.scrollBy({ 
         top: window.innerHeight, // Scroll down by one viewport height
         behavior: 'smooth' 
-    });
+    });
+}
+
+function scrollUp() {
+    window.scrollBy({ 
+        top: -window.innerHeight, // Scroll up by one viewport height
+        behavior: 'smooth' 
+    });
 }

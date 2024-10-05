@@ -508,8 +508,7 @@ def predict(features: str) -> str:
 
     prob, email_type, reason, recommendation = take_clean_input(features, vocab, loaded_model)
     email_type = email_type.lower()
-    reason = reason.lower()
-    recommendation = recommendation.lower()
+
 
     # URL detection
     label_mapping = ['safe', 'defacement', 'malware', 'phishing']
@@ -542,14 +541,14 @@ def predict(features: str) -> str:
          prediction ='The email content is most likely a phishing email, with probability {} %. This is because at least one malicious website link was detected.<br> The detected malicious links are listed as below:<br>'.format(prob) + url_print
 
       else:
-         prediction = 'This email is most likely a {}, with probability {} %.<br> The reason is that {}.<br>  The recommendation is that {}'.format(email_type, prob, reason, recommendation)
+         prediction = 'This email is most likely a {}, with probability {} %.<br> Reason: {}.<br> Recommendation: {}'.format(email_type, prob, reason, recommendation)
          
 
     elif url_features is None and prob is None:
-       prediction = 'We could not identify the safety of the input, the reason is that {}, please {}'.format(reason, recommendation)
+       prediction = 'We could not identify the safety of the input, the reason is that {}, please {}'.format(reason.lower(), recommendation.lower())
 
     else:
-       prediction = 'This email is most likely a {}, with probability {} %.<br> The reason is that {}.<br>  The recommendation is that {}'.format(email_type, prob, reason, recommendation)
+       prediction = 'This email is most likely a {}, with probability {} %.<br> Reason: {}.<br>  Recommendation: {}'.format(email_type, prob, reason, recommendation)
    
     return prediction
 

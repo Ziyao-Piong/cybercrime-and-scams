@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be Cautious About Clicking Links - Senior Safe</title>
+    <link href="./css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .content-container {
+        flex: 1;
+        margin: 50px auto;
+        max-width: 900px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #007bff; /* Blue theme color */
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .alert-message {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #dc3545;
+      }
+
+      .scam-list {
+        margin: 30px 0;
+        font-size: 1.2rem;
+        text-align: left;
+      }
+
+      .scam-list a {
+        color: #007bff; /* Blue theme color */
+        text-decoration: none;
+      }
+
+      .scam-list a:hover {
+        text-decoration: underline;
+      }
+
+      .quiz-button {
+        background-color: #007bff; /* Blue theme color */
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .quiz-button:hover {
+        background-color: #0056b3; /* Darker blue for hover effect */
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        padding: 10px 0;
+        font-size: 0.875rem;
+      }
+
+      footer h5 {
+        font-size: 1rem;
+      }
+
+      footer p, footer a {
+        margin: 0;
+        color: #007bff; /* Blue theme color */
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      footer .col-md-4 {
+        padding: 5px;
+      }
+
+      hr {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+            src="resources/logof.jpg"
+            alt="Senior Safe Logo"
+            class="logo"
+          />Senior Safe
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../scrollytelly/data.html">Trending Scams</a>
+            </li>
+            <li class="nav-item"></li>
+              <a class="nav-link" href="../fraud_detection/backend/email_detection.html">Detect Phishing Scams</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="scamReport/index.html">Report Phishing Scam</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Quiz/quiz.html">Test Your Knowledge</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="businessEmailCompromisePhishing.html">Scam Overview</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+
+    <!-- Main Content Section -->
+    <div class="content-container">
+      <h1>Think Before You Click!</h1>
+
+      <p class="alert-message">Don't blindly click on any link you come across online!</p>
+
+      <p>
+        Phishing scams often trick users by sending fake emails or messages with malicious links. Before you click, it's important to stop and think about where that link might take you. Clicking a bad link could lead to malware, theft of your personal information, or worse!
+      </p>
+
+      <p>
+        Learn more about the different types of phishing scams to better protect yourself. Below are some common types of phishing attacks you should be aware of:
+      </p>
+
+      <div class="scam-list">
+        <ul>
+          <li><a href="businessEmailCompromisePhishing.html">Business Email Compromise (BEC) Phishing</a></li>
+          <li><a href="clonePhishing.html">Clone Phishing</a></li>
+          <li><a href="popupPhishing.html">Pop-up Phishing</a></li>
+          <li><a href="searchEnginePhishing.html">Search Engine Phishing</a></li>
+          <li><a href="smishingPhishing.html">Smishing (SMS Phishing)</a></li>
+          <li><a href="spearPhishing.html">Spear Phishing</a></li>
+          <li><a href="voicePhishing.html">Voice Phishing (Vishing)</a></li>
+        </ul>
+      </div>
+
+      <p>
+        Want to test how prepared you are to avoid falling for these scams? Take our online quiz to see how well you can protect yourself.
+      </p>
+
+      <a href="Quiz/quiz.html" class="quiz-button">Test Your Preparedness</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-light text-center">
+      <div class="container">
+          <div>
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li style="padding: 50px;" class="d-inline"><a href="#">Home</a></li>
+              <li style="padding: 50px;" class="d-inline"><a href="../scrollytelly/data.html">Trending Scams</a></li>
+              <li style="padding: 50px;" class="d-inline"><a href="../fraud_detection/backend/email_detection.html">Detect Phishing Scams</a></li>
+              <li style="padding: 50px;" class="d-inline"><a href="scamReport/index.html">Report Phishing Scam</a></li>
+              <li style="padding: 50px;" class="d-inline"><a href="Quiz/quiz.html">Test Your Knowledge</a></li>
+          </ul>        
+        </div>
+        <hr />
+        <p class="text-muted">© 2024 SeniorSafe. All Rights Reserved.</p>
+      </div>
+    </footer>
+    <a href="javascript:void(0);" class="down-arrow" onclick="scrollDown();">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </body>
+</html>
