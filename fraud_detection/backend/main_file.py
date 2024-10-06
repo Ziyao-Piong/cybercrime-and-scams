@@ -515,7 +515,7 @@ def predict(features: str) -> str:
     url_list = extract_url(features)
     url_features = process_input_url(features)
     if url_features is not None:
-       with open('rf.joblib', 'rb') as f:
+       with open('xgb.joblib', 'rb') as f:
           loaded_rf = joblib.load(f)       
        url_predictions = loaded_rf.predict(url_features)
        url_predictions = url_predictions.tolist()
