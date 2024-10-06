@@ -94,7 +94,7 @@ body {
 }
 
 .btn-blue {
-  background-color: #2d65f2e5;
+  background-color: #2865ffe5;
   color: #e0e1dd;
   padding: 1.2%;
   border-radius: 15px;
@@ -105,7 +105,7 @@ body {
 }
 
 .btn-blue:hover {
-  background-color: #1F3C88;
+  background-color: #0048ff;
   color: #e0e1dd;
   text-decoration: none;
 }
