@@ -515,7 +515,7 @@ def predict(features: str) -> str:
     url_list = extract_url(features)
     url_features = process_input_url(features)
     if url_features is not None:
-       with open('xgb.joblib', 'rb') as f:
+       with open('fraud_detection/backend/xgb.joblib', 'rb') as f:
           loaded_rf = joblib.load(f)       
        url_predictions = loaded_rf.predict(url_features)
        url_predictions = url_predictions.tolist()
@@ -525,7 +525,7 @@ def predict(features: str) -> str:
     # Converage the predictions together
 
     # If user only input the URL or the input content except the URL is too short
-    if url_features is not None and prob is None:
+    if url_features is not None and prob is None: 
        url_print = ''
        for i in range(url_num):
           url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])
