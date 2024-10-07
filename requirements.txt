@@ -3,14 +3,11 @@ pandas
 pymysql
 uvicorn
 pydantic
-re
 torch
 nltk
-json
 pydantic
 typing-extensions
 email-validator
-urllib
 tld
 joblib
-sklearn
+scikit-learn

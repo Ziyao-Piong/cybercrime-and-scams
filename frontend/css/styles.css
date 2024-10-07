@@ -488,7 +488,7 @@ ol.gradient-list > li::before {
 
 .up-arrow {
   position: fixed;
-  top: 20px;
+  bottom: 100px;
   right: 20px;
   font-size: 2rem;
   color: #0056b3;
