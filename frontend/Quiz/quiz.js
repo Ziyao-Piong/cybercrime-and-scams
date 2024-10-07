@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     async function fetchQuestions() {
         try {
-            const response = await fetch('http://127.0.0.1:8000/data/api/quiz-questions');
+            const response = await fetch('https://www.seniorsafe.info/api/data/api/quiz-questions');
             questions = await response.json();
             startQuiz();
         } catch (error) {
@@ -166,17 +166,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     correctScams.push(scamType);
                 } else if (performance.correct > 0) {
                     // If the user got some questions right but not all
-                    scamFeedback += `
-                        <li><strong>${scamType}</strong>: You answered ${performance.correct} out of ${performance.total} questions correctly. 
-                        Consider reviewing more on <a href="${scamLinks[scamType]}" target="_blank">${scamType}</a> to improve.</li>
-                    `;
-                    incorrectScams.push(scamType);  // Track incorrect scam types
+
+                    if (scamType === "Safe Email") {
+                        scamFeedback += `
+                            <li><strong>${scamType}</strong>: You answered ${performance.correct} out of ${performance.total} questions correctly. 
+                            Consider reviewing more on Safe Emails and Trending Scams to improve.</li>
+                        `;
+                    } else {
+                        scamFeedback += `
+                            <li><strong>${scamType}</strong>: You answered ${performance.correct} out of ${performance.total} questions correctly. 
+                            Consider reviewing more on <a href="${scamLinks[scamType]}" target="_blank">${scamType}</a> to improve.</li>
+                        `;
+                    }
+                    incorrectScams.push(scamType);
+
+                    // scamFeedback += `
+                    //     <li><strong>${scamType}</strong>: You answered ${performance.correct} out of ${performance.total} questions correctly. 
+                    //     Consider reviewing more on <a href="${scamLinks[scamType]}" target="_blank">${scamType}</a> to improve.</li>
+                    // `;
+                    // incorrectScams.push(scamType);  // Track incorrect scam types
                 } else {
                     // If the user got no questions right in this category
-                    scamFeedback += `
-                        <li><strong>${scamType}</strong>: You didn't answer any questions correctly. We recommend revisiting 
-                        <a href="${scamLinks[scamType]}" target="_blank">${scamType}</a> to strengthen your understanding.</li>
-                    `;
+                    if (scamType === "Safe Email") {
+                        scamFeedback += `
+                            <li><strong>${scamType}</strong>: You didn't answer any questions correctly. 
+                            We recommend revisiting Safe Emails and Trending Scams to strengthen your understanding.</li>
+                        `;
+                    } else {
+                    
+                        scamFeedback += `
+                            <li><strong>${scamType}</strong>: You didn't answer any questions correctly. We recommend revisiting 
+                            <a href="${scamLinks[scamType]}" target="_blank">${scamType}</a> to strengthen your understanding.</li>
+                        `;
+                    }
                     incorrectScams.push(scamType);  // Track incorrect scam types
                 }
             }

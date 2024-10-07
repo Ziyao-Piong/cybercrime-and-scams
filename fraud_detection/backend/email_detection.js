@@ -1,7 +1,7 @@
 async function makePrediction() {
     const feature = document.getElementById('emailContents').value;
 
-    const response = await fetch('http://127.0.0.1:8000/email/predict', {
+    const response = await fetch('https://www.seniorsafe.info/api/email/predict', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
