@@ -103,12 +103,27 @@ def replace_sql_keywords(user_input):
 
     return user_input
 
+
+def remove_greetings(email_content):
+    greetings = [
+        r"best regards", r"sincerely", r"thank you", r"thanks", r"kind regards", 
+        r"cheers", r"warm regards", r"yours sincerely", r"yours truly", 
+        r"regards", r"with gratitude", r"respectfully"
+    ]
+    
+    pattern = r"(?:{})\s*(?:(?:\n|$)|(?:,\s*)|\b)".format('|'.join(greetings))
+    
+    cleaned_email = re.sub(pattern, '', email_content, flags=re.IGNORECASE).strip()
+    
+    return cleaned_email
+
 # define a function to process user's input
 def process_single_text(text, vocab, max_sequence_length=350, unk_index=None):
     # Preprocess the input text (cleaning, removing non-English words, and stopwords)
     text = preprocess_string(text)
     text = remove_non_english_words(text)
     text = remove_stop_words(text)
+    text = remove_greetings(text)
 
     # Tokenize the preprocessed text
     tokens = word_tokenize(text.lower())

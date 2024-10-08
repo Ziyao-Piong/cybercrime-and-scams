@@ -18,9 +18,17 @@ async function makePrediction() {
         const probabilityRegex = /\d{1,3}\.\d{1,2} ?%/; 
         const probabilityMatch = data.prediction.match(probabilityRegex);
 
+        let emailType = "Unknown";
+
+        if (data.prediction.includes("phishing")) {
+            emailType = "Phishing Content!";
+        } else if (data.prediction.includes("safe")) {
+            emailType = "Safe Content!";
+        }
+
         if (probabilityMatch) {
             const probability = probabilityMatch[0];  
-            document.getElementById('probability').textContent = `How Sure We Are: ${probability}`;
+            document.getElementById('probability').textContent = `${emailType} How Sure We Are: ${probability}`;
         } else {
             document.getElementById('probability').textContent = ``;
         }
