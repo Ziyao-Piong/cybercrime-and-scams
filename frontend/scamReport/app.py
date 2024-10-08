@@ -35,8 +35,8 @@ class ScamReport(BaseModel):
         'Victoria', 'Western Australia', 'Unspecified'
     ]
     Scam_Contact_Mode: Literal[
-        'Email', 'Phone Call', 'Text message', 'In person', 'Internet',
-        'Mail', 'Social media', 'Mobile apps', 'Unspecified', 'Fax'
+        'Email', 'Phone call', 'Text message', 'In person', 'Internet',
+        'Mail', 'Social media', 'Mobile apps', 'unspecified', 'Fax'
     ]
     Complainant_Age: Literal['Under 18', '18 - 24', '25 - 34', '35 - 44', '45 - 54', '55 - 64', '65 and over']
     Complainant_Gender: Literal['Male', 'Female', 'Other']
