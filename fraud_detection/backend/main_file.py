@@ -103,12 +103,27 @@ def replace_sql_keywords(user_input):
 
     return user_input
 
+
+def remove_greetings(email_content):
+    greetings = [
+        r"best regards", r"sincerely", r"thank you", r"thanks", r"kind regards", 
+        r"cheers", r"warm regards", r"yours sincerely", r"yours truly", 
+        r"regards", r"with gratitude", r"respectfully"
+    ]
+    
+    pattern = r"(?:{})\s*(?:(?:\n|$)|(?:,\s*)|\b)".format('|'.join(greetings))
+    
+    cleaned_email = re.sub(pattern, '', email_content, flags=re.IGNORECASE).strip()
+    
+    return cleaned_email
+
 # define a function to process user's input
 def process_single_text(text, vocab, max_sequence_length=350, unk_index=None):
     # Preprocess the input text (cleaning, removing non-English words, and stopwords)
     text = preprocess_string(text)
     text = remove_non_english_words(text)
     text = remove_stop_words(text)
+    text = remove_greetings(text)
 
     # Tokenize the preprocessed text
     tokens = word_tokenize(text.lower())
@@ -515,7 +530,7 @@ def predict(features: str) -> str:
     url_list = extract_url(features)
     url_features = process_input_url(features)
     if url_features is not None:
-       with open('rf.joblib', 'rb') as f:
+       with open('fraud_detection/backend/xgb.joblib', 'rb') as f:
           loaded_rf = joblib.load(f)       
        url_predictions = loaded_rf.predict(url_features)
        url_predictions = url_predictions.tolist()
@@ -525,7 +540,7 @@ def predict(features: str) -> str:
     # Converage the predictions together
 
     # If user only input the URL or the input content except the URL is too short
-    if url_features is not None and prob is None:
+    if url_features is not None and prob is None: 
        url_print = ''
        for i in range(url_num):
           url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])

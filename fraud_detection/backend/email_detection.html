@@ -74,9 +74,10 @@
     </nav>
 
     <div class="container mt-5">
-      <h1>Phishing Email and URL Detection</h1>
+      <h1>Phishing Email and website link Detection</h1>
+      <br>
       <p>
-        Check whether an email or URL is malicious by using our phishing detection tool. Simply copy and paste the content into the box below, and our system will analyze it to help you stay safe from phishing scams.
+        Check whether an email or website link is malicious by using our phishing detection tool. Simply copy and paste the content into the box below, and our system will analyze it to help you stay safe from phishing scams.
       </p>
       <div class="form-group">
         <label for="emailContent"
@@ -93,6 +94,12 @@
     const wordCount = text === "" ? 0 : text.split(/\s+/).length;
     const wordLimit = 500;
     document.getElementById("wordCounter").textContent = `${wordCount}/${wordLimit} words`;
+
+    if (wordCount > wordLimit) {
+      document.getElementById("wordCounter").style.color = 'red';  // Change to red
+    } else {
+      document.getElementById("wordCounter").style.color = '#6c757d';  // Default color
+    }
   }
 </script>
 
@@ -119,7 +126,7 @@
     </div> -->
 
     <div class="container mt-5">
-      <div id="predictionResultWrapper" class="p-4"  style="margin-top: 60px;"> <!-- Add a wrapper with padding -->
+      <div id="predictionResultWrapper" class="p-4"  style="margin-top: 100px; margin-bottom: 60px;"> <!-- Add a wrapper with padding -->
         <h1 id="probability" style="font-size: 4rem;"></h1> <!-- Probability -->
         <div id="result" class="mt-3" style="font-size: 1.5rem; font-weight: bold; color: #444;"></div> <!-- Prediction result -->
       </div>

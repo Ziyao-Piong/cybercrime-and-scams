@@ -269,7 +269,7 @@ var scrollVis = function () {
         .on("click", function(d) {
             if (data_class === "final") {
                 // Redirect to the target URL when the dot is clicked
-                window.location.href = "/cybercrime-and-scams/frontend/caution.html";  // Replace with your target URL
+                window.location.href = "../frontend/caution.html";  // Replace with your target URL
             }
         });
     
@@ -540,6 +540,6 @@ function convert_data(my_data) {
 }
 
 // Load data and display
-d3.json('http://127.0.0.1:8000/data/scam-by-year').then(display).catch(function(error) {
+d3.json('https://www.seniorsafe.info/api/data/scam-by-year').then(display).catch(function(error) {
     console.error("Error loading data: ", error);
 });

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         console.log('Submitting data:', data);
 
-        fetch('http://127.0.0.1:8000/data/api/submit_report', {
+        fetch('https://www.seniorsafe.info/api/data/api/submit_report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
