@@ -94,6 +94,12 @@
     const wordCount = text === "" ? 0 : text.split(/\s+/).length;
     const wordLimit = 500;
     document.getElementById("wordCounter").textContent = `${wordCount}/${wordLimit} words`;
+
+    if (wordCount > wordLimit) {
+      document.getElementById("wordCounter").style.color = 'red';  // Change to red
+    } else {
+      document.getElementById("wordCounter").style.color = '#6c757d';  // Default color
+    }
   }
 </script>
 
