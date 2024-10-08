@@ -31,8 +31,8 @@ class ScamReport(BaseModel):
     StartOfMonth: datetime
     Address_State: Literal[
         'Australian Capital Territory', 'New South Wales', 'Northern Territory',
-        'Outside of Australia', 'Queensland', 'South Australia', 'Tasmania',
-        'Victoria', 'Western Australia', 'Unspecified'
+        'Queensland', 'South Australia', 'Tasmania',
+        'Victoria', 'Western Australia'
     ]
     Scam_Contact_Mode: Literal[
         'Email', 'Phone call', 'Text message', 'In person', 'Internet',

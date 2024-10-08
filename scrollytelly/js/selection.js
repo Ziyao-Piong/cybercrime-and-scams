@@ -375,8 +375,10 @@ function convert_data(my_data) {
         my_data,
         v => d3.sum(v, d => d.NumberOfReports),
         d => d.State
-    ).map(([state, NumberOfReports]) => ({ state, NumberOfReports }));
-
+    )
+    .map(([state, NumberOfReports]) => ({ state, NumberOfReports }))
+    .sort((a, b) => d3.descending(a.NumberOfReports, b.NumberOfReports)); // Sort in descending order
+    
     state_aggregated_data.forEach(function (d, index) {
         var numDots = Math.ceil(d.NumberOfReports / 600); // Divide by 250 for better rendering
         for (var i = 0; i < numDots; i++) {
@@ -388,6 +390,7 @@ function convert_data(my_data) {
             });
         }
     });
+    
 
     // Aggregate the number of reports by year
     var year_aggregated_data = d3.rollups(
@@ -413,8 +416,10 @@ function convert_data(my_data) {
         my_data,
         v => d3.sum(v, d => d.NumberOfReports),
         d => d.ScamType
-    ).map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }));
-
+    )
+    .map(([scam_type, NumberOfReports]) => ({ scam_type, NumberOfReports }))
+    .sort((a, b) => d3.descending(a.NumberOfReports, b.NumberOfReports)); // Sort by NumberOfReports in descending order
+    
     scam_type_aggregated_data.forEach(function (d, index) {
         var numDots = Math.ceil(d.NumberOfReports / 1500); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
@@ -426,21 +431,23 @@ function convert_data(my_data) {
             });
         }
     });
+    
 
     // Aggregate the number of reports by contact mode
     var contact_mode_aggregated_data = d3.rollups(
         my_data,
         v => d3.sum(v, d => d.NumberOfReports),
         d => d.ScamContactMode
-    ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }));
+    ).map(([contact_mode, NumberOfReports]) => ({ contact_mode, NumberOfReports }))
+    .sort((a, b) => d3.descending(a.NumberOfReports, b.NumberOfReports)); // Sort by NumberOfReports in descending order;
 
     contact_mode_aggregated_data.forEach(function (d, index) {
-        var numDots = Math.ceil(d.NumberOfReports / 750); // Use the same scaling factor
+        var numDots = Math.ceil(d.NumberOfReports / 650); // Use the same scaling factor
         for (var i = 0; i < numDots; i++) {
             contact_mode_data.push({
                 contact_mode: d.contact_mode,
                 row: Math.floor(i / dots_per_row),
-                column: i % 4,
+                column: i %4,
                 NumberOfReports: i === 0 ? d.NumberOfReports : 0 // Full number of reports in the label
             });
         }
