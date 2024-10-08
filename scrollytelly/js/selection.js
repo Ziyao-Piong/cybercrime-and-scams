@@ -104,7 +104,7 @@ var scrollVis = function () {
         activateFunctions[3] = ["contact_mode", "contact_mode", 2000, "Number of Reported Scams by Contact Mode"]; // Contact Mode
         activateFunctions[4] = ["state", "state", 2000, "Number of Reported Scams by State"]; // State
         activateFunctions[5] = ["gender", "gender", 2000, "Percentage of Reported Scams by Gender"]; // Gender (Male and Female only)
-        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Reported Scams by Lost Amount Range"]; // LostAmountRange
+        activateFunctions[6] = ["lost_amount_range", "lost_amount_range", 2000, "Number of Reported Scams by Individual Lost Amount Range"]; // LostAmountRange
         activateFunctions[7] = ["month", "month", 2000, "Percentage of Reported Scams by Month"]; // Month
         activateFunctions[8] = ["final", "final", 2000, "Don't be tricked by a phishing scam"]; // Final section for the single dot
     };
