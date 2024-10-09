@@ -11,3 +11,4 @@ email-validator
 tld
 joblib
 scikit-learn
+xgboost
