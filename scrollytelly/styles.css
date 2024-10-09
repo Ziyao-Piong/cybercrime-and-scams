@@ -266,3 +266,39 @@
     line-height: 23px;
     color: #767678;
   }
+
+  .step {
+    position: relative;
+    padding-bottom: 25px; /* Space below section */
+}
+
+.step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 1px;
+    background-color: lightgray;
+}
+  
+.arrow-indicator {
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+  color: gray;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(10px);
+  }
+  60% {
+      transform: translateY(5px);
+  }
+}
+
