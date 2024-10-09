@@ -454,11 +454,11 @@ def process_input_url(input):
   feature_dict['count-www'] = []
   feature_dict['count@'] = []
   feature_dict['count_dir'] = []
-  feature_dict['count_embed_domian'] = []
+  # feature_dict['count_embed_domian'] = []
   feature_dict['sus_words'] = []
   feature_dict['short_url'] = []
-  feature_dict['count-https'] = []
   feature_dict['count-http'] =  []
+  feature_dict['count-https'] = []
   feature_dict['count%'] =[]
   feature_dict['count-'] = []
   feature_dict['count='] = []
@@ -477,11 +477,11 @@ def process_input_url(input):
         feature_dict['count-www'].append(i.count('www')) 
         feature_dict['count@'].append(i.count('@')) 
         feature_dict['count_dir'].append(no_of_dir(i)) 
-        feature_dict['count_embed_domian'].append(no_of_embed(i)) 
+        # feature_dict['count_embed_domian'].append(no_of_embed(i)) 
         feature_dict['sus_words'].append(suspicious_words(i))
         feature_dict['short_url'].append(shortening_service(i))
-        feature_dict['count-https'].append(i.count('https'))
         feature_dict['count-http'].append(i.count('http'))
+        feature_dict['count-https'].append(i.count('https'))
         feature_dict['count%'].append(i.count('%'))
         feature_dict['count-'].append(i.count('-'))
         feature_dict['count='].append(i.count('='))
@@ -569,6 +569,6 @@ def predict(features: str) -> str:
 
 
 if __name__ == '__main__':
-  test = "lowers blood pressure and cholesterol let ' s face it , age should be nothing more than a number it ' s okay to want to hold on to your young body as long as you can with increasing longevity for an increasing segment of the population , this is the frontier for the new millennium - dr virgil howard view more about a new lifespan enhancement press here we ship right to your door sorry not for me and the twenty trials compared the same lactam all cause fatality the most significant and objective outcome was not reduced by the addition of aminoglycosides clinical and bacteriological failure which may be prone to bias with nonblinded trials and are of much lesser relevance to patients were not significantly different the wind at first sent him spinning away to the south , but he continued to rise until he was above the air currents , and the storm raged far beneath him"
+  test = "www.test.com"
   prediction = predict(test)
   print(prediction)
