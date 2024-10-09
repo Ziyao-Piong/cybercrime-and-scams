@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then((responseData) => {
-            alert(`Report submitted successfully! Your receipt number is: ${responseData.receipt_number}`);
+            alert(`Report submitted successfully! Your receipt number is: ${responseData.receipt_number}. A copy has been sent to your email.`);
             form.reset();  // Reset the form after successful submission
         })
         .catch((error) => {
