@@ -93,15 +93,18 @@
     // Count words by splitting on spaces and filtering out empty values
     const wordCount = text === "" ? 0 : text.split(/\s+/).length;
     const wordLimit = 500;
-    document.getElementById("wordCounter").textContent = `${wordCount}/${wordLimit} words`;
+    const wordCounter = document.getElementById("wordCounter");
 
     if (wordCount > wordLimit) {
-      document.getElementById("wordCounter").style.color = 'red';  // Change to red
+      wordCounter.textContent = `Exceeded word limit (${wordCount}/${wordLimit} words)`;
+      wordCounter.style.color = 'red';  // Change text to red when limit is exceeded
     } else {
-      document.getElementById("wordCounter").style.color = '#6c757d';  // Default color
+      wordCounter.textContent = `${wordCount}/${wordLimit} words`;
+      wordCounter.style.color = '#6c757d';  // Default color
     }
   }
 </script>
+
 
 
       </div>

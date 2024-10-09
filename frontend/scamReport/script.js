@@ -70,18 +70,5 @@ document.addEventListener('DOMContentLoaded', function () {
             loadingMessage.style.display = 'none';
         });
     });
-});
+});;
 
-function countWords(textarea) {
-    const text = textarea.value;
-    const words = text.trim().split(/\s+/);
-    const wordCount = words.length;
-    const wordCountDisplay = document.getElementById('wordCount');
-
-    if (wordCount > 500) {
-        textarea.value = words.slice(0, 500).join(' ');
-        wordCountDisplay.textContent = '500/500 words';
-    } else {
-        wordCountDisplay.textContent = `${wordCount}/500 words`;
-    }
-}

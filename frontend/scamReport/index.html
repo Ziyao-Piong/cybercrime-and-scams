@@ -50,8 +50,11 @@
       <form id="scamReportForm" method="POST" action="https://www.seniorsafe.info/apif/data/api/submit_report">
         <div class="form-group">
           <label for="phishingUrl"><b>Please type or paste the suspected phishing scam or URL:</b></label>
-          <textarea id="phishingUrl" name="phishingUrl" class="form-control" rows="9" oninput="countWords(this)"></textarea>
-          <small id="wordCount" class="form-text text-muted">0/500 words</small>
+           <!-- Textarea for word count -->
+    <textarea id="phishingUrl" class="form-control" rows="9" oninput="countWords(this)"></textarea>
+    
+    <!-- Display word count -->
+    <small id="wordCount" class="form-text text-muted">0/500 words</small>
         </div>
 
         <div class="form-row">
@@ -200,11 +203,25 @@
   <script>
     function countWords(textarea) {
       const text = textarea.value.trim();
-      const wordCount = text.split(/\s+/).length;
+      const words = text ? text.split(/\s+/) : [];
+      const wordCount = words.length;
       const wordLimit = 500;
-      document.getElementById("wordCount").textContent = `${wordCount}/${wordLimit} words`;
+      const wordCountDisplay = document.getElementById("wordCount");
+  
+      // Update word count text
+      wordCountDisplay.textContent = `${wordCount}/${wordLimit} words`;
+  
+      // Change color if word limit is exceeded
+      if (wordCount > wordLimit) {
+        wordCountDisplay.classList.add('exceeded');  // Add a CSS class for red color
+      } else {
+        wordCountDisplay.classList.remove('exceeded');  // Remove the class if within limit
+      }
     }
   </script>
+  
+  
+
 </body>
 </html>
 

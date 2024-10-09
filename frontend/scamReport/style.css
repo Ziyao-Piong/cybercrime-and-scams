@@ -173,3 +173,8 @@ button[type="submit"]:hover {
     color: grey;
 }
 
+/* Define the red color class */
+#wordCount.exceeded {
+    color: red !important; /* This will force the text color to red, overriding other styles */
+  }
+  
