@@ -307,7 +307,7 @@
 #scroll-buttons-container {
   position: fixed;
   right: 10px; /* Align to the right */
-  bottom: 400px; /* A bit higher from the bottom */
+  bottom: 370px; /* A bit higher from the bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
