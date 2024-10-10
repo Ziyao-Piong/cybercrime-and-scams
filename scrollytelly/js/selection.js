@@ -362,31 +362,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const scrollDownArrow = document.getElementById('scroll-down-arrow');
 
     let sectionCount = 0; // Start at the first section
-    const totalSections = document.querySelectorAll('.step').length;
+    const sections = document.querySelectorAll('.step');
+    const totalSections = sections.length;
 
     // Hide the up arrow initially (since we're in the first section)
     scrollUpArrow.style.display = 'none';
+
+    // Function to update the arrow visibility and state based on the current section
+    function updateArrows() {
+        if (sectionCount === 0) {
+            scrollUpArrow.style.display = 'none';
+        } else {
+            scrollUpArrow.style.display = 'block';
+        }
+
+        if (sectionCount === totalSections - 1) {
+            scrollDownArrow.classList.remove('fa-chevron-down');
+            scrollDownArrow.classList.add('fa-arrow-up');
+        } else {
+            scrollDownArrow.classList.remove('fa-arrow-up');
+            scrollDownArrow.classList.add('fa-chevron-down');
+        }
+    }
 
     // Handle the down arrow click
     scrollDownArrow.addEventListener('click', function () {
         if (sectionCount < totalSections - 1) {
             sectionCount++;
-            const nextSection = document.querySelectorAll('.step')[sectionCount];
+            const nextSection = sections[sectionCount];
             window.scrollTo({
                 top: nextSection.offsetTop,
                 behavior: 'smooth'
             });
-
-            // Show the up arrow once we're past the first section
-            if (sectionCount > 0) {
-                scrollUpArrow.style.display = 'block';
-            }
-
-            // If in the last section, change the down arrow to "Scroll to top"
-            if (sectionCount === totalSections - 1) {
-                scrollDownArrow.classList.remove('fa-chevron-down');
-                scrollDownArrow.classList.add('fa-arrow-up');
-            }
         } else {
             // If already in the last section, scroll to the top
             window.scrollTo({
@@ -394,37 +401,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 behavior: 'smooth'
             });
             sectionCount = 0; // Reset to the first section
-            scrollUpArrow.style.display = 'none'; // Hide the up arrow
-
-            // Reset the down arrow to its original state
-            scrollDownArrow.classList.remove('fa-arrow-up');
-            scrollDownArrow.classList.add('fa-chevron-down');
         }
+        updateArrows();
     });
 
     // Handle the up arrow click
     scrollUpArrow.addEventListener('click', function () {
         if (sectionCount > 0) {
             sectionCount--;
-            const prevSection = document.querySelectorAll('.step')[sectionCount];
+            const prevSection = sections[sectionCount];
             window.scrollTo({
                 top: prevSection.offsetTop,
                 behavior: 'smooth'
             });
-
-            // Hide the up arrow if we are in the first section again
-            if (sectionCount === 0) {
-                scrollUpArrow.style.display = 'none';
-            }
-
-            // Reset the down arrow if we're no longer in the last section
-            if (sectionCount < totalSections - 1) {
-                scrollDownArrow.classList.remove('fa-arrow-up');
-                scrollDownArrow.classList.add('fa-chevron-down');
-            }
         }
+        updateArrows();
     });
+
+    // Update section count based on manual scroll
+    window.addEventListener('scroll', function () {
+        let currentScrollPos = window.scrollY;
+
+        // Find the current section based on scroll position
+        sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            // If the current scroll position is within the bounds of this section
+            if (currentScrollPos >= sectionTop - 1 && currentScrollPos < sectionBottom - 1) {
+                sectionCount = index;
+            }
+        });
+
+        updateArrows();
+    });
+
+    // Initial update for the arrows
+    updateArrows();
 });
+
 
 
 
