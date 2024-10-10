@@ -15,35 +15,52 @@ async function makePrediction() {
 
     if (response.ok) {
         document.getElementById('result').innerHTML = `Prediction: ${data.prediction}`;
+
+        // Regular expression to extract confidence percentage
         const probabilityRegex = /\d{1,3}\.\d{1,2} ?%/; 
         const probabilityMatch = data.prediction.match(probabilityRegex);
 
+        // Default to unknown email type
         let emailType = "Unknown";
 
+        // Determine the type of email
         if (data.prediction.includes("phishing")) {
-            emailType = "Phishing Content!";
+            emailType = "Phishing Email";
+        } else if (data.prediction.includes("defacement")) {
+            emailType = "Defacement Email";
+        } else if (data.prediction.includes("malware")) {
+            emailType = "Malware Email";
         } else if (data.prediction.includes("safe")) {
-            emailType = "Safe Content!";
+            emailType = "Safe Email";
         }
 
+        // Confidence handling for various cases
         if (probabilityMatch) {
             const probability = probabilityMatch[0];  
-            document.getElementById('probability').textContent = `${emailType} How Sure We Are: ${probability}`;
+            document.getElementById('probability').textContent = `We are ${probability} confident this is a ${emailType}.`;
         } else {
-            document.getElementById('probability').textContent = ``;
+            if (emailType === "Safe Email") {
+                document.getElementById('probability').textContent = `This email appears to be safe, but confidence could not be determined.`;
+            } else if (emailType === "Unknown") {
+                document.getElementById('probability').textContent = `We are unsure about this email. It doesn't match any known malicious types.`;
+            } else {
+                document.getElementById('probability').textContent = `Confidence could not be determined, but this appears to be a ${emailType}.`;
+            }
         }
 
-        if (data.prediction.includes("phishing email") || data.prediction.includes("defacement") || data.prediction.includes("malware") || data.prediction.includes("phishing")) {
-            document.getElementById('predictionResultWrapper').style.backgroundColor = '#f8d7da'; // Red background
+        // Change background color based on email type
+        if (emailType === "Phishing Email" || emailType === "Defacement Email" || emailType === "Malware Email") {
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#f8d7da'; // Red background for malicious
+        } else if (emailType === "Safe Email") {
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background for safe
         } else {
-            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#fff3cd'; // Yellow background for unknown
         }
-        
+
     } else {
         document.getElementById('result').textContent = `Error: ${data.detail}`;
     }
 }
-
 
 function updateWordCount() {
     // Get the text from the input box
@@ -54,4 +71,4 @@ function updateWordCount() {
     
     // Update the word count display
     document.getElementById('wordCounter').textContent = `${wordCount}`;
-  }
+}
