@@ -306,7 +306,7 @@
 /* Container for arrows */
 #scroll-buttons-container {
   position: fixed;
-  right: 150px; /* Align to the right */
+  right: 10px; /* Align to the right */
   bottom: 400px; /* A bit higher from the bottom */
   display: flex;
   flex-direction: column;
