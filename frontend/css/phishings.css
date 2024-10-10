@@ -67,20 +67,18 @@ section {
   .list-container {
     width: 90%;
   }
-  
+
   /* Reference: https://codepen.io/erinesullivan/pen/qGrdGV */
   ol.gradient-list {
     list-style: none;
+    list-style-type: none;
     margin: 1.75rem 0;
     padding-left: 1rem;
   }
   
   ol.gradient-list > li {
-    /*
-    background: rgba(200, 201, 212, 0.445);
-    */
     background: #0056b3;
-    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    border-radius: 0.5rem;
     margin-top: 1rem;
     min-height: 3rem;
     padding: 1rem 1rem 1rem 3rem;
@@ -104,25 +102,10 @@ section {
   }
 
   
-  ol.gradient-list > li::after {
-    background: none;
-  }
-
-  ol.gradient-list > li:nth-child(10n+1):before {
-    background: transparent;
-  }
-  ol.gradient-list > li:nth-child(10n+2):before {
-    background: transparent;
-  }
-  ol.gradient-list > li:nth-child(10n+3):before {
-    background: transparent;
-  }
-  ol.gradient-list > li:nth-child(10n+4):before {
-    background: transparent;
-  }
-  ol.gradient-list > li:nth-child(10n+5):before {
-    background: transparent;
-  }
+  ol.gradient-list > li::before {
+    content: '';
+    display: none;
+}
 
   ol.gradient-list > li + li {
     margin-top: 2rem;
