@@ -454,7 +454,7 @@ def process_input_url(input):
   feature_dict['count-www'] = []
   feature_dict['count@'] = []
   feature_dict['count_dir'] = []
-  # feature_dict['count_embed_domian'] = []
+  feature_dict['count_embed_domian'] = []
   feature_dict['sus_words'] = []
   feature_dict['short_url'] = []
   feature_dict['count-http'] =  []
@@ -477,7 +477,7 @@ def process_input_url(input):
         feature_dict['count-www'].append(i.count('www')) 
         feature_dict['count@'].append(i.count('@')) 
         feature_dict['count_dir'].append(no_of_dir(i)) 
-        # feature_dict['count_embed_domian'].append(no_of_embed(i)) 
+        feature_dict['count_embed_domian'].append(no_of_embed(i)) 
         feature_dict['sus_words'].append(suspicious_words(i))
         feature_dict['short_url'].append(shortening_service(i))
         feature_dict['count-http'].append(i.count('http'))
