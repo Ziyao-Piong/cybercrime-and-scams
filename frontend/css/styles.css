@@ -160,7 +160,7 @@ body {
 }
 
 .gold-btn {
-  background-color: #fe8820f2;
+  background-color: #fffffff2;
   color: #002147;
   border: none;
   border-radius: 15px;
@@ -171,7 +171,7 @@ body {
 }
 
 .gold-btn:hover {
-  background-color: rgb(255, 162, 0);
+  background-color: rgba(173, 173, 173, 0.952);
 }
 
 /* Trending Scams Section */
@@ -266,7 +266,7 @@ body {
 
 .intro-body {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.55rem !important;
   padding-bottom: 1%;
 }
 
@@ -577,7 +577,7 @@ ol.gradient-list > li::before {
 
 .sidebar {
   background-color: #f8f9fa;
-  height: 101.4%;
+  height: 101.5%;
   padding-top: 50px;
 }
 
