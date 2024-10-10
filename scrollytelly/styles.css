@@ -302,3 +302,40 @@
   }
 }
 
+
+/* Container for arrows */
+#scroll-buttons-container {
+  position: fixed;
+  right: 150px; /* Align to the right */
+  bottom: 400px; /* A bit higher from the bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000; /* Ensure the arrows are always on top */
+}
+
+/* General arrow styles */
+.arrow-indicator {
+  font-size: 20px; /* Make arrows bigger for better visibility */
+  color: #3082e0; /* Dark blue color for default state */
+  cursor: pointer;
+  padding: 20px;
+  margin: 10px 0; /* Evenly spaced */
+  background-color: white;
+  border: 3px solid #3082e0; /* Solid border for visibility */
+  border-radius: 50%; /* Circular shape */
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s; /* Smooth hover transition */
+}
+
+/* Hover effect to change color */
+.arrow-indicator:hover {
+  background-color: #3082e0; /* Change background to blue on hover */
+  color: white; /* Change arrow color to white on hover */
+}
+
+
+
+
+
+

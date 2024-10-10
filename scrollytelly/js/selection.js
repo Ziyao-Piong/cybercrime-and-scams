@@ -357,6 +357,89 @@ function display(data) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollUpArrow = document.getElementById('scroll-up-arrow');
+    const scrollDownArrow = document.getElementById('scroll-down-arrow');
+
+    let sectionCount = 0; // Start at the first section
+    const totalSections = document.querySelectorAll('.step').length;
+
+    // Hide the up arrow initially (since we're in the first section)
+    scrollUpArrow.style.display = 'none';
+
+    // Handle the down arrow click
+    scrollDownArrow.addEventListener('click', function () {
+        if (sectionCount < totalSections - 1) {
+            sectionCount++;
+            const nextSection = document.querySelectorAll('.step')[sectionCount];
+            window.scrollTo({
+                top: nextSection.offsetTop,
+                behavior: 'smooth'
+            });
+
+            // Show the up arrow once we're past the first section
+            if (sectionCount > 0) {
+                scrollUpArrow.style.display = 'block';
+            }
+
+            // If in the last section, change the down arrow to "Scroll to top"
+            if (sectionCount === totalSections - 1) {
+                scrollDownArrow.classList.remove('fa-chevron-down');
+                scrollDownArrow.classList.add('fa-arrow-up');
+            }
+        } else {
+            // If already in the last section, scroll to the top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            sectionCount = 0; // Reset to the first section
+            scrollUpArrow.style.display = 'none'; // Hide the up arrow
+
+            // Reset the down arrow to its original state
+            scrollDownArrow.classList.remove('fa-arrow-up');
+            scrollDownArrow.classList.add('fa-chevron-down');
+        }
+    });
+
+    // Handle the up arrow click
+    scrollUpArrow.addEventListener('click', function () {
+        if (sectionCount > 0) {
+            sectionCount--;
+            const prevSection = document.querySelectorAll('.step')[sectionCount];
+            window.scrollTo({
+                top: prevSection.offsetTop,
+                behavior: 'smooth'
+            });
+
+            // Hide the up arrow if we are in the first section again
+            if (sectionCount === 0) {
+                scrollUpArrow.style.display = 'none';
+            }
+
+            // Reset the down arrow if we're no longer in the last section
+            if (sectionCount < totalSections - 1) {
+                scrollDownArrow.classList.remove('fa-arrow-up');
+                scrollDownArrow.classList.add('fa-chevron-down');
+            }
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function convert_data(my_data) {
     var dots_per_row = 10;
 
@@ -545,6 +628,7 @@ function convert_data(my_data) {
         final: final_data // Add final data for the single dot
     };
 }
+
 
 // Load data and display
 d3.json('https://www.seniorsafe.info/api/data/scam-by-year').then(display).catch(function(error) {
