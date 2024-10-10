@@ -115,6 +115,25 @@ body {
 }
 
 /* Quotes Section */
+.quote-navigation {
+  position: relative;
+  margin-top: 20px;
+}
+
+.prev-quote,
+.next-quote {
+  position: absolute;
+  top: 0;
+}
+
+.prev-quote {
+  left: 0;
+}
+
+.next-quote {
+  right: 0;
+}
+
 .quotes-section {
   background-color: #1F3C88;
   color: white;
@@ -124,6 +143,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .quotes-section h2 {
@@ -140,19 +160,18 @@ body {
 }
 
 .gold-btn {
-  background-color: #ff9d00;
+  background-color: #fe8820f2;
   color: #002147;
   border: none;
-  padding: 12px 30px;
+  border-radius: 15px;
+  padding: 12px 20px;
   font-size: 1.2rem;
   cursor: pointer;
-  text-transform: uppercase;
   font-weight: bold;
-  margin-top: 30px;
 }
 
 .gold-btn:hover {
-  background-color: #e69200;
+  background-color: rgb(255, 162, 0);
 }
 
 /* Trending Scams Section */
@@ -587,5 +606,3 @@ ol.gradient-list > li::before {
 .sidebar ul li a:hover {
   color: #3661e1;
 }
-
-

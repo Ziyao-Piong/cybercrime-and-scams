@@ -45,19 +45,19 @@
               >Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="businessEmailCompromisePhishing.html">Scam Overview</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../scrollytelly/data.html">Trending Scams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Quiz/quiz.html">Test Your Knowledge</a>
           </li>
           <li class="nav-item"></li>
             <a class="nav-link" href="../fraud_detection/backend/email_detection.html">Detect Phishing Scams</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="scamReport/index.html">Report Phishing Scam</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Quiz/quiz.html">Test Your Knowledge</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="businessEmailCompromisePhishing.html">Scam Overview</a>
           </li>
         </ul>
       </div>
@@ -80,13 +80,18 @@
 
   <!-- Quotes Section -->
   <section class="quotes-section text-center">
-    <div class="container">
+    <div class="container position-relative">
       <h2 class="display-5 text-white">Stay Vigilant, Stay Safe</h2>
+      <div class="quote-navigation">
+        <button id="prev-quote" class="gold-btn prev-quote">&#60;</button>
+        <button id="next-quote" class="gold-btn next-quote">&#62;</button>
+      </div>
       <div id="quote-text" class="quote-text visible">
         "Australians lost a record amount of more than $2.7 billion to scams in 2023."
       </div>
     </div>
   </section>
+  
 
   <!-- Trending Scams Section -->
   <section class="trending-scams-section text-center" id="trending-scams">
@@ -177,8 +182,7 @@
 
   <!-- Check out Section -->
   <section class="what-to-do-section text-center">
-    <h3><a class="check-out-link" href="https://www.scamwatch.gov.au/" target="_blank" rel="noopener noreferrer" onclick="alert('You are being redirected to https://www.scamwatch.gov.au, Australia\'s first line of defence against phishing scams.');">Visit Scam Watch, Australia's first line of defence against phishing scams.</a>
-    </h3>
+    <h3><a class="check-out-link" href="https://www.scamwatch.gov.au/" target="_blank" rel="noopener noreferrer" onclick="return confirmRedirect();">Visit Scam Watch, Australia's first line of defence against phishing scams.</a>    </h3>
   </section>
 
   <!-- Footer -->

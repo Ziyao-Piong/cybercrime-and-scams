@@ -24,12 +24,18 @@ function changeQuote() {
     setTimeout(() => {
         quoteElement.textContent = quotes[currentQuoteIndex]; // Update the text
         quoteElement.classList.add('visible'); // Show the new quote
-        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-    }, 1000); // Delay for 1 second for smooth fading
+    }, 200); // Delay for smooth fading
 }
 
-// Change quote every 5 seconds (5000 ms)
-setInterval(changeQuote, 5000);
+document.getElementById('next-quote').addEventListener('click', () => {
+    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length; // Move to the next quote
+    changeQuote();
+});
+
+document.getElementById('prev-quote').addEventListener('click', () => {
+    currentQuoteIndex = (currentQuoteIndex - 1 + quotes.length) % quotes.length; // Move to the previous quote
+    changeQuote();
+});
 
 function scrollToTrendingScams() {
     document.getElementById('trending-scams').scrollIntoView({ behavior: 'smooth' });
@@ -47,4 +53,9 @@ function scrollUp() {
         top: -window.innerHeight, // Scroll up by one viewport height
         behavior: 'smooth' 
     });
+}
+
+function confirmRedirect() {
+    const msg = "Do you want to leave the current website and proceed to Australia's official website about phishing scams?"
+    return confirm(msg);
 }
