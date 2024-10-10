@@ -121,11 +121,9 @@
         </div>
 
         <!-- Add a navigation button to the next scam page -->
-         <!--
         <div class="btn-container">
           <button class="button-22" id="spearPhishingNextBtn">Go to the Next Scam Page (Voice Phising)</button>
         </div>
-        -->
 
         <!-- Footer -->
         <footer class="footer bg-light text-center">
@@ -156,6 +154,10 @@
               if (hrefValue.includes('spear')) {
                   link.classList.add('active');
               }
+          });
+
+          document.getElementById('spearPhishingNextBtn').addEventListener('click', function() {
+              window.location.href = './voicePhishing.html';
           });
         </script>
     </body>

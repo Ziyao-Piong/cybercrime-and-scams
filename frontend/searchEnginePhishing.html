@@ -123,11 +123,9 @@
         </div>
 
         <!-- Add a navigation button to the next scam page -->
-         <!--
         <div class="btn-container">
           <button class="button-22" id="searchEnginePhishingNextBtn">Go to the Next Scam Page (Smishing)</button>
         </div>
-        -->
 
         <!-- Footer -->
         <footer class="footer bg-light text-center">
@@ -158,6 +156,10 @@
               if (hrefValue.includes('search')) {
                   link.classList.add('active');
               }
+          });
+
+          document.getElementById('searchEnginePhishingNextBtn').addEventListener('click', function() {
+              window.location.href = './smishingPhishing.html';
           });
         </script>
 

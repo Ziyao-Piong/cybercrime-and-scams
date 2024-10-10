@@ -124,11 +124,9 @@
         </div>
 
         <!-- Add a navigation button to the next scam page -->
-         <!--
         <div class="btn-container">
           <button class="button-22" id="clonePhishingNextBtn">Go to the Next Scam Page (Pop-up Phishing)</button>
         </div>
-        -->
 
         <!-- Footer -->
         <footer class="footer bg-light text-center">
@@ -159,6 +157,10 @@
               if (hrefValue.includes('clone')) {
                   link.classList.add('active');
               }
+          });
+
+          document.getElementById('clonePhishingNextBtn').addEventListener('click', function() {
+              window.location.href = './popupPhishing.html';
           });
         </script>
     </body>

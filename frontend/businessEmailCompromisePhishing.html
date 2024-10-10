@@ -128,11 +128,10 @@
         </div>
 
         <!-- Add a navigation button to the next scam page -->
-        <!--
         <div class="btn-container">
           <button class="button-22" id="BECNextBtn">Go to the Next Scam Page (Clone Phishing)</button>
         </div>
-        -->
+
         <!-- Footer -->
         <footer class="footer bg-light text-center">
           <div class="container">
@@ -163,6 +162,11 @@
                   link.classList.add('active');
               }
           });
+
+          document.getElementById('BECNextBtn').addEventListener('click', function() {
+              window.location.href = './clonePhishing.html';
+          });
+
         </script>
     </body>
 
