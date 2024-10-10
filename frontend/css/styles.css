@@ -606,3 +606,7 @@ ol.gradient-list > li::before {
 .sidebar ul li a:hover {
   color: #3661e1;
 }
+
+.list-unstyled .d-inline {
+  padding: 0 20px !important;
+}
