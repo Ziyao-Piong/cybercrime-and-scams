@@ -577,8 +577,8 @@ ol.gradient-list > li::before {
 
 .sidebar {
   background-color: #f8f9fa;
-  height: 101.5%;
-  padding-top: 30px;
+  height: 101.4%;
+  padding-top: 50px;
 }
 
 .sidebar ul {
