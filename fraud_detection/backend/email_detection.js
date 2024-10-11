@@ -25,13 +25,9 @@ async function makePrediction() {
 
         // Determine the type of email
         if (data.prediction.includes("phishing")) {
-            emailType = "Phishing Email";
-        } else if (data.prediction.includes("defacement")) {
-            emailType = "Defacement Email";
-        } else if (data.prediction.includes("malware")) {
-            emailType = "Malware Email";
+            emailType = "Phishing Content!";
         } else if (data.prediction.includes("safe")) {
-            emailType = "Safe Email";
+            emailType = "Safe Content!";
         }
 
         // Confidence handling for various cases

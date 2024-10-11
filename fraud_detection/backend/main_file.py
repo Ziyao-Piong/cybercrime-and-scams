@@ -558,7 +558,7 @@ def predict(features: str) -> str:
          
 
     elif url_features is None and prob is None:
-       prediction = 'We could not identify the safety of the input, the reason is that {}, please {}'.format(reason.lower(), recommendation.lower())
+       prediction = 'We could not identify the type of the input, the reason is that {}, please {}'.format(reason.lower(), recommendation.lower())
 
     else:
        prediction = 'This email is most likely a {}, with probability {} %.<br> Reason: {}.<br>  Recommendation: {}'.format(email_type, prob, reason, recommendation)
