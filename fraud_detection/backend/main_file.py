@@ -209,7 +209,7 @@ def take_clean_input(email_content, vocab, model):
       recommendation = 'No special action is required, handle this email as you would with any other legitimate message.'
     elif label == 1:
       email_type = "Phishing email"
-      reason = 'The email contains a suspicious link that could lead to a phishing site, which is a common indicator of phishing'
+      reason = 'The email contains a suspicious content that could lead to a phishing site, which is a common indicator of phishing'
       recommendation = 'Avoid interacting with this email, verify it through official channels, and report it as phishing if you suspect it is not legitimate.'
 
     elif label == 2:
@@ -244,13 +244,13 @@ def take_clean_input(email_content, vocab, model):
 
     elif label == 8:
       email_type = 'Phishing Email'
-      reason = 'The email contains urgent language like ''Urgent'' or ''Immediate action required'' and includes a suspicious link, both of which are common indicators of phishing'
+      reason = 'The email contains urgent language like ''Urgent'' or ''Immediate action required'' , which is a common indicator of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
 
     elif label == 9:
       email_type = 'Phishing Email'
-      reason = 'The email contains a call to action like ''Click here'' or ''Login'' and includes a suspicious link that could lead to a phishing site, both of which are common indicators of phishing'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', which is a common indicator of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
     elif label == 10:
@@ -267,7 +267,7 @@ def take_clean_input(email_content, vocab, model):
 
     elif label == 12:
       email_type = 'Phishing Email'
-      reason = 'The email offers an unexpected discount or special deal and includes a suspicious link that could take you to a fake website, which are common signs of a scam'
+      reason = 'The email offers an unexpected discount or special deal, which are common signs of a scam'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
 
@@ -285,12 +285,12 @@ def take_clean_input(email_content, vocab, model):
 
     elif label == 15:
       email_type = 'Phishing Email'
-      reason = 'The email contains an offer of a prize or reward and includes a suspicious link that could lead to a phishing site, both of which are common indicators of phishing'
+      reason = 'The email contains an offer of a prize or reward, which are common indicators of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
     elif label == 16 or label == 19:
       email_type = 'Phishing Email'
-      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an unsolicited discount or special offer, and a suspicious link that could lead to a phishing site, all of which are common indicators of phishing'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an unsolicited discount or special offer, which are common indicators of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
 
@@ -302,13 +302,13 @@ def take_clean_input(email_content, vocab, model):
 
     elif label == 18:
       email_type = 'Phishing Email'
-      reason = 'The email contains an offer of a prize or reward, an unsolicited discount or special offer, a suspicious link, which could lead to a phishing site, which are common indicators of phishing'
+      reason = 'The email contains an offer of a prize or reward, an unsolicited discount or special offer, which are common indicators of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
 
     elif label == 20 or label == 21:
       email_type = 'Phishing Email'
-      reason = 'The email contains a call to action like ''Click here'' or ''Login'', an offer of a prize or reward, a suspicious link, which could lead to a phishing site, which are common indicators of phishing'
+      reason = 'The email contains a call to action like ''Click here'' or ''Login'', which are common indicators of phishing'
       recommendation = 'Avoid interacting with the email, verify its authenticity through official channels, and report it as phishing if suspicious.'
 
 
@@ -549,14 +549,12 @@ def predict(features: str) -> str:
     elif url_features is not None and prob is not None:
       url_print = ''
       for i in range(url_num):
-         if url_types[i] != 'safe':
-            url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])
+         url_print = url_print + '{} : {}.<br>'.format(url_list[i], url_types[i])
 
-      if url_print != '':
-         prediction ='The email content is most likely a phishing email, with probability {} %. This is because at least one malicious website link was detected.<br> The detected malicious links are listed as below:<br>'.format(prob) + url_print
 
-      else:
-         prediction = 'This email is most likely a {}, with probability {} %.<br> Reason: {}.<br> Recommendation: {}'.format(email_type, prob, reason, recommendation)
+      prediction_url = '{} URL detected, the identified type for the URL is as follows: <br>'.format(url_num) + url_print
+      prediction_email_content = 'This email content is most likely a {}, with probability {} %.<br> Reason: {}.<br> Recommendation: {}<br>'.format(email_type, prob, reason, recommendation)
+      prediction = prediction_email_content + prediction_url 
          
 
     elif url_features is None and prob is None:
@@ -569,6 +567,6 @@ def predict(features: str) -> str:
 
 
 if __name__ == '__main__':
-  test = "www.test.com"
+  test = "Hello, my name is jack, please visity my website, it is really good, for sure, and please please, please. www.test.com"
   prediction = predict(test)
   print(prediction)
