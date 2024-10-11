@@ -55,7 +55,7 @@ async function makePrediction() {
             } else if (urlType === "Unknown") {
                 document.getElementById('probability').textContent = `We are unsure about this email. It doesn't match any known malicious types.`;
             } else {
-                document.getElementById('probability').textContent = `Confidence could not be determined, but there are at least 1 malicious URL detected.`;
+                document.getElementById('probability').textContent = `Confidence could not be determined, but there is at least 1 malicious URL detected.`;
             }
         }
 
