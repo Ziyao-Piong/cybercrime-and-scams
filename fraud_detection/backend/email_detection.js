@@ -22,34 +22,53 @@ async function makePrediction() {
 
         // Default to unknown email type
         let emailType = "Unknown";
+        let urlType = "Unknown";
 
         // Determine the type of email
-        if (data.prediction.includes("phishing")) {
-            emailType = "Phishing Content!";
-        } else if (data.prediction.includes("safe")) {
-            emailType = "Safe Content!";
-        }
+        if (data.prediction.includes("phishing email")) {
+            emailType = "Phishing Email";
+        } else if (data.prediction.includes("safe email")) {
+            emailType = "Safe Email";
+        } 
+        
+        
+        if (data.prediction.includes("defacement")) {
+            urlType = "Malicous";
+        } else if (data.prediction.includes("malware")) {
+            urlType = "Malicous";
+        } else if (data.prediction.includes(": phishing")) {
+            urlType = "Malicous";
+        } else if (data.prediction.includes(": safe")) {
+            urlType = "Safe";
+        } 
 
         // Confidence handling for various cases
-        if (probabilityMatch) {
+        if (probabilityMatch && urlType == "Unknown") {
             const probability = probabilityMatch[0];  
             document.getElementById('probability').textContent = `We are ${probability} confident this is a ${emailType}.`;
-        } else {
-            if (emailType === "Safe Email") {
-                document.getElementById('probability').textContent = `This email appears to be safe, but confidence could not be determined.`;
-            } else if (emailType === "Unknown") {
+        } else if (probabilityMatch && urlType != "Unknown") {
+            const probability = probabilityMatch[0];  
+            document.getElementById('probability').textContent = `We are ${probability} confident that the email content is ${emailType}. The URL detected is ${urlType}`;
+        }else {
+            if (urlType === "Safe") {
+                document.getElementById('probability').textContent = `The URL detected seems to be safe, but confidence could not be determined.`;
+            } else if (urlType === "Unknown") {
                 document.getElementById('probability').textContent = `We are unsure about this email. It doesn't match any known malicious types.`;
             } else {
-                document.getElementById('probability').textContent = `Confidence could not be determined, but this appears to be a ${emailType}.`;
+                document.getElementById('probability').textContent = `Confidence could not be determined, but there are at least 1 malicious URL detected.`;
             }
         }
 
         // Change background color based on email type
-        if (emailType === "Phishing Email" || emailType === "Defacement Email" || emailType === "Malware Email") {
+        if (emailType === "Phishing Email" || urlType == "Malicous") {
             document.getElementById('predictionResultWrapper').style.backgroundColor = '#f8d7da'; // Red background for malicious
-        } else if (emailType === "Safe Email") {
+        } else if (emailType === "Safe Email" && urlType == "Safe") {
             document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background for safe
-        } else {
+        } else if (emailType === "Safe Email" && urlType == "Unknown") {
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background for safe
+        } else if (emailType === "Unknown" && urlType == "Safe") {
+            document.getElementById('predictionResultWrapper').style.backgroundColor = '#d4edda'; // Green background for safe
+        }else {
             document.getElementById('predictionResultWrapper').style.backgroundColor = '#fff3cd'; // Yellow background for unknown
         }
 
